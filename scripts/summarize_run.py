@@ -15,6 +15,8 @@ def main():
     if not rows: raise SystemExit('No completed epoch metric files found.')
     best=max(rows,key=lambda r:r['map']);last=rows[-1]
     selection=json.loads((a.run/'best/selection.json').read_text())
+    correction_file=a.run/'metric_correction.json'
+    correction=json.loads(correction_file.read_text()) if correction_file.exists() else None
     consistent=selection['stage']==best['stage'] and selection['epoch']==best['epoch'] and abs(selection['map']-best['map'])<1e-10
     # Earliest max is the checkpoint retained by strict-improvement selection.
     def pct(v):return f'{100*v:.2f}%'
@@ -28,6 +30,15 @@ def main():
         'AP values are precision-recall summary metrics, not the percentage of images classified correctly.',
         '', '## Per-class results at the best checkpoint','',
         '| Class | AP@0.50:0.95 | AP@0.50 | Validation GT boxes |','|---|---:|---:|---:|']
+    if correction:
+        lines[4:4]=[
+            '> **Historical AP warning:** Annotation ID 0 affected the epoch validation AP used for this run. These curves and epoch AP values have not been corrected.',
+            '',
+            f"The historically selected checkpoint's reevaluated validation mAP is {pct(correction['corrected_selected_best_validation_map'])}. Its historical selection may differ under corrected AP.",
+            '',
+            'See [the correction report](../../../../docs/COCO_ANNOTATION_ID_0_FIX.md) before comparing checkpoints.',
+            '',
+        ]
     for name,m in best['per_class_ap'].items():
         lines.append(f"| {name} | {pct(m['ap']) if m['ap'] is not None else 'N/A'} | {pct(m['ap50']) if m['ap50'] is not None else 'N/A'} | {m['support']} |")
     lines+=['','Support counts boxes, not images. The small validation set limits precision of these estimates.',
@@ -58,7 +69,12 @@ def main():
         if stage_a and stage_a<len(rows):ax.axvline(stage_a+.5,color='gray',linestyle='--')
     fig.suptitle(f'{a.run.name}: dashed line = Stage A/B transition; green line = best mAP checkpoint')
     fig.tight_layout();fig.savefig(out/'training_curves.png',dpi=160);plt.close(fig)
-    print(f"Best: stage {best['stage']}, epoch {best['epoch']} | mAP {pct(best['map'])} | AP50 {pct(best['map50'])}")
+    if correction:
+        print(f"Historical selection: stage {best['stage']}, epoch {best['epoch']} | affected epoch mAP {pct(best['map'])}")
+        print('Corrected selected-checkpoint validation mAP:',pct(correction['corrected_selected_best_validation_map']))
+        print('Historical epoch AP curves and checkpoint selection may differ under corrected AP.')
+    else:
+        print(f"Best: stage {best['stage']}, epoch {best['epoch']} | mAP {pct(best['map'])} | AP50 {pct(best['map50'])}")
     print('Selection metadata matches:',consistent);print('Report:',out/'SUMMARY.md');print('Plot:',out/'training_curves.png')
 
 if __name__=='__main__':main()

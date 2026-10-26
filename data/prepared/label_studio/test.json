@@ -252,7 +252,7 @@
   ],
   "annotations": [
     {
-      "id": 3,
+      "id": 4,
       "image_id": 3,
       "category_id": 3,
       "segmentation": [],
@@ -264,10 +264,11 @@
       ],
       "ignore": 0,
       "iscrowd": 0,
-      "area": 8398.466459679208
+      "area": 8398.466459679208,
+      "source_annotation_id": 3
     },
     {
-      "id": 4,
+      "id": 5,
       "image_id": 4,
       "category_id": 3,
       "segmentation": [],
@@ -279,10 +280,11 @@
       ],
       "ignore": 0,
       "iscrowd": 0,
-      "area": 519.448408609936
+      "area": 519.448408609936,
+      "source_annotation_id": 4
     },
     {
-      "id": 19,
+      "id": 20,
       "image_id": 53,
       "category_id": 2,
       "segmentation": [],
@@ -294,10 +296,11 @@
       ],
       "ignore": 0,
       "iscrowd": 0,
-      "area": 1005.2927224883014
+      "area": 1005.2927224883014,
+      "source_annotation_id": 19
     },
     {
-      "id": 20,
+      "id": 21,
       "image_id": 54,
       "category_id": 2,
       "segmentation": [],
@@ -309,10 +312,11 @@
       ],
       "ignore": 0,
       "iscrowd": 0,
-      "area": 9836.437500000004
+      "area": 9836.437500000004,
+      "source_annotation_id": 20
     },
     {
-      "id": 30,
+      "id": 31,
       "image_id": 64,
       "category_id": 2,
       "segmentation": [],
@@ -324,10 +328,11 @@
       ],
       "ignore": 0,
       "iscrowd": 0,
-      "area": 279.7541559924259
+      "area": 279.7541559924259,
+      "source_annotation_id": 30
     },
     {
-      "id": 35,
+      "id": 36,
       "image_id": 68,
       "category_id": 1,
       "segmentation": [],
@@ -339,10 +344,11 @@
       ],
       "ignore": 0,
       "iscrowd": 0,
-      "area": 35.19164903096457
+      "area": 35.19164903096457,
+      "source_annotation_id": 35
     },
     {
-      "id": 36,
+      "id": 37,
       "image_id": 68,
       "category_id": 1,
       "segmentation": [],
@@ -354,10 +360,11 @@
       ],
       "ignore": 0,
       "iscrowd": 0,
-      "area": 49.268308643350274
+      "area": 49.268308643350274,
+      "source_annotation_id": 36
     },
     {
-      "id": 37,
+      "id": 38,
       "image_id": 68,
       "category_id": 1,
       "segmentation": [],
@@ -369,10 +376,11 @@
       ],
       "ignore": 0,
       "iscrowd": 0,
-      "area": 41.056923869458636
+      "area": 41.056923869458636,
+      "source_annotation_id": 37
     },
     {
-      "id": 38,
+      "id": 39,
       "image_id": 68,
       "category_id": 1,
       "segmentation": [],
@@ -384,10 +392,11 @@
       ],
       "ignore": 0,
       "iscrowd": 0,
-      "area": 45.74914374025385
+      "area": 45.74914374025385,
+      "source_annotation_id": 38
     },
     {
-      "id": 41,
+      "id": 42,
       "image_id": 71,
       "category_id": 1,
       "segmentation": [],
@@ -399,10 +408,11 @@
       ],
       "ignore": 0,
       "iscrowd": 0,
-      "area": 243.37268879483156
+      "area": 243.37268879483156,
+      "source_annotation_id": 41
     },
     {
-      "id": 42,
+      "id": 43,
       "image_id": 71,
       "category_id": 1,
       "segmentation": [],
@@ -414,10 +424,11 @@
       ],
       "ignore": 0,
       "iscrowd": 0,
-      "area": 179.60570282913793
+      "area": 179.60570282913793,
+      "source_annotation_id": 42
     },
     {
-      "id": 46,
+      "id": 47,
       "image_id": 75,
       "category_id": 0,
       "segmentation": [],
@@ -429,10 +440,11 @@
       ],
       "ignore": 0,
       "iscrowd": 0,
-      "area": 1268.8584177990647
+      "area": 1268.8584177990647,
+      "source_annotation_id": 46
     },
     {
-      "id": 52,
+      "id": 53,
       "image_id": 81,
       "category_id": 0,
       "segmentation": [],
@@ -444,10 +456,11 @@
       ],
       "ignore": 0,
       "iscrowd": 0,
-      "area": 281.2343367119621
+      "area": 281.2343367119621,
+      "source_annotation_id": 52
     },
     {
-      "id": 57,
+      "id": 58,
       "image_id": 86,
       "category_id": 0,
       "segmentation": [],
@@ -459,10 +472,11 @@
       ],
       "ignore": 0,
       "iscrowd": 0,
-      "area": 149.3367119625753
+      "area": 149.3367119625753,
+      "source_annotation_id": 57
     },
     {
-      "id": 66,
+      "id": 67,
       "image_id": 92,
       "category_id": 0,
       "segmentation": [],
@@ -474,7 +488,8 @@
       ],
       "ignore": 0,
       "iscrowd": 0,
-      "area": 12233.93717977278
+      "area": 12233.93717977278,
+      "source_annotation_id": 66
     }
   ],
   "categories": [

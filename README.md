@@ -70,4 +70,5 @@ Threshold selection is performed once on validation data. Reserve test evaluatio
 - [Twenty-view augmentation recipes](docs/AUGMENTATION_20_VIEWS.md)
 - [Folder migration and path compatibility](docs/PROJECT_STRUCTURE.md)
 - [Dataset report](docs/DATASET_REPORT.md)
+- [COCO annotation ID 0 metric correction](docs/COCO_ANNOTATION_ID_0_FIX.md)
 - [Implementation notes](docs/IMPLEMENTATION_NOTES.md)

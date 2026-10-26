@@ -1,0 +1,12 @@
+{
+  "issue": "COCOeval annotation ID 0 sentinel affected historical validation AP",
+  "historical_epoch_ap_invalid": true,
+  "historical_best_selection_may_change": true,
+  "historically_selected_best_validation_map": 0.16893542785955612,
+  "corrected_selected_best_validation_map": 0.20537657197396758,
+  "historical_selected_best_validation_map50": 0.3276538678712591,
+  "corrected_selected_best_validation_map50": 0.389535055990071,
+  "other_saved_stage_checkpoint": "stage_A_best",
+  "other_saved_stage_checkpoint_corrected_validation_map_rounded": 0.15969,
+  "details": "docs/COCO_ANNOTATION_ID_0_FIX.md"
+}

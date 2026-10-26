@@ -159,6 +159,10 @@ def main():
     p.add_argument('--seed',type=int,default=42); p.add_argument('--groups',type=Path); p.add_argument('--resplit',action='store_true')
     args=p.parse_args(); root=args.root.resolve(); out=root/args.output
     records,boxes,report=inspect(root,root/args.source)
+    # COCOeval uses annotation ID 0 as its unmatched sentinel. Preserve raw IDs separately.
+    for index,box in enumerate(boxes,1):
+        box['source_annotation_id']=box['id']
+        box['id']=index
     write(out/'validation_report.json',report)
     if report['errors']: raise ValueError(report['errors'])
     source_groups=read(args.groups) if args.groups else {}

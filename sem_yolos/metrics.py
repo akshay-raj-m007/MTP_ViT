@@ -69,7 +69,10 @@ def fixed_metrics(coco,predictions,threshold):
 
 def coco_ap(coco,predictions):
     eligible={im['id'] for im in coco['images'] if im.get('evaluation_eligible',True)}
-    dataset=dict(coco,images=[im for im in coco['images'] if im['id'] in eligible],annotations=[a for a in coco['annotations'] if a['image_id'] in eligible])
+    # COCOeval reserves annotation ID 0 to mean unmatched. Keep source data intact.
+    annotations=[a for a in coco['annotations'] if a['image_id'] in eligible]
+    safe_annotations=[dict(a,id=index) for index,a in enumerate(annotations,1)]
+    dataset=dict(coco,images=[im for im in coco['images'] if im['id'] in eligible],annotations=safe_annotations)
     predictions=[p for p in predictions if p['image_id'] in eligible]
     with contextlib.redirect_stdout(io.StringIO()):
         gt=COCO();gt.dataset=dataset;gt.createIndex()

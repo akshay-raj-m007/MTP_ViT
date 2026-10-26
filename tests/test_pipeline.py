@@ -75,6 +75,21 @@ class PipelineTests(unittest.TestCase):
         d=self.fixture();p=[dict(image_id=1,category_id=0,bbox=[10,10,20,20],score=.9)]
         m=evaluate_predictions(d,p,.5);self.assertAlmostEqual(m['map'],1.);self.assertAlmostEqual(m['map50'],1.)
         json.dumps(m,allow_nan=False);self.assertEqual(m['detection']['f1'],1.);self.assertEqual(m['clean_specificity'],1.)
+    def test_zero_annotation_id_does_not_corrupt_coco_ap(self):
+        d=self.fixture();d['annotations'][0]['id']=0
+        p=[dict(image_id=1,category_id=0,bbox=[10,10,20,20],score=.9)]
+        m=evaluate_predictions(d,p,.5)
+        self.assertAlmostEqual(m['map'],1.)
+        self.assertAlmostEqual(m['map50'],1.)
+        self.assertEqual(d['annotations'][0]['id'],0)
+
+    def test_prepared_annotation_ids_are_positive(self):
+        for split in ('train','val','test'):
+            d=read(ROOT/'data/prepared/label_studio'/(split+'.json'))
+            ids=[a['id'] for a in d['annotations']]
+            self.assertTrue(all(isinstance(i,int) and i>0 for i in ids))
+            self.assertEqual(len(ids),len(set(ids)))
+
     def test_duplicates_wrong_classes_clean_fp(self):
         d=self.fixture();p=[dict(image_id=1,category_id=0,bbox=[10,10,20,20],score=.9)]
         m=fixed_metrics(d,p+p+[dict(image_id=2,category_id=1,bbox=[1,1,5,5],score=.8)],.5)
