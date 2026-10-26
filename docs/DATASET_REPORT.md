@@ -38,6 +38,26 @@
       "gap": 2,
       "bridge": 4
     }
+  },
+  "split_box_distributions": {
+    "train": {
+      "multi_bridge": 6,
+      "line_collapse": 15,
+      "gap": 6,
+      "bridge": 17
+    },
+    "val": {
+      "multi_bridge": 2,
+      "line_collapse": 3,
+      "gap": 4,
+      "bridge": 4
+    },
+    "test": {
+      "multi_bridge": 2,
+      "line_collapse": 3,
+      "gap": 3,
+      "bridge": 4
+    }
   }
 }
 ```

@@ -4,7 +4,7 @@
 
 - The new input is COCO, not native Label Studio JSON. No additional native export was found in the project-level inputs. Therefore no guessed task-ID correspondence or percentage conversion was introduced.
 - Canonical source-name remapping fixes the previous noncontiguous category/no-object collision. Exactly four foreground classes; the head produces a fifth internal no-object logit.
-- `fig34` is clean (`no_defect`) by explicit user confirmation. It retains its training assignment, has zero boxes and uses `user_confirmed_clean` metadata. All 36 empty images count as clean; clean split counts are 26/5/5. No image assignments or box labels changed.
+- `fig34` is clean (`no_defect`) by explicit user confirmation. It retains its training assignment, has zero boxes and uses `user_confirmed_clean` metadata. All 36 empty images count as clean; clean split counts are 26/5/5. Six gap image assignments were later changed at the user's request; box labels and geometry were unchanged.
 - Natural sampling is baseline. Weighted sampling now uses image presence, exponent 0.5 and cap 3. Background exposure is explicitly reported, including the unannotated example.
 - torchvision v2 (installed 0.28.0) provides maintained bounding-box-aware flips. Known-coordinate and empty-box tests exercise its real APIs. No extra augmentation package needed.
 - Letterbox coordinates use actual integer resized width/height, so separate effective x/y scales are recorded. Inversion handles padding explicitly. Only predicted coordinates may be clipped to image bounds. Ground-truth boxes fail validation rather than being silently clipped or discarded.
@@ -12,6 +12,7 @@
 - Dedicated training and evaluation loops replace Trainer. There is no private sampler override to depend on. Stage optimizers and warmup schedules are rebuilt. Whole-split COCO `map` controls best-model and early-stop decisions, greater is better. Output tuples are never assumed batch-shaped.
 - Predictions use all model queries for AP, original coordinates and image IDs. COCO evaluator state is freshly constructed each call. Fixed-threshold matching is score-ordered, same-class, one-to-one at IoU 0.5; wrong-class and duplicate predictions count correctly.
 - Validation selects the global threshold; test and inference load it. Metadata fingerprints reject model/data mismatches in evaluation. Image classification is reported separately from localization.
+- Prepared-data identity now hashes the actual train, validation and test COCO contents along with the source fingerprint. This prevents a checkpoint from the previous gap split from passing the identity check on the new split.
 - The old visualization incorrectly used the filtered detection index to select a token. The new attention entry point selects from original logits and derives patch layout from actual token dimensions. Legacy detailed plots are archived, not silently run against a new checkpoint.
 
 ## Environment and executed checks

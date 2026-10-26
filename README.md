@@ -20,7 +20,15 @@ venv/                       Existing Python environment
 requirements.txt            Python dependencies
 ```
 
-The existing split is **63 training / 16 validation / 16 test images**. Folder relocation preserves the assignments and dataset fingerprint. Existing runs are now under `outputs/runs/`; their saved configurations remain intact.
+The prepared split has **63 training / 16 validation / 16 test images**. The seven gap images were reassigned for a new experiment; see `data/prepared/label_studio/split_manifest.json`. The previous natural and weighted results were removed because their scores refer to the old split. The manifest's `split_fingerprint` and checkpoint identity checks include the actual prepared COCO files.
+
+| Split | Gap image figures | Gap boxes |
+|---|---|---:|
+| Train | 14, 2, 29 | 6 |
+| Validation | 26, 45 | 4 |
+| Test | 35, 91 | 3 |
+
+Before retraining, generate a fresh manual annotation review bundle with `& .\venv\Scripts\python.exe .\scripts\review_annotations.py`. Review the new split in its `index.html` and `review.csv`.
 
 ## Train with one original and 19 augmented views per image
 
@@ -61,7 +69,7 @@ For stronger rare-class promotion, use `configs/pipeline_config_20_views_weighte
 & $py .\scripts\summarize_run.py --run .\outputs\runs\natural_20_views_01
 ```
 
-Threshold selection is performed once on validation data. Reserve test evaluation until experiment choices are final. An existing baseline can be accessed at `outputs/runs/natural_01/best`.
+Threshold selection is performed once on validation data. Reserve test evaluation until experiment choices are final. Start both experiments from the pretrained model after completing manual review; previous run checkpoints have been removed.
 
 ## Documentation
 

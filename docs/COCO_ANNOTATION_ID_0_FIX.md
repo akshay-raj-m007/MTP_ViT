@@ -2,7 +2,7 @@
 
 The original Label Studio COCO export has a `multi_bridge` annotation with ID `0` in image ID `0`. Image and category IDs are not the issue. `pycocotools.COCOeval` stores a matched ground-truth **annotation** ID in `dtMatches` and uses `0` as the unmatched sentinel. Consequently, this annotation's matches were mishandled in AP calculations.
 
-`prepare_data.py` now writes positive, unique prepared annotation IDs and preserves the original ID in `source_annotation_id`. `sem_yolos.metrics.coco_ap` independently renumbers the annotations in memory before calling COCOeval, protecting evaluations of any older prepared files. The raw `data/raw/result.json` is unchanged. Split assignments and the dataset fingerprint are unchanged.
+`prepare_data.py` now writes positive, unique prepared annotation IDs and preserves the original ID in `source_annotation_id`. `sem_yolos.metrics.coco_ap` independently renumbers the annotations in memory before calling COCOeval, protecting evaluations of any older prepared files. The raw `data/raw/result.json` is unchanged. That annotation-ID correction did not change the split. A later user-requested gap reassignment did, and current checkpoint identity now includes prepared split contents.
 
 ## Corrected saved evaluations
 

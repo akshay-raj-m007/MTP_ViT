@@ -1,5 +1,0 @@
-{
-  "device": "cuda",
-  "amp": true,
-  "dtype": "torch.bfloat16"
-}

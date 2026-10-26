@@ -17,7 +17,7 @@ git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPOSITORY.git
 git push -u origin main
 ```
 
-Check `git status --short` before committing: it should show `data/raw/images/`, `data/raw/result.json`, prepared split files, code, configs and docs. It should not show `venv/`, `outputs/`, `archive/`, or `run.txt`, which `.gitignore` excludes. The 95 raw images total about 10 MiB, and the largest is about 1.33 MiB, so Git LFS is not needed for these images. Existing run checkpoints are deliberately local; copy one separately only if you need its weights on the new machine.
+Check `git status --short` before committing: it should show the intended prepared split files, code, configs and docs. `venv/` and new review bundles are ignored. The 95 raw images total about 10 MiB, and the largest is about 1.33 MiB, so Git LFS is not needed for these images. The previous natural and weighted checkpoints were removed after the gap split change; retrain both experiments from the pretrained model after manual review.
 
 If GitHub already has a repository you want to use, use its remote URL instead of creating a new repository. If `origin` exists, inspect `git remote -v` before changing it.
 
@@ -95,7 +95,7 @@ On Linux, use `python3 -m venv .venv`, `./.venv/bin/python`, and the Linux CUDA 
 
 ## Save completed experiment runs to GitHub
 
-`outputs/` is normally ignored to keep previews and in-progress checkpoints out of Git. When a run has finished and its validation/test evaluation is complete, explicitly add its run directory. The current natural run is named `natural_20_views_01`; it has already been published. On the Linux machine, after weighted training finishes:
+`outputs/` is normally ignored to keep previews and in-progress checkpoints out of Git. The old natural and weighted runs were removed locally because their scores refer to the previous split. Their tracked deletions and the changed prepared data must be committed and pushed before training on another machine. When a new run has finished and its validation/test evaluation is complete, explicitly add its run directory. On the Linux machine, after weighted training finishes:
 
 ```bash
 cd /path/to/MTP_ViT

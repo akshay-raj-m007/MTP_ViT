@@ -13,7 +13,7 @@ import random
 from collections import Counter, defaultdict
 from pathlib import Path
 from PIL import Image
-from sem_yolos.common import ROOT, CLASSES, CATEGORIES, read, write, resolve_image, raw_images_dir
+from sem_yolos.common import ROOT, CLASSES, CATEGORIES, read, write, resolve_image, raw_images_dir, prepared_fingerprint
 
 CONFIRMED_CLEAN = "c5329556-fig34.jpg"
 
@@ -181,13 +181,18 @@ def main():
     else:
         records=split_records(records,args.seed,source_groups)
         write(manifest_path,dict(seed=args.seed,fingerprint=fingerprint,images=records))
-    distributions={}
+    distributions={}; box_distributions={}
     for split in ['train','val','test']:
         subset=[im for im in records if im['split']==split]; ids={im['id'] for im in subset}
         write(out/(split+'.json'),dict(info={'source':'Label Studio'},images=subset,annotations=[a for a in boxes if a['image_id'] in ids],categories=CATEGORIES))
         distributions[split]=dict(Counter('deliberately_unannotated' if not im['evaluation_eligible'] else (CLASSES[c] if c<4 else 'no_defect') for im in subset for c in (im['classes'] or [4])))
+        box_distributions[split]=dict(Counter(CLASSES[a['category_id']] for a in boxes if a['image_id'] in ids))
+    manifest=read(manifest_path)
+    manifest['split_fingerprint']=prepared_fingerprint(out)
+    write(manifest_path,manifest)
     write(out/'class_mapping.json',dict(id2label=dict(enumerate(CLASSES)),source_to_model=report['source_to_model']))
     report['split_distributions']=distributions
+    report['split_box_distributions']=box_distributions
     lookup={im['id']:im for im in records}
     report['near_duplicate_cross_split_candidates']=sum(lookup[pair['ids'][0]]['split']!=lookup[pair['ids'][1]]['split'] for pair in report['near_duplicate_candidates'])
     lines=['# Near-duplicate review candidates','','dHash distance <= 5 is screening, not proof of shared source. No groups inferred.','', '| Image A | Split | Image B | Split | Distance |','|---|---|---|---|---|']
@@ -196,7 +201,7 @@ def main():
         lines.append(f"| {a['file_name']} | {a['split']} | {b['file_name']} | {b['split']} | {pair['dhash_distance']} |")
     (out/'NEAR_DUPLICATE_REVIEW.md').write_text('\n'.join(lines),encoding='utf-8')
     write(out/'validation_report.json',report)
-    text='# Dataset report\n\n```json\n'+json.dumps({k:report[k] for k in ['images','boxes','instances','class_presence','split_distributions']},indent=2)+'\n```\n\n'
+    text='# Dataset report\n\n```json\n'+json.dumps({k:report[k] for k in ['images','boxes','instances','class_presence','split_distributions','split_box_distributions']},indent=2)+'\n```\n\n'
     text+='\n\n'.join(report['assumptions'])
     text+='\n\nSource groups supplied: '+str(bool(source_groups))
     text+='\n\nFull dimensions, hashes and near-duplicate candidates: data/prepared/label_studio/validation_report.json and split_manifest.json. Small originals include 81x81 pixels; upscaling cannot recover detail. No test predictions were computed.\n'

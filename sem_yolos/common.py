@@ -1,3 +1,4 @@
+import hashlib
 import json
 from pathlib import Path
 
@@ -7,6 +8,18 @@ CATEGORIES = [{"id": i, "name": n} for i, n in enumerate(CLASSES)]
 
 def read(path):
     return json.loads(Path(path).read_text(encoding="utf-8-sig"))
+
+
+def prepared_fingerprint(directory):
+    """Identify the source data and the actual prepared COCO split contents."""
+    directory = Path(directory)
+    manifest = read(directory / 'split_manifest.json')
+    payload = {
+        'source_fingerprint': manifest['fingerprint'],
+        'splits': {split: read(directory / f'{split}.json') for split in ('train', 'val', 'test')},
+    }
+    canonical = json.dumps(payload, sort_keys=True, separators=(',', ':'), allow_nan=False)
+    return hashlib.sha256(canonical.encode('utf-8')).hexdigest()
 
 def write(path, data):
     path = Path(path)

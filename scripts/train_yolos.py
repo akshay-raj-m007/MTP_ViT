@@ -15,7 +15,7 @@ import numpy as np
 import torch
 from torch.utils.data import DataLoader,WeightedRandomSampler
 from transformers import get_cosine_schedule_with_warmup
-from sem_yolos.common import ROOT,read,write,prepared_dir,normalized_config
+from sem_yolos.common import ROOT,read,write,prepared_dir,normalized_config,prepared_fingerprint
 from sem_yolos.data import CocoDetectionDataset,collate_fn,sample_weights
 from sem_yolos.runtime import seed_all,device_for,load_model,configure_stage,predict_loader
 from sem_yolos.metrics import coco_ap
@@ -41,8 +41,10 @@ def main(default_sampling='natural'):
     else:
         out.mkdir(parents=True,exist_ok=False)
         write(out/'run_config.json',dict(config=cfg,sampling=args.sampling,checkpoint_metric='map',greater_is_better=True))
-    manifest=read(prepared_dir(root,cfg['prepared'])/'split_manifest.json')
-    fingerprint=manifest['fingerprint']
+    prepared=prepared_dir(root,cfg['prepared'])
+    manifest=read(prepared/'split_manifest.json')
+    fingerprint=prepared_fingerprint(prepared)
+    if manifest.get('split_fingerprint')!=fingerprint: raise ValueError('Prepared split files differ from split manifest; rerun prepare_data.py')
     if args.resume and read(out/'data_identity.json')['fingerprint']!=fingerprint: raise ValueError('Prepared dataset changed since run')
     write(out/'data_identity.json',dict(fingerprint=fingerprint))
     seed_all(cfg['seed']);torch.set_num_threads(min(8,os.cpu_count() or 1));device=device_for(args.device)

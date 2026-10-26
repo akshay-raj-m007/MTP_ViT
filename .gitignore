@@ -9,6 +9,7 @@ __pycache__/
 
 # Machine-specific and generated outputs
 outputs/
+/outputs/manual_annotation_review/
 run.txt
 *.log
 

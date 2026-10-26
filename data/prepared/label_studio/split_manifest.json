@@ -984,7 +984,7 @@
       "file_sha256": "85f38144a1f157038e3099218a3c03a0108a972ef7c45c134838d8f1e5a7bcf0",
       "annotation_status": "box_annotated",
       "evaluation_eligible": true,
-      "split": "val",
+      "split": "train",
       "source_group": null,
       "leakage_group": "65"
     },
@@ -1016,7 +1016,7 @@
       "file_sha256": "bc95817e9b4e417a9c9e43aa366dd66121b8510187db48714ec287535cafba92",
       "annotation_status": "box_annotated",
       "evaluation_eligible": true,
-      "split": "train",
+      "split": "val",
       "source_group": null,
       "leakage_group": "67"
     },
@@ -1032,7 +1032,7 @@
       "file_sha256": "9d5ecaac64868b997470017414553c9d7fb4fbc7ab588bb7e898a0d562408916",
       "annotation_status": "box_annotated",
       "evaluation_eligible": true,
-      "split": "test",
+      "split": "train",
       "source_group": null,
       "leakage_group": "68"
     },
@@ -1062,7 +1062,7 @@
       "file_sha256": "7532248012f7573a9a6cbdadcaed2e6ffe1645ae9d2f5275b703830bbe424034",
       "annotation_status": "box_annotated",
       "evaluation_eligible": true,
-      "split": "train",
+      "split": "test",
       "source_group": null,
       "leakage_group": "70"
     },
@@ -1078,7 +1078,7 @@
       "file_sha256": "6e8a9f7be0354912e13d4286feced6cdbd5d2d3f3d60735de7722c737e7f6ac1",
       "annotation_status": "box_annotated",
       "evaluation_eligible": true,
-      "split": "test",
+      "split": "val",
       "source_group": null,
       "leakage_group": "71"
     },
@@ -1094,7 +1094,7 @@
       "file_sha256": "8e982c4d98c3fac647524623de8a1096549a866d8f4a6fffe5757ab5c5302415",
       "annotation_status": "box_annotated",
       "evaluation_eligible": true,
-      "split": "val",
+      "split": "test",
       "source_group": null,
       "leakage_group": "72"
     },
@@ -1450,5 +1450,6 @@
       "source_group": null,
       "leakage_group": "94"
     }
-  ]
+  ],
+  "split_fingerprint": "54e0ef39bfabb1cf4e849733f7d9a056878c95825c1c2532f0c9039bb919f276"
 }
