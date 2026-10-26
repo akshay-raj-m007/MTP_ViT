@@ -1,0 +1,2 @@
+# Preserve the original COCO export byte-for-byte on every operating system.
+data/raw/result.json -text
