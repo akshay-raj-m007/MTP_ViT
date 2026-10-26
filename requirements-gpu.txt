@@ -1,0 +1,9 @@
+# Install matching CUDA-enabled torch and torchvision first from https://pytorch.org/get-started/previous-versions/
+transformers==5.16.1
+accelerate==1.14.0
+Pillow==12.3.0
+pycocotools==2.0.11
+numpy==2.5.2
+matplotlib==3.11.1
+scipy==1.18.1
+safetensors==0.8.0

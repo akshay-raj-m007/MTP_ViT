@@ -1,0 +1,29 @@
+{
+  "seed": 42,
+  "size": 512,
+  "model": "hustvl/yolos-tiny",
+  "prepared": "data/prepared/label_studio",
+  "batch_size": 1,
+  "accumulation": 8,
+  "workers": 0,
+  "stage_a_epochs": 15,
+  "stage_b_epochs": 40,
+  "stage_a_lr": 0.0001,
+  "stage_b_head_lr": 5e-05,
+  "stage_b_encoder_lr": 5e-06,
+  "last_blocks": 2,
+  "weight_decay": 0.0001,
+  "gradient_clip": 1.0,
+  "warmup_ratio": 0.05,
+  "patience": 8,
+  "sampling_power": 0.5,
+  "sampling_cap": 3.0,
+  "background_weight": 1.0,
+  "augmentation": {
+    "hflip": 0.5,
+    "vflip": 0.5,
+    "brightness": 0.1,
+    "contrast": 0.1,
+    "noise_std": 0.0
+  }
+}
