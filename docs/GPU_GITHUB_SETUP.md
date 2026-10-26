@@ -92,3 +92,18 @@ The configuration starts at a 512-pixel canvas and batch size 1. If CUDA runs ou
 To continue an interrupted run after a completed epoch, repeat the training command with the same config/output and add `--resume`. The run's `last/` checkpoint contains the resume state. Keep `outputs/runs/` backed up separately; `.gitignore` keeps large checkpoints out of source Git history.
 
 On Linux, use `python3 -m venv .venv`, `./.venv/bin/python`, and the Linux CUDA wheel from the PyTorch previous-versions page. The repository-relative data paths are portable.
+
+## Save completed experiment runs to GitHub
+
+`outputs/` is normally ignored to keep previews and in-progress checkpoints out of Git. When a run has finished and its validation/test evaluation is complete, explicitly add its run directory. The current natural run is named `natural_20_views_01`; it has already been published. On the Linux machine, after weighted training finishes:
+
+```bash
+cd /path/to/MTP_ViT
+git pull --ff-only
+git add -f outputs/runs/weighted_20_views_balanced_01
+git status --short
+git commit -m "Save weighted 20-view training results"
+git push origin main
+```
+
+`git add -f` is required because `outputs/` is ignored. Wait until evaluation is complete so the commit includes `best/`, `last/`, stage checkpoints, epoch metrics, `validation/`, and `final_test/`. Do not commit while training is writing checkpoint files. Check file sizes first with `find outputs/runs/weighted_20_views_balanced_01 -type f -size +95M`; files above GitHub's 100 MiB limit need Git LFS or another storage method. A committed full run increases clone size. Keep a separate backup if the run is important.

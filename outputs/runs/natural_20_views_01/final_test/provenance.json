@@ -1,0 +1,33 @@
+{
+  "split": "test",
+  "model": "D:\\aksha\\MTP\\annotate_image.v4-train-test.coco\\outputs\\runs\\natural_20_views_01\\best",
+  "data_fingerprint": "b3aa0c38134c1bf18ed47502308a6740423d3544328ac59662f5572991e6b587",
+  "threshold": {
+    "threshold": 0.3,
+    "objective": "validation detection F1 at IoU 0.5",
+    "grid": [
+      0.05,
+      0.1,
+      0.15,
+      0.2,
+      0.25,
+      0.3,
+      0.35,
+      0.4,
+      0.45,
+      0.5,
+      0.55,
+      0.6,
+      0.65,
+      0.7,
+      0.75,
+      0.8,
+      0.85,
+      0.9,
+      0.95
+    ],
+    "validation_f1": 0.16666666666666669,
+    "data_fingerprint": "b3aa0c38134c1bf18ed47502308a6740423d3544328ac59662f5572991e6b587"
+  },
+  "ap_cutoff": 0.0
+}
