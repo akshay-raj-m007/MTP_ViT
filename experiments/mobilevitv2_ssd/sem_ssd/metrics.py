@@ -51,5 +51,5 @@ def coco_ap(data, predictions):
     precision = ev.eval['precision']
     return dict(map=mean(precision[:,:,:,0,2]), map50=mean(precision[0,:,:,0,2]),
                 per_class_ap={CLASSES[c]:dict(ap=mean(precision[:,:,k,0,2]),
-                    ap50=mean(precision[0,:,k,0,2]), support=sum(a['category_id']==c for a in data['annotations']))
+                    ap50=mean(precision[0,:,k,0,2]), support=int(sum(a['category_id']==c for a in data['annotations'])))
                     for k,c in enumerate(ev.params.catIds)})

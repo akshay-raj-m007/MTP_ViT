@@ -160,3 +160,15 @@ def test_class_agnostic_recall_and_duplicate_matching():
     assert localization_recall(data,[wrong[0],wrong[0]])['recall']==.5
     assert localization_recall(data,[dict(p,score=.1) for p in wrong])['recall']==0.
     assert localization_recall(data,[dict(wrong[0],image_id=2)])['recall']==0.
+
+
+def test_coco_metrics_can_be_saved_as_strict_json(tmp_path):
+    from sem_ssd.io import write
+    data,predictions=metric_fixture()
+    metrics=coco_ap(data,predictions)
+    assert type(metrics['per_class_ap']['bridge']['support']) is int
+    path=tmp_path/'metrics_A_001.json'
+    write(path,dict(stage='A',epoch=1,**metrics))
+    saved=read(path)
+    assert saved['per_class_ap']['bridge']['support']==2
+    assert saved['map']==pytest.approx(1.)
