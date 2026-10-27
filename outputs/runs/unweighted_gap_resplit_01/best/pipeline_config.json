@@ -1,0 +1,129 @@
+{
+  "seed": 42,
+  "size": 512,
+  "model": "hustvl/yolos-tiny",
+  "prepared": "data/prepared/label_studio",
+  "batch_size": 1,
+  "accumulation": 8,
+  "workers": 0,
+  "stage_a_epochs": 15,
+  "stage_b_epochs": 40,
+  "stage_a_lr": 0.0001,
+  "stage_b_head_lr": 5e-05,
+  "stage_b_encoder_lr": 5e-06,
+  "last_blocks": 2,
+  "weight_decay": 0.0001,
+  "gradient_clip": 1.0,
+  "warmup_ratio": 0.05,
+  "patience": 8,
+  "sampling_power": 0.5,
+  "sampling_cap": 3.0,
+  "background_weight": 1.0,
+  "augmentation": {
+    "hflip": 0.5,
+    "vflip": 0.5,
+    "brightness": 0.1,
+    "contrast": 0.1,
+    "noise_std": 0.0
+  },
+  "training_view_mode": "original_plus_recipes",
+  "augmentation_recipes": [
+    {
+      "name": "flip_h",
+      "hflip": true
+    },
+    {
+      "name": "flip_v",
+      "vflip": true
+    },
+    {
+      "name": "flip_hv",
+      "hflip": true,
+      "vflip": true
+    },
+    {
+      "name": "stretch_width_1p2",
+      "scale_x": 1.2
+    },
+    {
+      "name": "compress_width_0p8",
+      "scale_x": 0.8
+    },
+    {
+      "name": "stretch_height_1p2",
+      "scale_y": 1.2
+    },
+    {
+      "name": "compress_height_0p8",
+      "scale_y": 0.8
+    },
+    {
+      "name": "rotate_minus12",
+      "angle": -12.0
+    },
+    {
+      "name": "shear_horizontal_plus8",
+      "shear_x": 8.0
+    },
+    {
+      "name": "shear_vertical_minus8",
+      "shear_y": -8.0
+    },
+    {
+      "name": "rotate_plus12",
+      "angle": 12.0
+    },
+    {
+      "name": "scale_down_0p8_padded",
+      "zoom": 0.8
+    },
+    {
+      "name": "scale_up_1p15_padded",
+      "zoom": 1.15
+    },
+    {
+      "name": "noise_0p01",
+      "noise_std": 0.01
+    },
+    {
+      "name": "noise_0p03",
+      "noise_std": 0.03
+    },
+    {
+      "name": "noise_0p05",
+      "noise_std": 0.05
+    },
+    {
+      "name": "combo_h_stretch_rotate_noise",
+      "hflip": true,
+      "scale_x": 1.15,
+      "scale_y": 0.9,
+      "angle": 8.0,
+      "noise_std": 0.02,
+      "brightness": 0.08,
+      "contrast": 0.08,
+      "shear_x": 5.0
+    },
+    {
+      "name": "combo_v_compress_rotate_noise",
+      "vflip": true,
+      "scale_x": 0.9,
+      "scale_y": 1.15,
+      "angle": -8.0,
+      "noise_std": 0.03,
+      "brightness": 0.08,
+      "contrast": 0.08,
+      "shear_y": -5.0
+    },
+    {
+      "name": "combo_hv_scale_rotate_noise",
+      "hflip": true,
+      "vflip": true,
+      "zoom": 0.9,
+      "angle": 10.0,
+      "noise_std": 0.04,
+      "brightness": 0.08,
+      "contrast": 0.08
+    }
+  ]
+}
