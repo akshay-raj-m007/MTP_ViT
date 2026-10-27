@@ -1,0 +1,11 @@
+# Python 3.12; install torch==2.5.1 and torchvision==0.20.1 from a matched CPU/CUDA index first.
+numpy==1.26.4
+Pillow==10.4.0
+PyYAML==6.0.2
+pycocotools==2.0.8
+requests==2.32.3
+tqdm==4.67.1
+psutil==6.1.1
+packaging==24.2
+fvcore==0.1.5.post20221221
+pytest==8.3.5
