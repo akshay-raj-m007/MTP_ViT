@@ -17,7 +17,7 @@ from sem_yolos.metrics import evaluate_predictions,select_threshold
 
 def main():
     p=argparse.ArgumentParser();p.add_argument('--root',type=Path,default=ROOT);p.add_argument('--model',type=Path,required=True)
-    p.add_argument('--split',choices=['val','test'],default='val');p.add_argument('--select-threshold',action='store_true')
+    p.add_argument('--split',choices=['train','val','test'],default='val');p.add_argument('--select-threshold',action='store_true')
     p.add_argument('--output',type=Path,required=True);p.add_argument('--device',choices=['auto','cpu','cuda'],default='auto')
     args=p.parse_args();torch.set_num_threads(4)
     if args.select_threshold and args.split!='val': raise ValueError('Threshold selection is validation-only')
