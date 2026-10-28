@@ -645,7 +645,7 @@ a{color:#83d8ff}h1,h2,h3{line-height:1.2}p{max-width:75rem}.intro,.record,.issue
 def main(argv=None):
     parser = argparse.ArgumentParser(description="Build a local, read-only SEM annotation review bundle")
     parser.add_argument("--root", type=Path, default=ROOT)
-    parser.add_argument("--prepared", type=Path, default=Path("data/prepared/label_studio"))
+    parser.add_argument("--prepared", type=Path, default=Path("data/prepared/label_studio_v2"))
     parser.add_argument("--output-root", type=Path, default=Path("outputs/manual_annotation_review"))
     parser.add_argument("--config", type=Path, default=Path("configs/pipeline_config_20_views.json"))
     parser.add_argument("--canvas-size", type=int, default=None)

@@ -38,7 +38,7 @@ class PipelineTests(unittest.TestCase):
         torch.testing.assert_close(b,torch.tensor([[60.,50.,30.,10.]]));self.assertEqual(labels,[2])
         _,b,_=augment(image,[],[],dict(hflip=1.,vflip=1.));self.assertEqual(tuple(b.shape),(0,4))
     def test_prepared_leakage(self):
-        manifest=read(ROOT/'data/prepared/label_studio/split_manifest.json');seen={};ids=set()
+        manifest=read(ROOT/'data/prepared/label_studio_v2/split_manifest.json');seen={};ids=set()
         for im in manifest['images']:
             self.assertNotIn(im['id'],ids);ids.add(im['id'])
             for key in (im['sha256'],im['leakage_group']):
@@ -47,7 +47,7 @@ class PipelineTests(unittest.TestCase):
             if not im['evaluation_eligible']: self.assertEqual(im['split'],'train')
         self.assertEqual(len(ids),95)
     def test_fig34_is_clean(self):
-        manifest=read(ROOT/'data/prepared/label_studio/split_manifest.json')
+        manifest=read(ROOT/'data/prepared/label_studio_v2/split_manifest.json')
         image=next(im for im in manifest['images'] if im['file_name'].endswith('c5329556-fig34.jpg'))
         self.assertEqual(image['classes'],[])
         self.assertEqual(image['annotation_status'],'user_confirmed_clean')
@@ -61,7 +61,7 @@ class PipelineTests(unittest.TestCase):
     def test_processor_empty_and_multi(self):
         processor=YolosImageProcessor.from_pretrained('hustvl/yolos-tiny',local_files_only=True)
         processor.do_resize=False;processor.do_pad=False
-        ds=CocoDetectionDataset(ROOT,ROOT/'data/prepared/label_studio/train.json',processor,128)
+        ds=CocoDetectionDataset(ROOT,ROOT/'data/prepared/label_studio_v2/train.json',processor,128)
         for count in [0,2]:
             index=next(i for i,im in enumerate(ds.images) if (len(ds.anns_by_image[im['id']])==0 if count==0 else len(ds.anns_by_image[im['id']])>=2))
             item=ds[index];self.assertEqual(tuple(item['pixel_values'].shape),(3,128,128))
@@ -85,7 +85,7 @@ class PipelineTests(unittest.TestCase):
 
     def test_prepared_annotation_ids_are_positive(self):
         for split in ('train','val','test'):
-            d=read(ROOT/'data/prepared/label_studio'/(split+'.json'))
+            d=read(ROOT/'data/prepared/label_studio_v2'/(split+'.json'))
             ids=[a['id'] for a in d['annotations']]
             self.assertTrue(all(isinstance(i,int) and i>0 for i in ids))
             self.assertEqual(len(ids),len(set(ids)))

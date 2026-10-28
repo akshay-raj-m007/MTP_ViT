@@ -1,0 +1,369 @@
+{
+  "info": {
+    "source": "Label Studio"
+  },
+  "images": [
+    {
+      "width": 177,
+      "height": 147,
+      "id": 5,
+      "file_name": "data/raw/images/3de709e3-fig20.jpg",
+      "classes": [
+        2
+      ],
+      "sha256": "618fa5fac022347cb4a17318d5efb14e3e1c99d36efbc61d48ec7000371720a7",
+      "file_sha256": "2d8e22d4c90b69aa9a701c7e16998287cfa8f12c5b7365274d8b7b6fdb714727",
+      "annotation_status": "box_annotated",
+      "evaluation_eligible": true,
+      "split": "test",
+      "source_group": "collapse_E",
+      "leakage_group": "collapse_E"
+    },
+    {
+      "width": 128,
+      "height": 128,
+      "id": 9,
+      "file_name": "data/raw/images/4befb5e7-fig53.png",
+      "classes": [],
+      "sha256": "1643c7ec6761ed5cf37778909a9d1cb6202e26112f62c663ab985009904be5a4",
+      "file_sha256": "0ea5df4bde358e15cfcba16c0bec804a1aba528c8c1c243db03d9121cd95cc1d",
+      "annotation_status": "assumed_clean_coco",
+      "evaluation_eligible": true,
+      "split": "test",
+      "source_group": "clean_53",
+      "leakage_group": "clean_53"
+    },
+    {
+      "width": 242,
+      "height": 197,
+      "id": 12,
+      "file_name": "data/raw/images/4dec1c5f-fig42.jpg",
+      "classes": [
+        2
+      ],
+      "sha256": "cabc9620c070f4b386025e5b699d677809cd334cf107baf9a9198892e0dd3380",
+      "file_sha256": "d7a90a85c4538331abee10c9eb7e58ffd999b330e913db08fe9e3c50bc140009",
+      "annotation_status": "box_annotated",
+      "evaluation_eligible": true,
+      "split": "test",
+      "source_group": "collapse_E",
+      "leakage_group": "collapse_E"
+    },
+    {
+      "width": 128,
+      "height": 128,
+      "id": 23,
+      "file_name": "data/raw/images/17bb30c7-fig54.png",
+      "classes": [],
+      "sha256": "7169cd8659fa63df766323f7a01119aadae53642480d4d4d396879cd76b0dc79",
+      "file_sha256": "30ef77baaa7266e0af31e9d1e92658f1e45285c9e34687b6f83a95a480fb9e9a",
+      "annotation_status": "assumed_clean_coco",
+      "evaluation_eligible": true,
+      "split": "test",
+      "source_group": "clean_53",
+      "leakage_group": "clean_53"
+    },
+    {
+      "width": 187,
+      "height": 187,
+      "id": 30,
+      "file_name": "data/raw/images/43e08f23-fig5.jpg",
+      "classes": [
+        3
+      ],
+      "sha256": "398bab89d4760286984c2f224b8b5a2e56933e5833d53883e67f24546f7361ef",
+      "file_sha256": "52cf14a04228ecd4eba58aeef9c9f4b1f1162968d01846d5f7bf972a0c922b03",
+      "annotation_status": "box_annotated",
+      "evaluation_eligible": true,
+      "split": "test",
+      "source_group": null,
+      "leakage_group": "43e08f23-fig5.jpg"
+    },
+    {
+      "width": 256,
+      "height": 256,
+      "id": 41,
+      "file_name": "data/raw/images/258f1f90-fig72.png",
+      "classes": [],
+      "sha256": "0b30bce6028ad689317c0c4ba22a63fb4944c6f59e651805d026f4b66d338d71",
+      "file_sha256": "3527271c6e7f23c72aa0ed40e0d184786fa0c3e4f2bfda5c35b85ae47fbd2b4d",
+      "annotation_status": "assumed_clean_coco",
+      "evaluation_eligible": true,
+      "split": "test",
+      "source_group": null,
+      "leakage_group": "258f1f90-fig72.png"
+    },
+    {
+      "width": 225,
+      "height": 227,
+      "id": 46,
+      "file_name": "data/raw/images/753e8e60-fig25.jpg",
+      "classes": [
+        2
+      ],
+      "sha256": "f01c6d5481d4a1f4453de4310465973d4a1efa7bb56083682418de24bdaf4a0c",
+      "file_sha256": "4964d12a13c1e0487ec498bef90c9b73f3dfd9d40e24feae518bb6a4f55c278c",
+      "annotation_status": "box_annotated",
+      "evaluation_eligible": true,
+      "split": "test",
+      "source_group": "collapse_E",
+      "leakage_group": "collapse_E"
+    },
+    {
+      "width": 161,
+      "height": 160,
+      "id": 49,
+      "file_name": "data/raw/images/4531a923-fig50.jpg",
+      "classes": [],
+      "sha256": "9dab1af27b2317d3325371507236fd6e0687aba0c37652d8377070649ede35e6",
+      "file_sha256": "be7aa58c35a33251451ca0d85344a338d16fc5d42cb690806325a6ad75be6092",
+      "annotation_status": "assumed_clean_coco",
+      "evaluation_eligible": true,
+      "split": "test",
+      "source_group": null,
+      "leakage_group": "4531a923-fig50.jpg"
+    },
+    {
+      "width": 287,
+      "height": 290,
+      "id": 57,
+      "file_name": "data/raw/images/38304605-fig52.jpg",
+      "classes": [],
+      "sha256": "753000815153734a9fd81930c41928bb364b3cfef56823d03aa482eb598a6167",
+      "file_sha256": "19da538cd9ff7f2bf0cfbfd0ca26a22a7a9addddc7ea2a5852811b30b8704c78",
+      "annotation_status": "assumed_clean_coco",
+      "evaluation_eligible": true,
+      "split": "test",
+      "source_group": null,
+      "leakage_group": "38304605-fig52.jpg"
+    },
+    {
+      "width": 385,
+      "height": 388,
+      "id": 67,
+      "file_name": "data/raw/images/add3881f-fig91.jpg",
+      "classes": [
+        1
+      ],
+      "sha256": "d25aab993e97d133a69d80c7e864f90705d0be9dbfb6ec3e7f30095ddd4da011",
+      "file_sha256": "8e982c4d98c3fac647524623de8a1096549a866d8f4a6fffe5757ab5c5302415",
+      "annotation_status": "box_annotated",
+      "evaluation_eligible": true,
+      "split": "test",
+      "source_group": null,
+      "leakage_group": "add3881f-fig91.jpg"
+    },
+    {
+      "width": 211,
+      "height": 211,
+      "id": 76,
+      "file_name": "data/raw/images/c44668f5-fig7.jpg",
+      "classes": [
+        0
+      ],
+      "sha256": "d483df77e581155954d3ba5487098dd8ff8d000d3687a9a5bc20cffdd18af627",
+      "file_sha256": "b7a35f783066d69a58e8ef67d29c674fc7ec91450ebd4f53e324fedd0caf6589",
+      "annotation_status": "box_annotated",
+      "evaluation_eligible": true,
+      "split": "test",
+      "source_group": null,
+      "leakage_group": "c44668f5-fig7.jpg"
+    },
+    {
+      "width": 247,
+      "height": 200,
+      "id": 79,
+      "file_name": "data/raw/images/d56b00d9-fig43.jpg",
+      "classes": [
+        0
+      ],
+      "sha256": "e7af39bd12e0b4e70a0cd1b4edc8ef7c85079f99a2248e3c30958376388cc0d2",
+      "file_sha256": "171f8f242ab18b0b966c8cc87d4cac3e7f56fbea9ec69aa7a06e38bc47d0d1ad",
+      "annotation_status": "box_annotated",
+      "evaluation_eligible": true,
+      "split": "test",
+      "source_group": "bridge_I",
+      "leakage_group": "bridge_I"
+    },
+    {
+      "width": 150,
+      "height": 147,
+      "id": 88,
+      "file_name": "data/raw/images/e660164b-fig12.jpg",
+      "classes": [
+        0
+      ],
+      "sha256": "0ce146512402ac33467c75bdafa3233bf32aac4c135f24eed63a76ee11fe7537",
+      "file_sha256": "ff5bdc98c350e19751252a09ae9379fe5dc78b1ec349b52493250a305be24a15",
+      "annotation_status": "box_annotated",
+      "evaluation_eligible": true,
+      "split": "test",
+      "source_group": "bridge_I",
+      "leakage_group": "bridge_I"
+    }
+  ],
+  "annotations": [
+    {
+      "id": 6,
+      "image_id": 5,
+      "category_id": 2,
+      "segmentation": [],
+      "bbox": [
+        81.17910447761193,
+        46.623134328358226,
+        18.37499999999997,
+        57.86753731343278
+      ],
+      "ignore": 0,
+      "iscrowd": 0,
+      "area": 1063.3159981343256,
+      "source_annotation_id": 5
+    },
+    {
+      "id": 10,
+      "image_id": 12,
+      "category_id": 2,
+      "segmentation": [],
+      "bbox": [
+        112.88085749908629,
+        66.15671641791037,
+        23.9666726849773,
+        59.9657187078994
+      ],
+      "ignore": 0,
+      "iscrowd": 0,
+      "area": 1437.1787525916448,
+      "source_annotation_id": 9
+    },
+    {
+      "id": 25,
+      "image_id": 30,
+      "category_id": 3,
+      "segmentation": [],
+      "bbox": [
+        63.613899191566674,
+        70.09834725062724,
+        50.49174958254387,
+        64.75495567930774
+      ],
+      "ignore": 0,
+      "iscrowd": 0,
+      "area": 3269.5910063883334,
+      "source_annotation_id": 24
+    },
+    {
+      "id": 39,
+      "image_id": 46,
+      "category_id": 2,
+      "segmentation": [],
+      "bbox": [
+        89.36007462686557,
+        89.78358208955224,
+        25.410447761194032,
+        52.514925373134254
+      ],
+      "ignore": 0,
+      "iscrowd": 0,
+      "area": 1334.4277678770309,
+      "source_annotation_id": 38
+    },
+    {
+      "id": 40,
+      "image_id": 46,
+      "category_id": 2,
+      "segmentation": [],
+      "bbox": [
+        111.38246268656714,
+        84.70149253731344,
+        25.410447761194032,
+        57.173507462686565
+      ],
+      "ignore": 0,
+      "iscrowd": 0,
+      "area": 1452.8044247048342,
+      "source_annotation_id": 39
+    },
+    {
+      "id": 49,
+      "image_id": 67,
+      "category_id": 1,
+      "segmentation": [],
+      "bbox": [
+        144.05223880597032,
+        119.44029850746269,
+        79.62686567164182,
+        145.49999999999986
+      ],
+      "ignore": 0,
+      "iscrowd": 0,
+      "area": 11585.708955223874,
+      "source_annotation_id": 48
+    },
+    {
+      "id": 56,
+      "image_id": 76,
+      "category_id": 0,
+      "segmentation": [],
+      "bbox": [
+        74.79477611940293,
+        86.99813432835816,
+        44.876865671641745,
+        64.55970149253736
+      ],
+      "ignore": 0,
+      "iscrowd": 0,
+      "area": 2897.2370516818883,
+      "source_annotation_id": 55
+    },
+    {
+      "id": 58,
+      "image_id": 79,
+      "category_id": 0,
+      "segmentation": [],
+      "bbox": [
+        105.97014925373132,
+        55.970149253731336,
+        56.343283582089555,
+        82.83582089552242
+      ],
+      "ignore": 0,
+      "iscrowd": 0,
+      "area": 4667.242147471599,
+      "source_annotation_id": 57
+    },
+    {
+      "id": 66,
+      "image_id": 88,
+      "category_id": 0,
+      "segmentation": [],
+      "bbox": [
+        49.914179104477604,
+        38.12126865671642,
+        39.492537313432855,
+        69.11194029850748
+      ],
+      "ignore": 0,
+      "iscrowd": 0,
+      "area": 2729.4058810425504,
+      "source_annotation_id": 65
+    }
+  ],
+  "categories": [
+    {
+      "id": 0,
+      "name": "bridge"
+    },
+    {
+      "id": 1,
+      "name": "gap"
+    },
+    {
+      "id": 2,
+      "name": "line_collapse"
+    },
+    {
+      "id": 3,
+      "name": "multi_bridge"
+    }
+  ]
+}

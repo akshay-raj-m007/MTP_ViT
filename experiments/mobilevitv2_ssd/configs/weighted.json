@@ -1,5 +1,5 @@
 {
-  "prepared": "data/prepared/label_studio",
+  "prepared": "data/prepared/label_studio_v2",
   "size": 320,
   "resize_mode": "resize",
   "seed": 42,

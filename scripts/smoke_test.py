@@ -20,7 +20,7 @@ if __name__=='__main__':
     a=p.parse_args();a.output.mkdir(parents=True,exist_ok=False);torch.set_num_threads(4);seed_all(42)
     device=torch.device('cpu');model,processor=load_model('hustvl/yolos-tiny',device,fresh=True)
     cfg=read(a.config) if a.config else {}
-    train=CocoDetectionDataset(ROOT,ROOT/'data/prepared/label_studio/train.json',processor,a.size,training=bool(a.config),augmentation=cfg.get('augmentation'),view_mode=cfg.get('training_view_mode','random_augmented'),recipes=cfg.get('augmentation_recipes'))
+    train=CocoDetectionDataset(ROOT,ROOT/'data/prepared/label_studio_v2/train.json',processor,a.size,training=bool(a.config),augmentation=cfg.get('augmentation'),view_mode=cfg.get('training_view_mode','random_augmented'),recipes=cfg.get('augmentation_recipes'))
     empty=next(i for i,im in enumerate(train.images) if not im['classes'])
     multi=next(i for i,im in enumerate(train.images) if len(train.anns_by_image[im['id']])>1)
     if train.view_mode=='original_plus_recipes':
@@ -37,7 +37,7 @@ if __name__=='__main__':
         if stage=='B': assert any(p.grad is not None for p in model.vit.encoder.layer[-1].parameters())
         optimizer=torch.optim.AdamW([p for p in model.parameters() if p.requires_grad],lr=1e-5)
         optimizer.step();checks.append(dict(stage=stage,image_id=batch['image_ids'][0],loss=float(result.loss.detach()),view=train.view_name(index)))
-    val=CocoDetectionDataset(ROOT,ROOT/'data/prepared/label_studio/val.json',processor,a.size)
+    val=CocoDetectionDataset(ROOT,ROOT/'data/prepared/label_studio_v2/val.json',processor,a.size)
     indices=[]
     for c in range(5):
         indices.append(next(i for i,im in enumerate(val.images) if c in (im['classes'] or [4])))

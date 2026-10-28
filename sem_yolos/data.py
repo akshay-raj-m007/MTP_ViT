@@ -86,7 +86,9 @@ class CocoDetectionDataset(Dataset):
                 image,boxes,labels=geometry(image,boxes,labels,recipe)
             else:image,boxes,labels=augment(image,boxes,labels,self.augmentation)
         canvas,boxes,meta=letterbox(image,boxes,self.size)
-        if recipe is not None:canvas=appearance(canvas,recipe)
+        if recipe is not None:
+            content=(meta['left'],meta['top'],round(meta['width']*meta['scale_x']),round(meta['height']*meta['scale_y']))
+            canvas=appearance(canvas,recipe,content)
         return canvas,boxes,labels,meta
     def __getitem__(self,index):
         source_index,augmented=self.view_info(index)

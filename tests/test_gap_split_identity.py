@@ -12,24 +12,30 @@ sys.path.insert(0, str(ROOT))
 from sem_yolos.common import prepared_fingerprint, read
 
 
+# Grouped v2 split (data/splits/split_v2.json): both black-void views (fig26/fig35) and both
+# faint-dash views (fig14/fig45) train; held-out gaps are independent defects.
 EXPECTED = {
-    "train": {"baea786d-fig14.jpg", "d40dc8e8-fig2.jpg", "79c680ce-fig29.jpg"},
-    "val": {"a3c2b033-fig26.jpg", "d799ade3-fig45.jpg"},
-    "test": {"b5e1d95a-fig35.jpg", "add3881f-fig91.jpg"},
+    "train": {"baea786d-fig14.jpg", "d40dc8e8-fig2.jpg", "a3c2b033-fig26.jpg", "b5e1d95a-fig35.jpg", "d799ade3-fig45.jpg"},
+    "val": {"79c680ce-fig29.jpg"},
+    "test": {"add3881f-fig91.jpg"},
 }
 
 
 class GapSplitIdentityTests(unittest.TestCase):
     def test_gap_images_and_annotations_follow_requested_split(self):
-        prepared = ROOT / "data/prepared/label_studio"
+        prepared = ROOT / "data/prepared/label_studio_v2"
         manifest = read(prepared / "split_manifest.json")
         self.assertEqual(manifest["split_fingerprint"], prepared_fingerprint(prepared))
         self.assertEqual(manifest["fingerprint"],
-                         "b3aa0c38134c1bf18ed47502308a6740423d3544328ac59662f5572991e6b587")
+                         "71f578aee5eeaa301d96c7c3c3877a28697d1e733437b6bc9db7611afe424880")
+        groups = {}
+        for im in manifest["images"]:
+            groups.setdefault(im["leakage_group"], set()).add(im["split"])
+        self.assertTrue(all(len(splits) == 1 for splits in groups.values()))
         image_ids = set()
-        expected_images = {"train": 63, "val": 16, "test": 16}
-        expected_boxes = {"train": 44, "val": 13, "test": 12}
-        expected_gap_boxes = {"train": 6, "val": 4, "test": 3}
+        expected_images = {"train": 66, "val": 16, "test": 13}
+        expected_boxes = {"train": 47, "val": 14, "test": 9}
+        expected_gap_boxes = {"train": 9, "val": 4, "test": 1}
         for split in ("train", "val", "test"):
             data = read(prepared / f"{split}.json")
             gaps = {a["image_id"] for a in data["annotations"] if a["category_id"] == 1}

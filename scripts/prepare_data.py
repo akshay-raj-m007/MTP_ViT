@@ -13,7 +13,7 @@ import random
 from collections import Counter, defaultdict
 from pathlib import Path
 from PIL import Image
-from sem_yolos.common import ROOT, CLASSES, CATEGORIES, read, write, resolve_image, raw_images_dir, prepared_fingerprint
+from sem_yolos.common import ROOT, CLASSES, CATEGORIES, DEFAULT_PREPARED, read, write, resolve_image, raw_images_dir, prepared_fingerprint
 
 CONFIRMED_CLEAN = "c5329556-fig34.jpg"
 
@@ -86,7 +86,7 @@ def inspect(root, source):
                 empty_images=[im["file_name"] for im in records if not im["classes"]],
                 exact_duplicate_groups=[v for v in hashes.values() if len(v)>1],near_duplicate_candidates=near,
                 source_to_model=remap,source_sha256=hashlib.sha256(source.read_bytes()).hexdigest(),
-                assumptions=["35 empty images assumed clean from COCO and supplied dataset description; review metadata unavailable.",
+                assumptions=["Images without boxes are clean (no_defect) as exported by the annotator; they carry zero detection boxes.",
                              "fig34 is clean (no_defect) by explicit user confirmation; 36 clean images total, with zero detection boxes.",
                              "Near-duplicate candidates are review hints, not inferred source groups."])
     report['unique_image_ids']=len(ids)==len(d['images'])
@@ -153,11 +153,34 @@ def split_records(records, seed, source_groups):
         im["leakage_group"]=str(find(im["id"]))
     return records
 
+def assign_records(records, plan):
+    """Apply an explicit filename -> split plan; groups must stay inside one split."""
+    assignments,groups=plan['assignments'],plan.get('groups',{})
+    names={Path(im['file_name']).name for im in records}
+    if set(assignments)!=names:
+        raise ValueError(f"Split plan and images differ: missing {sorted(names-set(assignments))}, unknown {sorted(set(assignments)-names)}")
+    bad={k:v for k,v in assignments.items() if v not in ('train','val','test')}
+    if bad: raise ValueError(f'Unknown split names: {bad}')
+    group_of={}
+    for group,members in groups.items():
+        unknown=set(members)-names
+        if unknown: raise ValueError(f'Group {group} names unknown images: {unknown}')
+        if len({assignments[m] for m in members})!=1: raise ValueError(f'Group {group} crosses splits')
+        for m in members:
+            if m in group_of: raise ValueError(f'{m} is in groups {group_of[m]} and {group}')
+            group_of[m]=group
+    for im in records:
+        name=Path(im['file_name']).name
+        im['split']=assignments[name]; im['source_group']=group_of.get(name); im['leakage_group']=group_of.get(name,name)
+    return records
+
 def main():
     p=argparse.ArgumentParser(); p.add_argument('--root',type=Path,default=ROOT)
-    p.add_argument('--source',default='data/raw/result.json'); p.add_argument('--output',default='data/prepared/label_studio')
+    p.add_argument('--source',default='data/raw/result_labeled.json'); p.add_argument('--output',default=DEFAULT_PREPARED)
+    p.add_argument('--assign',default='data/splits/split_v2.json',help="Explicit filename->split plan with groups; pass '' to use the quota splitter")
     p.add_argument('--seed',type=int,default=42); p.add_argument('--groups',type=Path); p.add_argument('--resplit',action='store_true')
     args=p.parse_args(); root=args.root.resolve(); out=root/args.output
+    if args.assign and args.groups: raise ValueError('--groups belongs to the quota splitter; put groups in the --assign plan instead')
     records,boxes,report=inspect(root,root/args.source)
     # COCOeval uses annotation ID 0 as its unmatched sentinel. Preserve raw IDs separately.
     for index,box in enumerate(boxes,1):
@@ -168,15 +191,21 @@ def main():
     source_groups=read(args.groups) if args.groups else {}
     unknown=set(source_groups)-{v for im in records for v in (im['file_name'],Path(im['file_name']).name)}
     if unknown: raise ValueError(f'Group entries not found: {unknown}')
-    fingerprint=hashlib.sha256(json.dumps([report['source_sha256'],[(i['id'],i['file_sha256']) for i in records],source_groups],sort_keys=True).encode()).hexdigest()
+    plan=read(root/args.assign) if args.assign else None
+    identity=[report['source_sha256'],[(i['id'],i['file_sha256']) for i in records],source_groups]+([plan] if plan is not None else [])
+    fingerprint=hashlib.sha256(json.dumps(identity,sort_keys=True).encode()).hexdigest()
     manifest_path=out/'split_manifest.json'
-    if manifest_path.exists() and not args.resplit:
+    if plan is not None:
+        records=assign_records(records,plan)
+        write(manifest_path,dict(seed=None,split_plan=args.assign,fingerprint=fingerprint,images=records))
+    elif manifest_path.exists() and not args.resplit:
         saved=read(manifest_path)
         if saved['fingerprint']!=fingerprint: raise ValueError('Dataset/groups changed; inspect changes and explicitly use --resplit')
-        previous={im['id']:im for im in saved['images']}
+        # Match by file name: Label Studio renumbers image IDs in every export.
+        previous={Path(im['file_name']).name:im for im in saved['images']}
         for im in records:
             for key in ('split','source_group','leakage_group'):
-                im[key]=previous[im['id']][key]
+                im[key]=previous[Path(im['file_name']).name][key]
         write(manifest_path,dict(seed=saved['seed'],fingerprint=fingerprint,images=records))
     else:
         records=split_records(records,args.seed,source_groups)
@@ -194,6 +223,9 @@ def main():
     report['split_distributions']=distributions
     report['split_box_distributions']=box_distributions
     lookup={im['id']:im for im in records}
+    report['split_plan']=args.assign or None
+    report['leakage_groups_crossing_splits']=sorted(g for g in {im['leakage_group'] for im in records} if len({im['split'] for im in records if im['leakage_group']==g})>1)
+    if report['leakage_groups_crossing_splits']: raise ValueError(f"Leakage groups cross splits: {report['leakage_groups_crossing_splits']}")
     report['near_duplicate_cross_split_candidates']=sum(lookup[pair['ids'][0]]['split']!=lookup[pair['ids'][1]]['split'] for pair in report['near_duplicate_candidates'])
     lines=['# Near-duplicate review candidates','','dHash distance <= 5 is screening, not proof of shared source. No groups inferred.','', '| Image A | Split | Image B | Split | Distance |','|---|---|---|---|---|']
     for pair in report['near_duplicate_candidates']:
@@ -203,12 +235,11 @@ def main():
     write(out/'validation_report.json',report)
     text='# Dataset report\n\n```json\n'+json.dumps({k:report[k] for k in ['images','boxes','instances','class_presence','split_distributions','split_box_distributions']},indent=2)+'\n```\n\n'
     text+='\n\n'.join(report['assumptions'])
-    text+='\n\nSource groups supplied: '+str(bool(source_groups))
-    text+='\n\nFull dimensions, hashes and near-duplicate candidates: data/prepared/label_studio/validation_report.json and split_manifest.json. Small originals include 81x81 pixels; upscaling cannot recover detail. No test predictions were computed.\n'
+    text+='\n\nSource groups supplied: '+str(bool(source_groups or plan))+'. Split plan: '+str(args.assign or None)
+    text+=f'\n\nFull dimensions, hashes and near-duplicate candidates: {args.output}/validation_report.json and split_manifest.json. Small originals include 81x81 pixels; upscaling cannot recover detail. No test predictions were computed.\n'
     text+='\n\nValidation: '+json.dumps({k:report[k] for k in ['errors','unique_image_ids','unique_annotation_ids','crowd_annotations','ignored_annotations','exact_duplicate_groups','near_duplicate_cross_split_candidates','boxes_shorter_than_4_pixels_at_512','minimum_box_short_side_at_512']},indent=2)
     text+='\n\nNear-duplicate candidates: '+str(len(report['near_duplicate_candidates']))+'. See NEAR_DUPLICATE_REVIEW.md before interpreting source-independent generalization.\n'
-    (root/'docs').mkdir(parents=True,exist_ok=True)
-    (root/'docs/DATASET_REPORT.md').write_text(text,encoding='utf-8')
+    (out/'DATASET_REPORT.md').write_text(text,encoding='utf-8')
     print(json.dumps(distributions,indent=2))
 
 if __name__=='__main__': main()

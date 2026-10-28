@@ -1,0 +1,497 @@
+{
+  "info": {
+    "source": "Label Studio"
+  },
+  "images": [
+    {
+      "width": 81,
+      "height": 81,
+      "id": 3,
+      "file_name": "data/raw/images/2f4867db-fig90.png",
+      "classes": [
+        2
+      ],
+      "sha256": "fc548b4fc5b41cf8dd012361b1d6d30156c415ee3713db6c4d9e4f3fbe78eaa2",
+      "file_sha256": "b914ae76c31e66d6c8106924aaa3bffae98acd40fd491cae49c7c485dd3c1731",
+      "annotation_status": "box_annotated",
+      "evaluation_eligible": true,
+      "split": "val",
+      "source_group": null,
+      "leakage_group": "2f4867db-fig90.png"
+    },
+    {
+      "width": 177,
+      "height": 145,
+      "id": 6,
+      "file_name": "data/raw/images/3e4d737f-fig17.jpg",
+      "classes": [
+        0
+      ],
+      "sha256": "7156cf88b49b91f2f6150134c4442d2a35a1e09427550a935adddec8c28dba62",
+      "file_sha256": "cd5bad64c1c4e418afe3b4a7716cf538986e5f15c6561f719cd923020e34e255",
+      "annotation_status": "box_annotated",
+      "evaluation_eligible": true,
+      "split": "val",
+      "source_group": "bridge_B",
+      "leakage_group": "bridge_B"
+    },
+    {
+      "width": 287,
+      "height": 287,
+      "id": 8,
+      "file_name": "data/raw/images/4b225fb2-fig47.jpg",
+      "classes": [],
+      "sha256": "6a746a000470f7c9845e92479b8437b03eca44a5e57c875398cd8560835afa39",
+      "file_sha256": "67969774fb80cf85eb4b44216b0034c6ba2190236eb900a124b2cce94a49b9b8",
+      "annotation_status": "assumed_clean_coco",
+      "evaluation_eligible": true,
+      "split": "val",
+      "source_group": null,
+      "leakage_group": "4b225fb2-fig47.jpg"
+    },
+    {
+      "width": 312,
+      "height": 427,
+      "id": 16,
+      "file_name": "data/raw/images/5bf1c7b1-fig49.jpg",
+      "classes": [],
+      "sha256": "1e00b95f0492d4868e9ba56b871abd3d5a72f6270ea64db25564f7890107b3a2",
+      "file_sha256": "abe49800fc5795d0f23c39907a5c4fe48d1fd0a337655c2b356a75330235c328",
+      "annotation_status": "assumed_clean_coco",
+      "evaluation_eligible": true,
+      "split": "val",
+      "source_group": null,
+      "leakage_group": "5bf1c7b1-fig49.jpg"
+    },
+    {
+      "width": 277,
+      "height": 277,
+      "id": 28,
+      "file_name": "data/raw/images/40de6898-fig1.jpg",
+      "classes": [
+        0
+      ],
+      "sha256": "09e9347e954396e7d4078a52a4bea471a53d826b2c7d96577c764509b2744ebf",
+      "file_sha256": "47d95afb5f2babc1d189b0152415d89969cf09e1db8255c479dbf8153f6edce8",
+      "annotation_status": "box_annotated",
+      "evaluation_eligible": true,
+      "split": "val",
+      "source_group": null,
+      "leakage_group": "40de6898-fig1.jpg"
+    },
+    {
+      "width": 250,
+      "height": 201,
+      "id": 32,
+      "file_name": "data/raw/images/59cf29dc-fig44.jpg",
+      "classes": [
+        2
+      ],
+      "sha256": "0ffa3b44fc848bf04f465ad047f6e95fb7c1c06e43bbd3838805775b5595fdc9",
+      "file_sha256": "7e15200e41ead33aef1e7dcec4f9ad52ef6c0395618abc45e27b055816ac9db2",
+      "annotation_status": "box_annotated",
+      "evaluation_eligible": true,
+      "split": "val",
+      "source_group": "collapse_J",
+      "leakage_group": "collapse_J"
+    },
+    {
+      "width": 240,
+      "height": 237,
+      "id": 37,
+      "file_name": "data/raw/images/79c680ce-fig29.jpg",
+      "classes": [
+        1
+      ],
+      "sha256": "8e480e390c5287acece64187a7f10d90d32bea8acd2582eef28f59a54a43ae07",
+      "file_sha256": "9d5ecaac64868b997470017414553c9d7fb4fbc7ab588bb7e898a0d562408916",
+      "annotation_status": "box_annotated",
+      "evaluation_eligible": true,
+      "split": "val",
+      "source_group": null,
+      "leakage_group": "79c680ce-fig29.jpg"
+    },
+    {
+      "width": 147,
+      "height": 146,
+      "id": 42,
+      "file_name": "data/raw/images/308e765b-fig13.jpg",
+      "classes": [
+        2
+      ],
+      "sha256": "8f346c262009839d64837a7207ee5ee5ab0a124a61331f64b5bf80773c8c3fd2",
+      "file_sha256": "4b197776d4fd052a062c70f84d188cc54d552e18a8d147e71e92ba97c707ad02",
+      "annotation_status": "box_annotated",
+      "evaluation_eligible": true,
+      "split": "val",
+      "source_group": "collapse_J",
+      "leakage_group": "collapse_J"
+    },
+    {
+      "width": 177,
+      "height": 145,
+      "id": 48,
+      "file_name": "data/raw/images/3271ba62-fig19.jpg",
+      "classes": [
+        3
+      ],
+      "sha256": "1b7d897ca29f952146d5581bb96b686ca63fa8c30cb8c0d2338d10abbabd5d30",
+      "file_sha256": "0b3e348376111ed7e73bcbc94c060996fdc4b5bf9d4855c2c21b08bb14836cee",
+      "annotation_status": "box_annotated",
+      "evaluation_eligible": true,
+      "split": "val",
+      "source_group": "multi_D",
+      "leakage_group": "multi_D"
+    },
+    {
+      "width": 128,
+      "height": 128,
+      "id": 53,
+      "file_name": "data/raw/images/616955db-fig55.png",
+      "classes": [],
+      "sha256": "b0b18327578877290564c90b4c710352609a04e6252255d0d4319b1fdd31f0c8",
+      "file_sha256": "90e4b9c06c0ddd330b0dcf0c02cd3c8e71dcbb91c2569afd2e95f493bb656f7d",
+      "annotation_status": "assumed_clean_coco",
+      "evaluation_eligible": true,
+      "split": "val",
+      "source_group": "clean_55",
+      "leakage_group": "clean_55"
+    },
+    {
+      "width": 225,
+      "height": 225,
+      "id": 54,
+      "file_name": "data/raw/images/911571b2-fig24.jpg",
+      "classes": [
+        3
+      ],
+      "sha256": "4bec16887669ef0c404a26053987331f01c42c403c4dee6539ea5dc8d7db419b",
+      "file_sha256": "a58c367321f3ebf1b1c7c6670bfc6d391bf23911f3c9028a8621ae31ed9d98ab",
+      "annotation_status": "box_annotated",
+      "evaluation_eligible": true,
+      "split": "val",
+      "source_group": "multi_D",
+      "leakage_group": "multi_D"
+    },
+    {
+      "width": 222,
+      "height": 222,
+      "id": 60,
+      "file_name": "data/raw/images/a0ac64f6-fig22.jpg",
+      "classes": [
+        0
+      ],
+      "sha256": "65df099ddeaf1d77081914d1c8247d9130983a465f840346e147493933735a50",
+      "file_sha256": "bc79040fffc17ba26e4026f1ef8cc93d50e66ce8a2680f4535b3eb770f57ed5b",
+      "annotation_status": "box_annotated",
+      "evaluation_eligible": true,
+      "split": "val",
+      "source_group": "bridge_B",
+      "leakage_group": "bridge_B"
+    },
+    {
+      "width": 256,
+      "height": 256,
+      "id": 65,
+      "file_name": "data/raw/images/accee79d-fig61.png",
+      "classes": [],
+      "sha256": "5703cfd09502f2d5aae628f41445880814fc346257401c8efd358a37c3ab071e",
+      "file_sha256": "0e00379c3342664e12530e5bfbdf3f467cf30a4970488bde06e29c7e3c983a64",
+      "annotation_status": "assumed_clean_coco",
+      "evaluation_eligible": true,
+      "split": "val",
+      "source_group": null,
+      "leakage_group": "accee79d-fig61.png"
+    },
+    {
+      "width": 246,
+      "height": 197,
+      "id": 70,
+      "file_name": "data/raw/images/b726f4f4-fig39.jpg",
+      "classes": [
+        0
+      ],
+      "sha256": "d1e2f499061267cd48592f58530cd6a0ffbafdf7e1dce2983cd695d432774dbc",
+      "file_sha256": "1b461deaf3e0dd9ef3da370bfca930cfa9469bb9905fe8bcd48232ce0efc2852",
+      "annotation_status": "box_annotated",
+      "evaluation_eligible": true,
+      "split": "val",
+      "source_group": "bridge_B",
+      "leakage_group": "bridge_B"
+    },
+    {
+      "width": 128,
+      "height": 128,
+      "id": 72,
+      "file_name": "data/raw/images/bc2db2b5-fig57.png",
+      "classes": [],
+      "sha256": "5bad6af121ec2efea4b2733105a5d4a42927fcdceaa6accc3ba6ea4767c390e9",
+      "file_sha256": "7249b894b87b86ef009d72f84787801dd3ee6a8029dc2a543fecb9612ef885ab",
+      "annotation_status": "assumed_clean_coco",
+      "evaluation_eligible": true,
+      "split": "val",
+      "source_group": "clean_55",
+      "leakage_group": "clean_55"
+    },
+    {
+      "width": 242,
+      "height": 192,
+      "id": 84,
+      "file_name": "data/raw/images/e12c8cd2-fig41.jpg",
+      "classes": [
+        3
+      ],
+      "sha256": "40879443e2b1c228b5329d994e5bff4c05d9d5caf05228fc92aceeb853990630",
+      "file_sha256": "af46e318d1bb5bcfa18bfc8df6cdd8444c0e29710d1c2c64a3921820095c0eb8",
+      "annotation_status": "box_annotated",
+      "evaluation_eligible": true,
+      "split": "val",
+      "source_group": "multi_D",
+      "leakage_group": "multi_D"
+    }
+  ],
+  "annotations": [
+    {
+      "id": 4,
+      "image_id": 3,
+      "category_id": 2,
+      "segmentation": [],
+      "bbox": [
+        39.44216417910448,
+        6.6492537313432845,
+        8.462686567164173,
+        60.44776119402985
+      ],
+      "ignore": 0,
+      "iscrowd": 0,
+      "area": 511.5504566718642,
+      "source_annotation_id": 3
+    },
+    {
+      "id": 7,
+      "image_id": 6,
+      "category_id": 0,
+      "segmentation": [],
+      "bbox": [
+        81.42723880597015,
+        44.36567164179105,
+        19.207089552238823,
+        55.72761194029852
+      ],
+      "ignore": 0,
+      "iscrowd": 0,
+      "area": 1070.3652330697273,
+      "source_annotation_id": 6
+    },
+    {
+      "id": 23,
+      "image_id": 28,
+      "category_id": 0,
+      "segmentation": [],
+      "bbox": [
+        111.62686567164182,
+        81.13619402985073,
+        48.06156716417915,
+        132.81529850746287
+      ],
+      "ignore": 0,
+      "iscrowd": 0,
+      "area": 6383.3113896469295,
+      "source_annotation_id": 22
+    },
+    {
+      "id": 27,
+      "image_id": 32,
+      "category_id": 2,
+      "segmentation": [],
+      "bbox": [
+        80.46512920278431,
+        14.411664931841958,
+        76.86221296982386,
+        176.5428954150641
+      ],
+      "ignore": 0,
+      "iscrowd": 0,
+      "area": 13569.477625701997,
+      "source_annotation_id": 26
+    },
+    {
+      "id": 30,
+      "image_id": 37,
+      "category_id": 1,
+      "segmentation": [],
+      "bbox": [
+        226.18348378993858,
+        10.341471461078982,
+        6.908258105030554,
+        15.690265327961708
+      ],
+      "ignore": 0,
+      "iscrowd": 0,
+      "area": 108.39240262197136,
+      "source_annotation_id": 29
+    },
+    {
+      "id": 31,
+      "image_id": 37,
+      "category_id": 1,
+      "segmentation": [],
+      "bbox": [
+        127.06260443181222,
+        103.16650485087597,
+        6.1680875937772335,
+        16.970288100533615
+      ],
+      "ignore": 0,
+      "iscrowd": 0,
+      "area": 104.6742234957268,
+      "source_annotation_id": 30
+    },
+    {
+      "id": 32,
+      "image_id": 37,
+      "category_id": 1,
+      "segmentation": [],
+      "bbox": [
+        189.48365088083858,
+        114.90154281568093,
+        6.90825810503057,
+        16.54707771781745
+      ],
+      "ignore": 0,
+      "iscrowd": 0,
+      "area": 114.31148375868315,
+      "source_annotation_id": 31
+    },
+    {
+      "id": 33,
+      "image_id": 37,
+      "category_id": 1,
+      "segmentation": [],
+      "bbox": [
+        131.99707450683405,
+        217.51923555919723,
+        6.661534601279477,
+        14.564034410082435
+      ],
+      "ignore": 0,
+      "iscrowd": 0,
+      "area": 97.01881915698908,
+      "source_annotation_id": 32
+    },
+    {
+      "id": 36,
+      "image_id": 42,
+      "category_id": 2,
+      "segmentation": [],
+      "bbox": [
+        55.83955223880597,
+        12.529850746268655,
+        57.74626865671642,
+        124.75373134328358
+      ],
+      "ignore": 0,
+      "iscrowd": 0,
+      "area": 7204.062486077077,
+      "source_annotation_id": 35
+    },
+    {
+      "id": 41,
+      "image_id": 48,
+      "category_id": 3,
+      "segmentation": [],
+      "bbox": [
+        71.39343806649121,
+        54.86647333204733,
+        36.90349374214001,
+        35.35292677818455
+      ],
+      "ignore": 0,
+      "iscrowd": 0,
+      "area": 1304.6465121250676,
+      "source_annotation_id": 40
+    },
+    {
+      "id": 43,
+      "image_id": 54,
+      "category_id": 3,
+      "segmentation": [],
+      "bbox": [
+        95.28917910447764,
+        91.09141791044775,
+        36.100746268656735,
+        39.03917910447765
+      ],
+      "ignore": 0,
+      "iscrowd": 0,
+      "area": 1409.3434993873934,
+      "source_annotation_id": 42
+    },
+    {
+      "id": 45,
+      "image_id": 60,
+      "category_id": 0,
+      "segmentation": [],
+      "bbox": [
+        103.50165047338398,
+        82.07503371335567,
+        23.125709370074972,
+        59.435581185149005
+      ],
+      "ignore": 0,
+      "iscrowd": 0,
+      "area": 1374.489976729252,
+      "source_annotation_id": 44
+    },
+    {
+      "id": 52,
+      "image_id": 70,
+      "category_id": 0,
+      "segmentation": [],
+      "bbox": [
+        112.46641791044766,
+        62.84888059701496,
+        25.727611940298463,
+        71.30223880597003
+      ],
+      "ignore": 0,
+      "iscrowd": 0,
+      "area": 1834.436330474487,
+      "source_annotation_id": 51
+    },
+    {
+      "id": 63,
+      "image_id": 84,
+      "category_id": 3,
+      "segmentation": [],
+      "bbox": [
+        95.64179104477604,
+        73.0746268656716,
+        49.791044776119385,
+        51.582089552238834
+      ],
+      "ignore": 0,
+      "iscrowd": 0,
+      "area": 2568.326130541324,
+      "source_annotation_id": 62
+    }
+  ],
+  "categories": [
+    {
+      "id": 0,
+      "name": "bridge"
+    },
+    {
+      "id": 1,
+      "name": "gap"
+    },
+    {
+      "id": 2,
+      "name": "line_collapse"
+    },
+    {
+      "id": 3,
+      "name": "multi_bridge"
+    }
+  ]
+}

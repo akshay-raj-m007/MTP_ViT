@@ -1,0 +1,209 @@
+{
+  "description": "Grouped split for the relabeled export. Images showing the same physical defect at different zoom/crop (or near-identical clean renders) share one group and one split. Groups were found by visual side-by-side review plus dHash<=5 screening; see data/splits/SPLIT_V2.md.",
+  "groups": {
+    "bridge_A": [
+      "1def4dff-fig16.jpg",
+      "ec47d83e-fig21.jpg",
+      "64e39b3e-fig38.jpg"
+    ],
+    "bridge_B": [
+      "3e4d737f-fig17.jpg",
+      "a0ac64f6-fig22.jpg",
+      "b726f4f4-fig39.jpg"
+    ],
+    "multi_C": [
+      "5c3a6bd0-fig18.jpg",
+      "f517f736-fig23.jpg",
+      "db263815-fig40.jpg"
+    ],
+    "multi_D": [
+      "3271ba62-fig19.jpg",
+      "911571b2-fig24.jpg",
+      "e12c8cd2-fig41.jpg"
+    ],
+    "collapse_E": [
+      "3de709e3-fig20.jpg",
+      "753e8e60-fig25.jpg",
+      "4dec1c5f-fig42.jpg"
+    ],
+    "bridge_F": [
+      "51b12735-fig27.jpg",
+      "a9b212c9-fig30.jpg",
+      "3ee4fda6-fig32.jpg",
+      "448a1ea1-fig36.jpg",
+      "6a61a40b-fig37.jpg"
+    ],
+    "collapse_G": [
+      "041f4174-fig28.jpg",
+      "8aa80f97-fig31.jpg",
+      "7508945b-fig33.jpg"
+    ],
+    "gapvoid_H": [
+      "a3c2b033-fig26.jpg",
+      "b5e1d95a-fig35.jpg"
+    ],
+    "bridge_I": [
+      "e660164b-fig12.jpg",
+      "d56b00d9-fig43.jpg"
+    ],
+    "collapse_J": [
+      "308e765b-fig13.jpg",
+      "59cf29dc-fig44.jpg"
+    ],
+    "gapfaint_K": [
+      "baea786d-fig14.jpg",
+      "d799ade3-fig45.jpg"
+    ],
+    "bridge_L": [
+      "c6afd036-fig92.jpg",
+      "18b0500e-fig95.jpg"
+    ],
+    "bridge_M": [
+      "22c25c35-fig4.jpg",
+      "94e0bc26-fig93.jpg",
+      "1fba1a73-fig94.jpg"
+    ],
+    "collapse_N": [
+      "05f7de8b-fig81.jpg",
+      "0df21114-fig82.jpg"
+    ],
+    "multi_O": [
+      "e02846f2-fig10.jpg",
+      "91c97d18-fig11.jpg"
+    ],
+    "collapse_P": [
+      "4c5f8e6b-fig83.png",
+      "6dbcd005-fig84.png",
+      "ff35e692-fig85.png",
+      "685ae930-fig86.png",
+      "5b094465-fig87.png",
+      "df4a3a5f-fig88.png",
+      "70d1c46d-fig89.png"
+    ],
+    "clean_53": [
+      "4befb5e7-fig53.png",
+      "17bb30c7-fig54.png"
+    ],
+    "clean_55": [
+      "616955db-fig55.png",
+      "bc2db2b5-fig57.png"
+    ],
+    "clean_64": [
+      "073a7321-fig64.png",
+      "5afa7ab5-fig67.png",
+      "b7edc469-fig70.png",
+      "62cda090-fig73.png",
+      "a72950f1-fig76.png"
+    ],
+    "clean_65": [
+      "aa0c08c7-fig65.png",
+      "adbcda0c-fig66.png",
+      "04083246-fig71.png",
+      "9e227b80-fig74.png",
+      "bf79e781-fig78.png"
+    ],
+    "clean_68": [
+      "94b819f6-fig68.png",
+      "575592db-fig69.png",
+      "fe6bc024-fig75.png",
+      "88523489-fig79.png"
+    ]
+  },
+  "assignments": {
+    "40de6898-fig1.jpg": "val",
+    "d40dc8e8-fig2.jpg": "train",
+    "fdf253f4-fig3.jpg": "train",
+    "22c25c35-fig4.jpg": "train",
+    "43e08f23-fig5.jpg": "test",
+    "30700fe6-fig6.jpg": "train",
+    "c44668f5-fig7.jpg": "test",
+    "3a0459f8-fig8.jpg": "train",
+    "6afcb829-fig9.jpg": "train",
+    "e02846f2-fig10.jpg": "train",
+    "91c97d18-fig11.jpg": "train",
+    "e660164b-fig12.jpg": "test",
+    "308e765b-fig13.jpg": "val",
+    "baea786d-fig14.jpg": "train",
+    "e755da54-fig15.jpg": "train",
+    "1def4dff-fig16.jpg": "train",
+    "3e4d737f-fig17.jpg": "val",
+    "5c3a6bd0-fig18.jpg": "train",
+    "3271ba62-fig19.jpg": "val",
+    "3de709e3-fig20.jpg": "test",
+    "ec47d83e-fig21.jpg": "train",
+    "a0ac64f6-fig22.jpg": "val",
+    "f517f736-fig23.jpg": "train",
+    "911571b2-fig24.jpg": "val",
+    "753e8e60-fig25.jpg": "test",
+    "a3c2b033-fig26.jpg": "train",
+    "51b12735-fig27.jpg": "train",
+    "041f4174-fig28.jpg": "train",
+    "79c680ce-fig29.jpg": "val",
+    "a9b212c9-fig30.jpg": "train",
+    "8aa80f97-fig31.jpg": "train",
+    "3ee4fda6-fig32.jpg": "train",
+    "7508945b-fig33.jpg": "train",
+    "c5329556-fig34.jpg": "train",
+    "b5e1d95a-fig35.jpg": "train",
+    "448a1ea1-fig36.jpg": "train",
+    "6a61a40b-fig37.jpg": "train",
+    "64e39b3e-fig38.jpg": "train",
+    "b726f4f4-fig39.jpg": "val",
+    "db263815-fig40.jpg": "train",
+    "e12c8cd2-fig41.jpg": "val",
+    "4dec1c5f-fig42.jpg": "test",
+    "d56b00d9-fig43.jpg": "test",
+    "59cf29dc-fig44.jpg": "val",
+    "d799ade3-fig45.jpg": "train",
+    "56020e51-fig46.jpg": "train",
+    "4b225fb2-fig47.jpg": "val",
+    "30efd278-fig48.jpg": "train",
+    "5bf1c7b1-fig49.jpg": "val",
+    "4531a923-fig50.jpg": "test",
+    "f91bde6a-fig51.jpg": "train",
+    "38304605-fig52.jpg": "test",
+    "4befb5e7-fig53.png": "test",
+    "17bb30c7-fig54.png": "test",
+    "616955db-fig55.png": "val",
+    "385f418f-fig56.png": "train",
+    "bc2db2b5-fig57.png": "val",
+    "d0319b1c-fig58.png": "train",
+    "990bc766-fig59.png": "train",
+    "e723f2b1-fig60.png": "train",
+    "accee79d-fig61.png": "val",
+    "c18bc5ac-fig62.png": "train",
+    "54668019-fig63.png": "train",
+    "073a7321-fig64.png": "train",
+    "aa0c08c7-fig65.png": "train",
+    "adbcda0c-fig66.png": "train",
+    "5afa7ab5-fig67.png": "train",
+    "94b819f6-fig68.png": "train",
+    "575592db-fig69.png": "train",
+    "b7edc469-fig70.png": "train",
+    "04083246-fig71.png": "train",
+    "258f1f90-fig72.png": "test",
+    "62cda090-fig73.png": "train",
+    "9e227b80-fig74.png": "train",
+    "fe6bc024-fig75.png": "train",
+    "a72950f1-fig76.png": "train",
+    "4c62874f-fig77.png": "train",
+    "bf79e781-fig78.png": "train",
+    "88523489-fig79.png": "train",
+    "38c5b065-fig80.png": "train",
+    "05f7de8b-fig81.jpg": "train",
+    "0df21114-fig82.jpg": "train",
+    "4c5f8e6b-fig83.png": "train",
+    "6dbcd005-fig84.png": "train",
+    "ff35e692-fig85.png": "train",
+    "685ae930-fig86.png": "train",
+    "5b094465-fig87.png": "train",
+    "df4a3a5f-fig88.png": "train",
+    "70d1c46d-fig89.png": "train",
+    "2f4867db-fig90.png": "val",
+    "add3881f-fig91.jpg": "test",
+    "c6afd036-fig92.jpg": "train",
+    "94e0bc26-fig93.jpg": "train",
+    "1fba1a73-fig94.jpg": "train",
+    "18b0500e-fig95.jpg": "train"
+  }
+}

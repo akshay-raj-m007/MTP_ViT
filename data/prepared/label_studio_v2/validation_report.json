@@ -1,0 +1,402 @@
+{
+  "schema": "COCO",
+  "images": 95,
+  "boxes": 70,
+  "errors": [],
+  "dimensions": {
+    "179x183": 1,
+    "177x145": 4,
+    "183x183": 1,
+    "81x81": 1,
+    "210x212": 1,
+    "177x147": 1,
+    "260x255": 1,
+    "287x287": 1,
+    "128x128": 5,
+    "1024x1024": 7,
+    "256x256": 22,
+    "242x197": 1,
+    "391x386": 1,
+    "312x427": 1,
+    "222x220": 1,
+    "216x217": 1,
+    "252x261": 1,
+    "166x183": 1,
+    "311x310": 2,
+    "285x281": 1,
+    "277x277": 1,
+    "241x237": 1,
+    "187x187": 1,
+    "237x241": 1,
+    "250x201": 1,
+    "240x195": 1,
+    "240x237": 1,
+    "260x261": 1,
+    "387x384": 1,
+    "147x146": 1,
+    "150x150": 1,
+    "226x226": 1,
+    "225x227": 1,
+    "161x160": 1,
+    "187x192": 1,
+    "286x287": 1,
+    "225x225": 2,
+    "260x257": 1,
+    "287x290": 1,
+    "222x222": 1,
+    "220x227": 1,
+    "255x257": 1,
+    "385x388": 1,
+    "256x261": 1,
+    "246x197": 1,
+    "147x142": 1,
+    "379x392": 1,
+    "211x211": 1,
+    "256x260": 1,
+    "312x312": 1,
+    "247x200": 1,
+    "245x200": 1,
+    "240x200": 1,
+    "242x192": 1,
+    "127x142": 1,
+    "257x260": 1,
+    "150x147": 1,
+    "160x160": 1,
+    "227x222": 1
+  },
+  "instances": {
+    "line_collapse": 21,
+    "bridge": 25,
+    "multi_bridge": 10,
+    "gap": 14
+  },
+  "class_presence": {
+    "line_collapse": 20,
+    "bridge": 22,
+    "multi_bridge": 10,
+    "gap": 7
+  },
+  "empty_images": [
+    "data/raw/images/4b225fb2-fig47.jpg",
+    "data/raw/images/4befb5e7-fig53.png",
+    "data/raw/images/4c62874f-fig77.png",
+    "data/raw/images/5afa7ab5-fig67.png",
+    "data/raw/images/5bf1c7b1-fig49.jpg",
+    "data/raw/images/9e227b80-fig74.png",
+    "data/raw/images/17bb30c7-fig54.png",
+    "data/raw/images/30efd278-fig48.jpg",
+    "data/raw/images/38c5b065-fig80.png",
+    "data/raw/images/62cda090-fig73.png",
+    "data/raw/images/073a7321-fig64.png",
+    "data/raw/images/94b819f6-fig68.png",
+    "data/raw/images/258f1f90-fig72.png",
+    "data/raw/images/385f418f-fig56.png",
+    "data/raw/images/990bc766-fig59.png",
+    "data/raw/images/4531a923-fig50.jpg",
+    "data/raw/images/56020e51-fig46.jpg",
+    "data/raw/images/575592db-fig69.png",
+    "data/raw/images/616955db-fig55.png",
+    "data/raw/images/04083246-fig71.png",
+    "data/raw/images/38304605-fig52.jpg",
+    "data/raw/images/54668019-fig63.png",
+    "data/raw/images/88523489-fig79.png",
+    "data/raw/images/a72950f1-fig76.png",
+    "data/raw/images/aa0c08c7-fig65.png",
+    "data/raw/images/accee79d-fig61.png",
+    "data/raw/images/adbcda0c-fig66.png",
+    "data/raw/images/b7edc469-fig70.png",
+    "data/raw/images/bc2db2b5-fig57.png",
+    "data/raw/images/bf79e781-fig78.png",
+    "data/raw/images/c18bc5ac-fig62.png",
+    "data/raw/images/c5329556-fig34.jpg",
+    "data/raw/images/d0319b1c-fig58.png",
+    "data/raw/images/e723f2b1-fig60.png",
+    "data/raw/images/f91bde6a-fig51.jpg",
+    "data/raw/images/fe6bc024-fig75.png"
+  ],
+  "exact_duplicate_groups": [],
+  "near_duplicate_candidates": [
+    {
+      "ids": [
+        0,
+        13
+      ],
+      "dhash_distance": 0
+    },
+    {
+      "ids": [
+        9,
+        23
+      ],
+      "dhash_distance": 1
+    },
+    {
+      "ids": [
+        14,
+        33
+      ],
+      "dhash_distance": 5
+    },
+    {
+      "ids": [
+        14,
+        36
+      ],
+      "dhash_distance": 2
+    },
+    {
+      "ids": [
+        14,
+        69
+      ],
+      "dhash_distance": 1
+    },
+    {
+      "ids": [
+        22,
+        55
+      ],
+      "dhash_distance": 0
+    },
+    {
+      "ids": [
+        22,
+        64
+      ],
+      "dhash_distance": 2
+    },
+    {
+      "ids": [
+        22,
+        66
+      ],
+      "dhash_distance": 0
+    },
+    {
+      "ids": [
+        22,
+        73
+      ],
+      "dhash_distance": 1
+    },
+    {
+      "ids": [
+        24,
+        43
+      ],
+      "dhash_distance": 1
+    },
+    {
+      "ids": [
+        24,
+        74
+      ],
+      "dhash_distance": 0
+    },
+    {
+      "ids": [
+        33,
+        36
+      ],
+      "dhash_distance": 3
+    },
+    {
+      "ids": [
+        33,
+        63
+      ],
+      "dhash_distance": 5
+    },
+    {
+      "ids": [
+        33,
+        69
+      ],
+      "dhash_distance": 4
+    },
+    {
+      "ids": [
+        36,
+        63
+      ],
+      "dhash_distance": 4
+    },
+    {
+      "ids": [
+        36,
+        69
+      ],
+      "dhash_distance": 1
+    },
+    {
+      "ids": [
+        39,
+        52
+      ],
+      "dhash_distance": 3
+    },
+    {
+      "ids": [
+        39,
+        59
+      ],
+      "dhash_distance": 1
+    },
+    {
+      "ids": [
+        39,
+        93
+      ],
+      "dhash_distance": 4
+    },
+    {
+      "ids": [
+        43,
+        74
+      ],
+      "dhash_distance": 1
+    },
+    {
+      "ids": [
+        52,
+        59
+      ],
+      "dhash_distance": 2
+    },
+    {
+      "ids": [
+        52,
+        93
+      ],
+      "dhash_distance": 3
+    },
+    {
+      "ids": [
+        53,
+        72
+      ],
+      "dhash_distance": 2
+    },
+    {
+      "ids": [
+        55,
+        64
+      ],
+      "dhash_distance": 2
+    },
+    {
+      "ids": [
+        55,
+        66
+      ],
+      "dhash_distance": 0
+    },
+    {
+      "ids": [
+        55,
+        73
+      ],
+      "dhash_distance": 1
+    },
+    {
+      "ids": [
+        59,
+        93
+      ],
+      "dhash_distance": 3
+    },
+    {
+      "ids": [
+        63,
+        69
+      ],
+      "dhash_distance": 5
+    },
+    {
+      "ids": [
+        64,
+        66
+      ],
+      "dhash_distance": 2
+    },
+    {
+      "ids": [
+        64,
+        73
+      ],
+      "dhash_distance": 3
+    },
+    {
+      "ids": [
+        66,
+        73
+      ],
+      "dhash_distance": 1
+    }
+  ],
+  "source_to_model": {
+    "0": 0,
+    "1": 1,
+    "2": 2,
+    "3": 3
+  },
+  "source_sha256": "eedd45b54f21b1cb87340c0b4a9a5769edcc8d71c51e33dc43acf1f6f1df0c99",
+  "assumptions": [
+    "Images without boxes are clean (no_defect) as exported by the annotator; they carry zero detection boxes.",
+    "fig34 is clean (no_defect) by explicit user confirmation; 36 clean images total, with zero detection boxes.",
+    "Near-duplicate candidates are review hints, not inferred source groups."
+  ],
+  "unique_image_ids": true,
+  "unique_annotation_ids": true,
+  "crowd_annotations": 0,
+  "ignored_annotations": 0,
+  "source_file_count": 95,
+  "boxes_shorter_than_4_pixels_at_512": 0,
+  "minimum_box_short_side_at_512": 13.158586866724765,
+  "split_distributions": {
+    "train": {
+      "line_collapse": 14,
+      "bridge": 15,
+      "multi_bridge": 6,
+      "no_defect": 26,
+      "gap": 5
+    },
+    "val": {
+      "line_collapse": 3,
+      "bridge": 4,
+      "no_defect": 5,
+      "gap": 1,
+      "multi_bridge": 3
+    },
+    "test": {
+      "line_collapse": 3,
+      "no_defect": 5,
+      "multi_bridge": 1,
+      "gap": 1,
+      "bridge": 3
+    }
+  },
+  "split_box_distributions": {
+    "train": {
+      "line_collapse": 14,
+      "bridge": 18,
+      "multi_bridge": 6,
+      "gap": 9
+    },
+    "val": {
+      "line_collapse": 3,
+      "bridge": 4,
+      "gap": 4,
+      "multi_bridge": 3
+    },
+    "test": {
+      "line_collapse": 4,
+      "multi_bridge": 1,
+      "gap": 1,
+      "bridge": 3
+    }
+  },
+  "split_plan": "data/splits/split_v2.json",
+  "leakage_groups_crossing_splits": [],
+  "near_duplicate_cross_split_candidates": 0
+}

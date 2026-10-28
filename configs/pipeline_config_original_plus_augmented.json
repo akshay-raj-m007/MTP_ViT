@@ -2,7 +2,7 @@
   "seed": 42,
   "size": 512,
   "model": "hustvl/yolos-tiny",
-  "prepared": "data/prepared/label_studio",
+  "prepared": "data/prepared/label_studio_v2",
   "batch_size": 1,
   "accumulation": 8,
   "workers": 0,

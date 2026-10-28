@@ -1,11 +1,11 @@
 # Code map
 
-Two isolated pipelines read the same prepared data in `data/prepared/label_studio/`. Windows commands are shown with `$py = .\venv\Scripts\python.exe` for YOLOS and `$ssd = .\outputs\mobilevitv2_ssd\env\Scripts\python.exe` for SSD.
+Two isolated pipelines read the same prepared data in `data/prepared/label_studio_v2/`: relabeled export with the grouped split. `data/prepared/label_studio/` keeps the original-label baseline that the existing runs and diagnostics configs use. Windows commands are shown with `$py = .\venv\Scripts\python.exe` for YOLOS and `$ssd = .\outputs\mobilevitv2_ssd\env\Scripts\python.exe` for SSD.
 
 ## Data preparation (shared)
-- `scripts/prepare_data.py` reads `data/raw/result.json` and `data/raw/images/`. It writes `train/val/test.json`, `split_manifest.json`, `class_mapping.json`, `validation_report.json`, `NEAR_DUPLICATE_REVIEW.md` and `docs/DATASET_REPORT.md`.
-- Command: `& $py .\scripts\prepare_data.py`. It keeps the saved splits. `--resplit` with `--groups groups.json` rebuilds them, and `--output` changes the target directory.
-- The current gap split exists only in `split_manifest.json` (a manual edit). `--resplit` would overwrite it.
+- `scripts/prepare_data.py` reads `data/raw/result_labeled.json` and `data/raw/images/`. It strips the extra Label Studio upload prefix. It writes `train/val/test.json`, `split_manifest.json`, `class_mapping.json`, `validation_report.json`, `NEAR_DUPLICATE_REVIEW.md` and `DATASET_REPORT.md` into the output directory.
+- Command: `& $py .\scripts\prepare_data.py`. The split comes from `--assign data/splits/split_v2.json` (filename to split, with same-defect groups; see `data/splits/SPLIT_V2.md`). It fails if a group crosses splits or if any image is missing or unknown.
+- The old baseline: `--source data/raw/result.json --output data/prepared/label_studio --assign ''` (keeps its saved manifest, matched by filename).
 - Annotation review: `& $py .\scripts\review_annotations.py`.
 
 ## YOLOS-Tiny (`scripts/`, `sem_yolos/`)

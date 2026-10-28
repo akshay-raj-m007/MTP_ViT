@@ -9,7 +9,7 @@ from torchvision.transforms.v2 import functional as F
 
 def validate_recipes(recipes):
     if not isinstance(recipes,list) or not 1<=len(recipes)<=63:
-        raise ValueError('Provide 1..63 named augmentation recipes (19 gives 20 total views).')
+        raise ValueError('Provide 1..63 named augmentation recipes (N recipes give N+1 views with the original).')
     names=set();allowed={'name','hflip','vflip','scale_x','scale_y','angle','shear_x','shear_y','zoom','noise_std','brightness','contrast'}
     for recipe in recipes:
         if not isinstance(recipe,dict) or set(recipe)-allowed:raise ValueError(f'Unknown recipe fields: {recipe}')
@@ -57,6 +57,16 @@ def full_canvas_affine(image,boxes,angle,shear_x=0.,shear_y=0.):
     return image,boxes
 
 
+def zoom_window(starts,ends,full,size):
+    """Centred crop start/length along one axis that contains every box interval."""
+    start=(full-size)//2
+    if not len(starts):return start,size
+    low,high=math.floor(starts.min().item()),math.ceil(ends.max().item())
+    if high-low>size:return max(0,low),min(full,high)-max(0,low)
+    start=min(max(start,high-size),low)
+    return min(max(0,start),full-size),size
+
+
 def geometry(image,boxes,labels,recipe):
     image=F.to_image(image)
     b=tv_tensors.BoundingBoxes(torch.as_tensor(boxes,dtype=torch.float32).reshape(-1,4),format='XYWH',
@@ -69,15 +79,20 @@ def geometry(image,boxes,labels,recipe):
         image=F.resize(image,target,interpolation=InterpolationMode.BILINEAR,antialias=True)
         b=F.resize(b,target)
     if 'zoom' in recipe:
-        # A shared 1.25x reference canvas makes scale differences survive letterboxing.
-        # Enlarging the canvas as necessary preserves all content; no zoom crop.
+        # The output keeps the input canvas size, so after letterboxing defects appear
+        # exactly `zoom` times their original-view size. zoom<1 pads around the shrunken
+        # image; zoom>1 crops a window that always contains every box (never clipped).
         h,w=image.shape[-2:];zoom=recipe['zoom']
         nh,nw=max(1,round(h*zoom)),max(1,round(w*zoom))
-        canvas_h,canvas_w=max(math.ceil(h*1.25),nh),max(math.ceil(w*1.25),nw)
         image=F.resize(image,[nh,nw],interpolation=InterpolationMode.BILINEAR,antialias=True);b=F.resize(b,[nh,nw])
-        left,top=(canvas_w-nw)//2,(canvas_h-nh)//2
-        padding=[left,top,canvas_w-nw-left,canvas_h-nh-top]
-        image=F.pad(image,padding,fill=114);b=F.pad(b,padding)
+        if zoom<1:
+            left,top=(w-nw)//2,(h-nh)//2
+            padding=[left,top,w-nw-left,h-nh-top]
+            image=F.pad(image,padding,fill=114);b=F.pad(b,padding)
+        elif zoom>1:
+            top,ch=zoom_window(b[:,1],b[:,1]+b[:,3],nh,h)
+            left,cw=zoom_window(b[:,0],b[:,0]+b[:,2],nw,w)
+            image=F.crop(image,top,left,ch,cw);b=F.crop(b,top,left,ch,cw)
     angle=recipe.get('angle',0.)
     sx,sy=recipe.get('shear_x',0.),recipe.get('shear_y',0.)
     if angle or sx or sy:
@@ -93,14 +108,20 @@ def geometry(image,boxes,labels,recipe):
     return F.to_pil_image(image),result,labels
 
 
-def appearance(canvas,recipe):
+def appearance(canvas,recipe,content=None):
     # Noise sigma is defined on the final canvas in normalized [0,1] intensity units.
+    # `content` (left, top, width, height) limits changes to the image area so the
+    # letterbox padding stays plain grey, exactly as in original and validation views.
     brightness,contrast=recipe.get('brightness',0.),recipe.get('contrast',0.)
-    if brightness or contrast:canvas=v2.ColorJitter(brightness=brightness,contrast=contrast)(canvas)
     sigma=recipe.get('noise_std',0.)
+    if not (brightness or contrast or sigma):return canvas
+    region=canvas if content is None else canvas.crop((content[0],content[1],content[0]+content[2],content[1]+content[3]))
+    if brightness or contrast:region=v2.ColorJitter(brightness=brightness,contrast=contrast)(region)
     if sigma:
-        value=F.to_dtype(F.to_image(canvas),torch.float32,scale=True)
+        value=F.to_dtype(F.to_image(region),torch.float32,scale=True)
         noise=torch.randn((1,*value.shape[-2:]),dtype=value.dtype,device=value.device)
         value=(value+noise*sigma).clamp(0,1)
-        canvas=F.to_pil_image(value)
+        region=F.to_pil_image(value)
+    if content is None:return region
+    canvas=canvas.copy();canvas.paste(region,(content[0],content[1]))
     return canvas
