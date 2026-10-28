@@ -87,6 +87,7 @@ def main():
         subset=args.subset_size
         config.update(sampling='natural',early_stopping=False,stage_a_epochs=5,stage_b_epochs=args.epochs,accumulation=1)
         config['augmentation']={k:0. for k in config['augmentation']}
+        config['training_view_mode']='random_augmented'  # overfit check memorises unaugmented images
     train(config,out,args.device,args.precision,args.resume,args.checkpoint,subset)
 
 

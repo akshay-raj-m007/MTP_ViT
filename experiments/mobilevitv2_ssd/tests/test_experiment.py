@@ -41,15 +41,17 @@ def test_flips():
 
 
 def test_sampling_budget_and_resume(config):
-    ds=SemDataset(ROOT,ROOT/config['prepared'],'train',config)
+    ds=SemDataset(ROOT,ROOT/config['prepared'],'train',config,training=True)
+    assert ds.views_per_image==21 and len(ds)==66*21
     a=torch.Generator().manual_seed(1);b=torch.Generator().manual_seed(2)
     natural=epoch_keys(ds,config,a,b)
     assert sorted(k[0] for k in natural)==list(range(len(ds)))
     config['sampling']='weighted'
     weights,report=weights_and_report(ds,config)
-    assert report['image_class_counts']['gap']==3
-    assert max(weights)==pytest.approx((14/3)**.5)
-    assert report['expected_clean_fraction']<26/63
+    assert report['image_class_counts']['gap']==5 and report['presentations_per_epoch']==1386
+    assert len(weights)==1386 and weights==weights[:66]*21
+    assert max(weights)==pytest.approx((15/5)**.5)
+    assert report['expected_clean_fraction']<26/66
     saved_a=a.get_state();saved_b=b.get_state()
     first=epoch_keys(ds,config,a,b)
     a.set_state(saved_a);b.set_state(saved_b)
@@ -57,6 +59,57 @@ def test_sampling_budget_and_resume(config):
     assert len(first)==len(natural)==len(ds)
     a.set_state(saved_a);b.manual_seed(999)
     assert [i for i,s in epoch_keys(ds,config,a,b)]==[i for i,s in first]
+
+
+def test_every_view_once_per_natural_epoch_and_validation_unexpanded(config):
+    ds=SemDataset(ROOT,ROOT/config['prepared'],'train',config,training=True)
+    names=[ds.view_name(i) for i in range(len(ds))]
+    assert names.count('original')==66
+    assert all(names.count(r['name'])==66 for r in config['augmentation_recipes'])
+    keys=epoch_keys(ds,config,torch.Generator().manual_seed(3),torch.Generator().manual_seed(4))
+    assert {(i%66,i//66) for i,_ in keys}=={(s,v) for s in range(66) for v in range(21)}
+    val=SemDataset(ROOT,ROOT/config['prepared'],'val',config)
+    assert len(val)==16 and val.views_per_image==1
+    plain=SemDataset(ROOT,ROOT/config['prepared'],'train',config)
+    assert len(plain)==66
+
+
+def test_recipe_views_keep_labels_and_boxes_inside(config):
+    ds=SemDataset(ROOT,ROOT/config['prepared'],'train',config,training=True)
+    plain=SemDataset(ROOT,ROOT/config['prepared'],'train',config)
+    n=len(ds.images)
+    for source in range(n):
+        reference=plain[source]
+        original=ds[(source,7)]
+        assert torch.equal(original['image'],reference['image']) and torch.equal(original['boxes'],reference['boxes'])
+        for view in range(1,ds.views_per_image):
+            item=ds[(source+view*n,7)]
+            assert item['image'].shape==(3,config['size'],config['size'])
+            assert torch.equal(item['labels'],reference['labels'])
+            if len(item['boxes']):
+                assert bool((item['boxes'][:,2:]>item['boxes'][:,:2]).all())
+                assert bool((item['boxes']>=-1e-4).all()) and bool((item['boxes']<=1+1e-4).all())
+    first=ds[(n*20,11)]['image'];again=ds[(n*20,11)]['image']
+    assert torch.equal(first,again)  # appearance noise is reproducible from the epoch seed
+
+
+def test_boxes_follow_pixels_with_this_torchvision(config):
+    # Same mask check as the YOLOS suite, run inside the SSD environment (older torchvision).
+    from PIL import ImageDraw
+    from torchvision.transforms.v2 import functional as F
+    from sem_ssd.recipes import geometry
+    ds=SemDataset(ROOT,ROOT/config['prepared'],'train',config)
+    for info in ds.images:
+        for ann in ds.anns[info['id']]:
+            x,y,w,h=ann['bbox'];snapped=[round(x),round(y),round(x+w)-round(x),round(y+h)-round(y)]
+            mask=Image.new('RGB',(info['width'],info['height']),'black')
+            ImageDraw.Draw(mask).rectangle((snapped[0],snapped[1],snapped[0]+snapped[2]-1,snapped[1]+snapped[3]-1),fill='white')
+            for recipe in config['augmentation_recipes']:
+                out,b,_=geometry(mask,[snapped],[0],recipe)
+                lit=(F.to_image(out)[0]>127).nonzero()
+                bx,by,bw,bh=b[0].tolist()
+                found=(float(lit[:,1].min()),float(lit[:,0].min()),float(lit[:,1].max())+1,float(lit[:,0].max())+1)
+                assert all(abs(g-w_)<=1.5 for g,w_ in zip(found,(bx,by,bx+bw,by+bh))),(info['file_name'],recipe['name'],found)
 
 
 def metric_fixture():

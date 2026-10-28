@@ -117,8 +117,8 @@ def train(config, output, device_name='cuda', precision='fp32', resume=False,
                 classes = {full_train.mapping[a['category_id']] for a in full_train.anns[im['id']]}
                 if (not classes if wanted is None else wanted in classes):
                     chosen.append(i); break
-        chosen += [i for i in range(len(full_train)) if i not in chosen]
-        indices = chosen[:min(subset_size,len(full_train))]
+        chosen += [i for i in range(len(full_train.images)) if i not in chosen]
+        indices = chosen[:min(subset_size,len(full_train.images))]
     train_data = SemDataset(root, prepared, 'train', config, training=True, indices=indices)
     val_data = (SemDataset(root, prepared, 'train', config, training=False, indices=indices) if subset_size else
                 SemDataset(root, prepared, 'val', config))

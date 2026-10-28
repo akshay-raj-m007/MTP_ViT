@@ -4,10 +4,12 @@ import math
 from collections import Counter, defaultdict
 from pathlib import Path
 from PIL import Image
+import numpy as np
 import torch
 from torch.utils.data import Dataset
 from .io import CLASSES, digest, file_hash, read
 from .preprocessing import transform
+from .recipes import appearance, geometry, validate_recipes
 
 
 def category_map(categories):
@@ -125,20 +127,52 @@ class SemDataset(Dataset):
         self.anns = defaultdict(list)
         for a in self.coco['annotations']:
             self.anns[a['image_id']].append(a)
+        # original_plus_recipes: every epoch shows each training image once unchanged and once per
+        # recipe (index = view * len(images) + source). random_augmented: one random flip/jitter view.
+        self.view_mode = config.get('training_view_mode', 'random_augmented')
+        if self.view_mode not in ('random_augmented', 'original_plus_recipes'):
+            raise ValueError(f'Unknown training view mode: {self.view_mode}')
+        self.recipes = config.get('augmentation_recipes', []) if self.view_mode == 'original_plus_recipes' else []
+        if self.view_mode == 'original_plus_recipes':
+            validate_recipes(self.recipes)
+        self.views_per_image = 1 + len(self.recipes) if training and self.recipes else 1
 
     def __len__(self):
-        return len(self.images)
+        return len(self.images) * self.views_per_image
+
+    def view_name(self, index):
+        view = index // len(self.images)
+        if not self.training:
+            return 'original'
+        if self.recipes:
+            return 'original' if view == 0 else self.recipes[view - 1]['name']
+        return 'random_augmented'
 
     def __getitem__(self, key):
         index, seed = key if isinstance(key, tuple) else (key, 0)
-        im = self.images[index]
+        if not 0 <= index < len(self):
+            raise IndexError(index)
+        source, view = index % len(self.images), index // len(self.images)
+        im = self.images[source]
         anns = self.anns[im['id']]
+        external = [self.mapping[a['category_id']] for a in anns]
         with Image.open(resolve_image(self.root, im['file_name'])) as image:
+            image = image.convert('RGB')
+        recipe = self.recipes[view - 1] if self.recipes and view > 0 else None
+        if recipe is not None:
+            image, xywh, _ = geometry(image, [a['bbox'] for a in anns], external, recipe)
+            tensor, boxes, meta, canvas = transform(image, xywh.tolist(), self.config['size'], self.config['resize_mode'])
+            content = (meta['left'], meta['top'], round(meta['width'] * meta['scale_x']), round(meta['height'] * meta['scale_y']))
+            with torch.random.fork_rng(devices=[]):
+                torch.manual_seed(seed)
+                canvas = appearance(canvas, recipe, content)
+            tensor = torch.from_numpy(np.array(canvas, copy=True)).permute(2, 0, 1).float().div(255)
+        else:
+            augmentation = self.config['augmentation'] if self.training and not self.recipes else None
             tensor, boxes, meta, _ = transform(image, [a['bbox'] for a in anns],
-                self.config['size'], self.config['resize_mode'],
-                self.config['augmentation'] if self.training else None, seed)
-        labels = torch.tensor([self.mapping[a['category_id']] + 1 for a in anns], dtype=torch.long)
-        return dict(image=tensor, boxes=boxes, labels=labels, meta=meta, image_id=im['id'])
+                self.config['size'], self.config['resize_mode'], augmentation, seed)
+        labels = torch.tensor([c + 1 for c in external], dtype=torch.long)
+        return dict(image=tensor, boxes=boxes, labels=labels, meta=meta, image_id=im['id'], view=self.view_name(index))
 
     def canonical_coco(self):
         data = copy.deepcopy(self.coco)

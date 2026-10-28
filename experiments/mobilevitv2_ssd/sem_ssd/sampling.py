@@ -14,13 +14,17 @@ def weights_and_report(dataset, config):
     weights = [min(cap, max((largest/counts[c])**power for c in cs)) if cs else background for cs in presence]
     active = weights if config['sampling'] == 'weighted' else [1.] * len(weights)
     total = sum(active)
-    report = dict(sampling=config['sampling'], unique_images=len(presence), presentations_per_epoch=len(presence),
+    views = getattr(dataset, 'views_per_image', 1)
+    # Frequencies count unique source images; each view of an image carries that image's weight.
+    report = dict(sampling=config['sampling'], unique_images=len(presence), presentations_per_epoch=len(dataset),
+        training_view_mode=getattr(dataset, 'view_mode', 'random_augmented'), views_per_image=views,
+        augmentation_recipes=[r['name'] for r in getattr(dataset, 'recipes', [])],
         image_class_counts={CLASSES[c]:counts[c] for c in range(4)},
         box_class_counts=dict(Counter(CLASSES[dataset.mapping[a['category_id']]] for im in dataset.images for a in dataset.anns[im['id']])),
         weight_min=min(active), weight_max=max(active), strategy='maximum capped inverse image-presence frequency raised to power',
         expected_clean_fraction=sum(w for w,cs in zip(active,presence) if not cs)/total,
-        expected_class_presentations={CLASSES[c]:len(presence)*sum(w for w,cs in zip(active,presence) if c in cs)/total for c in range(4)})
-    return weights, report
+        expected_class_presentations={CLASSES[c]:len(dataset)*sum(w for w,cs in zip(active,presence) if c in cs)/total for c in range(4)})
+    return weights * views, report
 
 
 def epoch_keys(dataset, config, sampling_rng, augmentation_rng):

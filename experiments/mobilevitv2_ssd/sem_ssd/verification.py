@@ -42,8 +42,11 @@ def preview(config, output):
         original_sheet.paste(raw_source,(0,0));original_sheet.paste(marked,(raw_source.width,0))
         source_filename=f"{source['id']}_original.png"
         original_sheet.save(output/source_filename)
-        for label, dataset in [('deterministic',original),('augmented',augmented)]:
-            item=dataset[(index,config['seed']+index)]
+        n=len(augmented.images)
+        views=[('deterministic',original,index)]+([(augmented.view_name(index+v*n),augmented,index+v*n) for v in range(1,augmented.views_per_image)]
+                                                  if augmented.recipes else [('augmented',augmented,index)])
+        for label, dataset, key in views:
+            item=dataset[(key,config['seed']+index)]
             raw=Image.fromarray((item['image'].permute(1,2,0).numpy()*255).round().astype(np.uint8))
             overlay=raw.copy();draw=ImageDraw.Draw(overlay)
             for box,internal in zip(item['boxes']*config['size'],item['labels']):

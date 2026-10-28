@@ -26,6 +26,13 @@ def validate_recipes(recipes):
                 raise ValueError(f'{field} must be finite and between {lo} and {hi}')
 
 
+def xywh_boxes(data,canvas_size):
+    # torchvision >= 0.23 needs clamping_mode=None to keep boxes unclipped; older versions (the SSD
+    # environment) have no such argument. Every box here stays inside its canvas, so clamping is a no-op.
+    try:return tv_tensors.BoundingBoxes(data,format='XYWH',canvas_size=canvas_size,clamping_mode=None)
+    except TypeError:return tv_tensors.BoundingBoxes(data,format='XYWH',canvas_size=canvas_size)
+
+
 def full_canvas_affine(image,boxes,angle,shear_x=0.,shear_y=0.):
     """Use the SAME padded canvas/affine for pixels and boxes; crop padding only.
 
@@ -40,8 +47,7 @@ def full_canvas_affine(image,boxes,angle,shear_x=0.,shear_y=0.):
     left,top=(side-w)//2,(side-h)//2
     padding=[left,top,side-w-left,side-h-top]
     image=F.pad(image,padding,fill=114);boxes=F.pad(boxes,padding)
-    frame=tv_tensors.BoundingBoxes([[float(left),float(top),float(w),float(h)]],
-                                  format='XYWH',canvas_size=(side,side),clamping_mode=None)
+    frame=xywh_boxes([[float(left),float(top),float(w),float(h)]],(side,side))
     options=dict(angle=-angle,translate=[0,0],scale=1.,shear=[shear_x,shear_y])
     image=F.affine(image,**options,interpolation=InterpolationMode.BILINEAR,fill=114)
     boxes=F.affine(boxes,**options);frame=F.affine(frame,**options)
@@ -69,8 +75,7 @@ def zoom_window(starts,ends,full,size):
 
 def geometry(image,boxes,labels,recipe):
     image=F.to_image(image)
-    b=tv_tensors.BoundingBoxes(torch.as_tensor(boxes,dtype=torch.float32).reshape(-1,4),format='XYWH',
-                              canvas_size=tuple(image.shape[-2:]),clamping_mode=None)
+    b=xywh_boxes(torch.as_tensor(boxes,dtype=torch.float32).reshape(-1,4),tuple(image.shape[-2:]))
     for key,fn in [('hflip',F.horizontal_flip),('vflip',F.vertical_flip)]:
         if recipe.get(key,False):image,b=fn(image),fn(b)
     h,w=image.shape[-2:]
