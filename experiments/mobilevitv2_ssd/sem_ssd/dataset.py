@@ -116,8 +116,9 @@ def inspect_dataset(root, prepared):
 
 
 class SemDataset(Dataset):
-    def __init__(self, root, prepared, split, config, training=False, indices=None):
-        if split not in ('train', 'val'):
+    def __init__(self, root, prepared, split, config, training=False, indices=None, final_test=False):
+        # Test is opened only by the explicit `experiment.py test` command, never by training or selection.
+        if split not in ('train', 'val') and not (split == 'test' and final_test and not training):
             raise ValueError('This experiment exposes train and validation only; final test is deferred')
         self.root, self.config = Path(root), config
         self.coco = read(Path(prepared) / f'{split}.json')

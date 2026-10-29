@@ -12,7 +12,7 @@ from sem_ssd.io import ROOT, EXPERIMENT, CACHE, read, write, output_path, isolat
 
 def main():
     p=argparse.ArgumentParser(description=__doc__)
-    p.add_argument('command',choices=['setup','inspect','check-setup','preview','smoke','train','overfit','validate'])
+    p.add_argument('command',choices=['setup','inspect','check-setup','preview','smoke','train','overfit','validate','test'])
     p.add_argument('--config',type=Path,default=EXPERIMENT/'configs/natural.json')
     p.add_argument('--prepared',type=str)
     p.add_argument('--output',type=Path)
@@ -64,8 +64,10 @@ def main():
     if args.command=='smoke':
         from sem_ssd.verification import smoke
         print(json.dumps(smoke(config,out,args.device,args.precision,args.checkpoint),indent=2));return
-    if args.command=='validate':
+    if args.command in ('validate','test'):
+        # 'test' scores the held-out split once with the validation-selected best.pt; it selects nothing.
         if not args.model:p.error('--model is required')
+        split='test' if args.command=='test' else 'val'
         import torch
         from sem_ssd.dataset import inspect_dataset,SemDataset
         from sem_ssd.model import create_model
@@ -76,9 +78,9 @@ def main():
         if saved['data_fingerprint']!=report['fingerprint']:raise ValueError('Checkpoint/data mismatch')
         model,_,_=create_model(config,pretrained=False);model.load_state_dict(saved['model'],strict=True)
         device,precision=device_precision(args.device,args.precision);model.to(device)
-        metrics,predictions=validate(model,SemDataset(ROOT,ROOT/config['prepared'],'val',config),device,precision)
+        metrics,predictions=validate(model,SemDataset(ROOT,ROOT/config['prepared'],split,config,final_test=split=='test'),device,precision)
         out.mkdir(parents=True,exist_ok=False);write(out/'metrics.json',metrics);write(out/'predictions.json',predictions)
-        write(out/'provenance.json',dict(model=str(args.model),split='val',data_fingerprint=report['fingerprint'],config=config,precision=precision))
+        write(out/'provenance.json',dict(model=str(args.model),split=split,data_fingerprint=report['fingerprint'],config=config,precision=precision))
         print(json.dumps(metrics,indent=2));return
     from sem_ssd.training import train
     subset=None
