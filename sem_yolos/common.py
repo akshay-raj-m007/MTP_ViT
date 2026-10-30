@@ -53,6 +53,10 @@ def raw_images_dir(root):
     return current if current.exists() else Path(root)/'images'
 
 def resolve_image(root, exported):
+    # Pitch-normalised sources name their file relative to the repo; raw exports only match by basename.
+    direct = Path(root)/exported.replace(chr(92), "/")
+    if direct.is_file() and direct.resolve().is_relative_to(Path(root).resolve()/"data"):
+        return direct.resolve()
     name = exported.replace(chr(92), "/").rsplit("/", 1)[-1]
     matches = [p for p in raw_images_dir(root).rglob(name) if p.is_file() and p.name == name]
     if not matches and UPLOAD_PREFIX.match(name):

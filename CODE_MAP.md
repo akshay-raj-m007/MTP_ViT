@@ -18,6 +18,14 @@ Two isolated pipelines read the same prepared data in `data/prepared/label_studi
 | Inference | `& $py .\scripts\infer_yolos.py <image> --model ...\best --output <dir>` |
 | Review predictions | `& $py .\scripts\draw_predictions.py --predictions ...\final_test\predictions.json --split test --threshold <thr> --output <dir>` (GT beside predictions ≥0.05, plus `gt_review.csv`: found / wrong_class / poorly_localised / missed per GT box; works on SSD `predictions.json` too) |
 | 768 input | `configs/pipeline_config_20_views_768.json` and `..._weighted_balanced_768.json` (identical to the 512 configs except `size`) |
+| Pitch-normalised | `configs/pipeline_config_pitch32.json` and `..._pitch32_weighted.json`; SSD `configs/pitch32_{natural,weighted}.json` |
+
+### Pitch-normalised pipeline
+- **Data:** `scripts/pitch_normalize.py --review`, then `--write`, resizes every image to a 32 px line pitch (no cropping) and maps the boxes exactly: `data/pitch_norm/{images,coco.json,pitch_table.json}`. Fix pitches in `data/pitch_norm/pitch_overrides.json`. Then `scripts/prepare_data.py --source data/pitch_norm/coco.json --images data/pitch_norm/images --output data/prepared/label_studio_v3_pitch32`, which reuses the split in `data/splits/split_v2.json`.
+- **Config keys:** `native_pitch` pads images and never enlarges them (SSD also needs `resize_mode: pad`); `tile_overlap` turns on tiled evaluation.
+- **Training (`sem_yolos/windows.py`, shared with SSD):** the original view is the whole image fitted to the 640 canvas; each recipe view is a random crop holding a defect, with other boxes kept only if at least half visible. Scale recipes stay within ±10%.
+- **Evaluation:** images over 640 px run as overlapping tiles plus one whole-image pass, merged by class-wise NMS. Boxes taller than the 320 px overlap rely on the whole-image pass.
+- **Metrics are in normalised pixels,** so mAP is comparable across runs but box coordinates are not. `scripts/infer_yolos.py` does not tile or normalise yet.
 
 - **Config keys:** `size` (letterbox size), the stage epochs and learning rates, `patience` (early stopping, active), `sampling_power`/`sampling_cap` (weighted mode only), `training_view_mode` plus `augmentation_recipes` (the 20 views), and `augmentation` (used only in `random_augmented` mode).
 - **Outputs per run:** `best/` (HF checkpoint, `selection.json`, `threshold.json`), `stage_A_best/`, `stage_B_best/`, `last/` (with `training_state.pt`), `metrics_{A,B}_NNN.json`, `sampling_report.json`, `device.json`.

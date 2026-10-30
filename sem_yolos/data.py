@@ -1,4 +1,5 @@
 """Shared box-aware augmentation and invertible fixed-canvas preprocessing."""
+import random
 from collections import Counter, defaultdict
 from pathlib import Path
 import torch
@@ -9,11 +10,13 @@ from torchvision.transforms.v2 import functional as F
 from PIL import Image, ImageDraw, ImageFont
 from .common import read, CLASSES
 from .multi_augment import geometry,appearance,validate_recipes
+from .windows import crop_window,crop_boxes,tile_windows
 
 
-def letterbox(image, boxes, size):
+def letterbox(image, boxes, size, upscale=True):
     w,h=image.size
     scale=min(size/w,size/h)
+    if not upscale: scale=min(scale,1.)
     nw,nh=max(1,round(w*scale)),max(1,round(h*scale))
     left,top=(size-nw)//2,(size-nh)//2
     canvas=Image.new('RGB',(size,size),(114,114,114))
@@ -31,6 +34,7 @@ def inverse_boxes(xyxy,meta):
     # Predictions can lie in padding. Clamp predictions only; raw GT is never clipped.
     b[:,[0,2]]=b[:,[0,2]].clamp(0,meta['width'])
     b[:,[1,3]]=b[:,[1,3]].clamp(0,meta['height'])
+    b[:,[0,2]]+=meta.get('offset_x',0); b[:,[1,3]]+=meta.get('offset_y',0)
     return b
 
 
@@ -48,9 +52,10 @@ def augment(image,boxes,labels,config):
 
 
 class CocoDetectionDataset(Dataset):
-    def __init__(self,root,ann_file,processor,size=512,training=False,augmentation=None,view_mode="random_augmented",recipes=None):
+    def __init__(self,root,ann_file,processor,size=512,training=False,augmentation=None,view_mode="random_augmented",recipes=None,native=False,tile_overlap=None):
         self.root=Path(root); self.coco=read(ann_file); self.processor=processor; self.size=size
         self.training=training; self.augmentation=augmentation or {}
+        self.native=native  # pitch-normalised images: pad, never enlarge; augmented views are crops around a defect
         if view_mode not in ('random_augmented','original_plus_augmented','original_plus_recipes'):
             raise ValueError(f'Unknown training view mode: {view_mode}')
         self.view_mode=view_mode
@@ -62,9 +67,13 @@ class CocoDetectionDataset(Dataset):
         self.images=self.coco['images']; self.image_ids=[i['id'] for i in self.images]
         self.anns_by_image=defaultdict(list)
         for a in self.coco['annotations']: self.anns_by_image[a['image_id']].append(a)
-    def __len__(self): return len(self.images)*self.views_per_image
+        # Evaluation only: each sample is (source image, window), merged per image after prediction.
+        self.tiles=[(i,w) for i,im in enumerate(self.images) for w in tile_windows(im['width'],im['height'],size,tile_overlap)] if tile_overlap is not None and not training else None
+        self.tiled_images={self.images[i]['id'] for i,w in self.tiles if (w[2],w[3])!=(self.images[i]['width'],self.images[i]['height'])} if self.tiles else set()
+    def __len__(self): return len(self.tiles) if self.tiles else len(self.images)*self.views_per_image
     def view_info(self,index):
         if not 0 <= index < len(self): raise IndexError(index)
+        if self.tiles: return self.tiles[index][0],False
         source_index=index % len(self.images)
         augmented=self.training and (self.view_mode=='random_augmented' or index>=len(self.images))
         return source_index,augmented
@@ -80,12 +89,18 @@ class CocoDetectionDataset(Dataset):
         anns=self.anns_by_image[info['id']]
         boxes=[a['bbox'] for a in anns]; labels=[a['category_id'] for a in anns]
         recipe=None
+        window=self.tiles[index][1] if self.tiles else None
+        if self.native and augmented: window=crop_window(image.width,image.height,self.size,boxes,random)
+        if window is not None:
+            boxes,labels=crop_boxes(boxes,labels,window)
+            image=image.crop((window[0],window[1],window[0]+window[2],window[1]+window[3]))
         if augmented:
             if self.view_mode=='original_plus_recipes':
                 recipe=self.recipes[index//len(self.images)-1]
                 image,boxes,labels=geometry(image,boxes,labels,recipe)
             else:image,boxes,labels=augment(image,boxes,labels,self.augmentation)
-        canvas,boxes,meta=letterbox(image,boxes,self.size)
+        canvas,boxes,meta=letterbox(image,boxes,self.size,upscale=not self.native)
+        if window is not None: meta.update(offset_x=window[0],offset_y=window[1])
         if recipe is not None:
             content=(meta['left'],meta['top'],round(meta['width']*meta['scale_x']),round(meta['height']*meta['scale_y']))
             canvas=appearance(canvas,recipe,content)

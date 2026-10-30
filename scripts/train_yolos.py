@@ -50,8 +50,8 @@ def main(default_sampling='natural'):
     seed_all(cfg['seed']);torch.set_num_threads(min(8,os.cpu_count() or 1));device=device_for(args.device)
     source=out/'last' if state else cfg['model']
     model,processor=load_model(source,device,fresh=not bool(state),local=not args.allow_download)
-    train=CocoDetectionDataset(root,prepared_dir(root,cfg['prepared'])/'train.json',processor,cfg['size'],True,cfg['augmentation'],view_mode=cfg.get('training_view_mode','random_augmented'),recipes=cfg.get('augmentation_recipes'))
-    val=CocoDetectionDataset(root,prepared_dir(root,cfg['prepared'])/'val.json',processor,cfg['size'])
+    train=CocoDetectionDataset(root,prepared_dir(root,cfg['prepared'])/'train.json',processor,cfg['size'],True,cfg['augmentation'],view_mode=cfg.get('training_view_mode','random_augmented'),recipes=cfg.get('augmentation_recipes'),native=cfg.get('native_pitch',False))
+    val=CocoDetectionDataset(root,prepared_dir(root,cfg['prepared'])/'val.json',processor,cfg['size'],native=cfg.get('native_pitch',False),tile_overlap=cfg.get('tile_overlap'))
     weights,report=sample_weights(train,cfg['sampling_power'],cfg['sampling_cap'],cfg['background_weight'])
     report['sampling']=args.sampling
     report['expected_empty_fraction_natural']=sum(not im['classes'] for im in train.images)/len(train.images)

@@ -24,7 +24,7 @@ def mapping(categories):
         raise ValueError("Duplicate category names")
     return {c["id"]: CLASSES.index(c["name"]) for c in categories if c["name"] in CLASSES}
 
-def inspect(root, source):
+def inspect(root, source, images=None):
     d = read(source)
     if not isinstance(d, dict) or not all(k in d for k in ("images", "categories", "annotations")):
         raise ValueError("This input is not COCO. Export COCO or implement/review native conversion before proceeding.")
@@ -78,7 +78,7 @@ def inspect(root, source):
             distance=(signatures[a]^signatures[b]).bit_count()
             if distance<=5: near.append(dict(ids=[a,b],dhash_distance=distance))
     used={x["file_name"] for x in records}
-    extra=[p.relative_to(root).as_posix() for p in raw_images_dir(root).rglob("*") if p.is_file() and p.relative_to(root).as_posix() not in used]
+    extra=[p.relative_to(root).as_posix() for p in (root/images if images else raw_images_dir(root)).rglob("*") if p.is_file() and p.relative_to(root).as_posix() not in used]
     if extra: errors.append(f"Files absent from export: {extra}")
     report=dict(schema="COCO",images=len(d["images"]),boxes=len(boxes),errors=errors,
                 dimensions=dict(sizes),instances=dict(Counter(CLASSES[a["category_id"]] for a in boxes)),
@@ -178,10 +178,11 @@ def main():
     p=argparse.ArgumentParser(); p.add_argument('--root',type=Path,default=ROOT)
     p.add_argument('--source',default='data/raw/result_labeled.json'); p.add_argument('--output',default=DEFAULT_PREPARED)
     p.add_argument('--assign',default='data/splits/split_v2.json',help="Explicit filename->split plan with groups; pass '' to use the quota splitter")
+    p.add_argument('--images',help='Image folder when it is not data/raw/images, e.g. data/pitch_norm/images')
     p.add_argument('--seed',type=int,default=42); p.add_argument('--groups',type=Path); p.add_argument('--resplit',action='store_true')
     args=p.parse_args(); root=args.root.resolve(); out=root/args.output
     if args.assign and args.groups: raise ValueError('--groups belongs to the quota splitter; put groups in the --assign plan instead')
-    records,boxes,report=inspect(root,root/args.source)
+    records,boxes,report=inspect(root,root/args.source,args.images)
     # COCOeval uses annotation ID 0 as its unmatched sentinel. Preserve raw IDs separately.
     for index,box in enumerate(boxes,1):
         box['source_annotation_id']=box['id']

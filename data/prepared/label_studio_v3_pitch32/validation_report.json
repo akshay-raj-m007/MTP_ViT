@@ -1,0 +1,410 @@
+{
+  "schema": "COCO",
+  "images": 95,
+  "boxes": 70,
+  "errors": [],
+  "dimensions": {
+    "400x400": 1,
+    "282x282": 1,
+    "450x449": 1,
+    "232x231": 1,
+    "370x370": 1,
+    "350x359": 1,
+    "334x334": 1,
+    "332x335": 1,
+    "262x263": 1,
+    "260x263": 1,
+    "260x261": 1,
+    "276x270": 1,
+    "194x193": 1,
+    "280x270": 1,
+    "198x221": 1,
+    "644x528": 1,
+    "642x526": 1,
+    "648x531": 2,
+    "652x541": 1,
+    "658x658": 2,
+    "650x650": 1,
+    "664x649": 1,
+    "658x664": 1,
+    "862x889": 1,
+    "1100x1119": 1,
+    "1118x1099": 1,
+    "1470x1452": 1,
+    "1094x1103": 1,
+    "1078x1117": 1,
+    "990x971": 1,
+    "994x983": 1,
+    "732x743": 1,
+    "982x1001": 1,
+    "994x994": 1,
+    "974x965": 1,
+    "648x526": 1,
+    "662x530": 1,
+    "650x542": 1,
+    "656x520": 1,
+    "660x537": 1,
+    "330x267": 1,
+    "240x193": 1,
+    "336x274": 1,
+    "808x811": 1,
+    "646x646": 1,
+    "710x700": 1,
+    "744x1018": 1,
+    "242x240": 1,
+    "254x254": 1,
+    "978x988": 1,
+    "128x128": 5,
+    "150x150": 1,
+    "260x260": 1,
+    "256x256": 18,
+    "258x258": 3,
+    "206x203": 1,
+    "202x207": 1,
+    "1124x1124": 4,
+    "1208x1208": 1,
+    "522x522": 1,
+    "1086x1086": 1,
+    "666x666": 1,
+    "110x111": 1,
+    "156x161": 1,
+    "136x135": 1,
+    "138x138": 1,
+    "146x161": 1
+  },
+  "instances": {
+    "bridge": 25,
+    "gap": 14,
+    "line_collapse": 21,
+    "multi_bridge": 10
+  },
+  "class_presence": {
+    "bridge": 22,
+    "gap": 7,
+    "line_collapse": 20,
+    "multi_bridge": 10
+  },
+  "empty_images": [
+    "data/pitch_norm/images/c5329556-fig34.jpg",
+    "data/pitch_norm/images/56020e51-fig46.jpg",
+    "data/pitch_norm/images/4b225fb2-fig47.jpg",
+    "data/pitch_norm/images/30efd278-fig48.jpg",
+    "data/pitch_norm/images/5bf1c7b1-fig49.jpg",
+    "data/pitch_norm/images/4531a923-fig50.jpg",
+    "data/pitch_norm/images/f91bde6a-fig51.jpg",
+    "data/pitch_norm/images/38304605-fig52.jpg",
+    "data/pitch_norm/images/4befb5e7-fig53.png",
+    "data/pitch_norm/images/17bb30c7-fig54.png",
+    "data/pitch_norm/images/616955db-fig55.png",
+    "data/pitch_norm/images/385f418f-fig56.png",
+    "data/pitch_norm/images/bc2db2b5-fig57.png",
+    "data/pitch_norm/images/d0319b1c-fig58.png",
+    "data/pitch_norm/images/990bc766-fig59.png",
+    "data/pitch_norm/images/e723f2b1-fig60.png",
+    "data/pitch_norm/images/accee79d-fig61.png",
+    "data/pitch_norm/images/c18bc5ac-fig62.png",
+    "data/pitch_norm/images/54668019-fig63.png",
+    "data/pitch_norm/images/073a7321-fig64.png",
+    "data/pitch_norm/images/aa0c08c7-fig65.png",
+    "data/pitch_norm/images/adbcda0c-fig66.png",
+    "data/pitch_norm/images/5afa7ab5-fig67.png",
+    "data/pitch_norm/images/94b819f6-fig68.png",
+    "data/pitch_norm/images/575592db-fig69.png",
+    "data/pitch_norm/images/b7edc469-fig70.png",
+    "data/pitch_norm/images/04083246-fig71.png",
+    "data/pitch_norm/images/258f1f90-fig72.png",
+    "data/pitch_norm/images/62cda090-fig73.png",
+    "data/pitch_norm/images/9e227b80-fig74.png",
+    "data/pitch_norm/images/fe6bc024-fig75.png",
+    "data/pitch_norm/images/a72950f1-fig76.png",
+    "data/pitch_norm/images/4c62874f-fig77.png",
+    "data/pitch_norm/images/bf79e781-fig78.png",
+    "data/pitch_norm/images/88523489-fig79.png",
+    "data/pitch_norm/images/38c5b065-fig80.png"
+  ],
+  "exact_duplicate_groups": [],
+  "near_duplicate_candidates": [
+    {
+      "ids": [
+        52,
+        53
+      ],
+      "dhash_distance": 1
+    },
+    {
+      "ids": [
+        54,
+        56
+      ],
+      "dhash_distance": 2
+    },
+    {
+      "ids": [
+        55,
+        91
+      ],
+      "dhash_distance": 1
+    },
+    {
+      "ids": [
+        55,
+        94
+      ],
+      "dhash_distance": 1
+    },
+    {
+      "ids": [
+        63,
+        66
+      ],
+      "dhash_distance": 2
+    },
+    {
+      "ids": [
+        63,
+        69
+      ],
+      "dhash_distance": 1
+    },
+    {
+      "ids": [
+        63,
+        72
+      ],
+      "dhash_distance": 3
+    },
+    {
+      "ids": [
+        63,
+        75
+      ],
+      "dhash_distance": 4
+    },
+    {
+      "ids": [
+        64,
+        65
+      ],
+      "dhash_distance": 2
+    },
+    {
+      "ids": [
+        64,
+        70
+      ],
+      "dhash_distance": 2
+    },
+    {
+      "ids": [
+        64,
+        73
+      ],
+      "dhash_distance": 2
+    },
+    {
+      "ids": [
+        64,
+        77
+      ],
+      "dhash_distance": 3
+    },
+    {
+      "ids": [
+        65,
+        70
+      ],
+      "dhash_distance": 0
+    },
+    {
+      "ids": [
+        65,
+        73
+      ],
+      "dhash_distance": 0
+    },
+    {
+      "ids": [
+        65,
+        77
+      ],
+      "dhash_distance": 1
+    },
+    {
+      "ids": [
+        66,
+        69
+      ],
+      "dhash_distance": 1
+    },
+    {
+      "ids": [
+        66,
+        72
+      ],
+      "dhash_distance": 5
+    },
+    {
+      "ids": [
+        67,
+        68
+      ],
+      "dhash_distance": 3
+    },
+    {
+      "ids": [
+        67,
+        74
+      ],
+      "dhash_distance": 4
+    },
+    {
+      "ids": [
+        67,
+        78
+      ],
+      "dhash_distance": 1
+    },
+    {
+      "ids": [
+        68,
+        74
+      ],
+      "dhash_distance": 3
+    },
+    {
+      "ids": [
+        68,
+        78
+      ],
+      "dhash_distance": 2
+    },
+    {
+      "ids": [
+        69,
+        72
+      ],
+      "dhash_distance": 4
+    },
+    {
+      "ids": [
+        69,
+        75
+      ],
+      "dhash_distance": 5
+    },
+    {
+      "ids": [
+        70,
+        73
+      ],
+      "dhash_distance": 0
+    },
+    {
+      "ids": [
+        70,
+        77
+      ],
+      "dhash_distance": 1
+    },
+    {
+      "ids": [
+        72,
+        75
+      ],
+      "dhash_distance": 5
+    },
+    {
+      "ids": [
+        73,
+        77
+      ],
+      "dhash_distance": 1
+    },
+    {
+      "ids": [
+        74,
+        78
+      ],
+      "dhash_distance": 3
+    },
+    {
+      "ids": [
+        80,
+        81
+      ],
+      "dhash_distance": 0
+    },
+    {
+      "ids": [
+        91,
+        94
+      ],
+      "dhash_distance": 0
+    }
+  ],
+  "source_to_model": {
+    "0": 0,
+    "1": 1,
+    "2": 2,
+    "3": 3
+  },
+  "source_sha256": "d5016411e8e1b495a2f36d526e57e942656a0b773cb9d8c2b240ca6f9e5ba6c0",
+  "assumptions": [
+    "Images without boxes are clean (no_defect) as exported by the annotator; they carry zero detection boxes.",
+    "fig34 is clean (no_defect) by explicit user confirmation; 36 clean images total, with zero detection boxes.",
+    "Near-duplicate candidates are review hints, not inferred source groups."
+  ],
+  "unique_image_ids": true,
+  "unique_annotation_ids": true,
+  "crowd_annotations": 0,
+  "ignored_annotations": 0,
+  "source_file_count": 95,
+  "boxes_shorter_than_4_pixels_at_512": 0,
+  "minimum_box_short_side_at_512": 13.158586866724763,
+  "split_distributions": {
+    "train": {
+      "gap": 5,
+      "line_collapse": 14,
+      "bridge": 15,
+      "multi_bridge": 6,
+      "no_defect": 26
+    },
+    "val": {
+      "bridge": 4,
+      "line_collapse": 3,
+      "multi_bridge": 3,
+      "gap": 1,
+      "no_defect": 5
+    },
+    "test": {
+      "multi_bridge": 1,
+      "bridge": 3,
+      "line_collapse": 3,
+      "no_defect": 5,
+      "gap": 1
+    }
+  },
+  "split_box_distributions": {
+    "train": {
+      "gap": 9,
+      "line_collapse": 14,
+      "bridge": 18,
+      "multi_bridge": 6
+    },
+    "val": {
+      "bridge": 4,
+      "line_collapse": 3,
+      "multi_bridge": 3,
+      "gap": 4
+    },
+    "test": {
+      "multi_bridge": 1,
+      "bridge": 3,
+      "line_collapse": 4,
+      "gap": 1
+    }
+  },
+  "split_plan": "data/splits/split_v2.json",
+  "leakage_groups_crossing_splits": [],
+  "near_duplicate_cross_split_candidates": 0
+}

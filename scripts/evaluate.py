@@ -30,7 +30,7 @@ def main():
     if args.select_threshold and threshold_file.exists(): raise ValueError('Threshold already saved; use a fresh model/run for a new calibration experiment')
     args.output.mkdir(parents=True,exist_ok=False)
     device=device_for(args.device);model,processor=load_model(args.model,device)
-    dataset=CocoDetectionDataset(args.root,prepared/(args.split+'.json'),processor,cfg['size'])
+    dataset=CocoDetectionDataset(args.root,prepared/(args.split+'.json'),processor,cfg['size'],native=cfg.get('native_pitch',False),tile_overlap=cfg.get('tile_overlap'))
     loader=DataLoader(dataset,batch_size=1,collate_fn=collate_fn,shuffle=False,num_workers=0)
     predictions=predict_loader(model,loader,device)
     if args.select_threshold:

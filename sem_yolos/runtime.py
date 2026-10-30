@@ -4,6 +4,7 @@ import torch
 from transformers import YolosForObjectDetection,YolosImageProcessor
 from .common import CLASSES
 from .data import inverse_boxes
+from .windows import merge_predictions
 
 
 def seed_all(seed):
@@ -50,7 +51,8 @@ def predict_loader(model,loader,device):
     for batch in loader:
         outputs=model(pixel_values=batch['pixel_values'].to(device))
         predictions.extend(decode(outputs,batch['meta'],batch['image_ids']))
-    return predictions
+    tiled=getattr(loader.dataset,'tiled_images',None)
+    return merge_predictions(predictions,tiled) if tiled else predictions
 
 
 def configure_stage(model,stage,last_blocks=2):

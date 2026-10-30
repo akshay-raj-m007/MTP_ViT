@@ -1,0 +1,483 @@
+{
+  "info": {
+    "source": "Label Studio"
+  },
+  "images": [
+    {
+      "id": 0,
+      "file_name": "data/pitch_norm/images/40de6898-fig1.jpg",
+      "width": 400,
+      "height": 400,
+      "split": "val",
+      "classes": [
+        0
+      ],
+      "sha256": "8eed17b9101e16a7155c3bdb391174be0822b9788f69a2b79aeae0ca98a277e2",
+      "file_sha256": "9edf71e2f9c7ac3e9c2e40966aa0b839610ac5087f1b8f2eb0be5eeea0142660",
+      "annotation_status": "box_annotated",
+      "evaluation_eligible": true,
+      "source_group": null,
+      "leakage_group": "40de6898-fig1.jpg"
+    },
+    {
+      "id": 12,
+      "file_name": "data/pitch_norm/images/308e765b-fig13.jpg",
+      "width": 194,
+      "height": 193,
+      "split": "val",
+      "classes": [
+        2
+      ],
+      "sha256": "75d1a0807ef4d283e71e84e4b23dd44ec36d4fcc4a15499dcdaf1fd122ea46c4",
+      "file_sha256": "dbff2aab98ca4168840d959aa552cde48530fe0584f8761d2aa8721553679f57",
+      "annotation_status": "box_annotated",
+      "evaluation_eligible": true,
+      "source_group": "collapse_J",
+      "leakage_group": "collapse_J"
+    },
+    {
+      "id": 16,
+      "file_name": "data/pitch_norm/images/3e4d737f-fig17.jpg",
+      "width": 642,
+      "height": 526,
+      "split": "val",
+      "classes": [
+        0
+      ],
+      "sha256": "94db9a0ef7851e7528824c706542dcd127f3ee90d14128f4134c1755b105922d",
+      "file_sha256": "6b9b919a44b4311dd1e991508641f596bd86fdc9a26d6a8d954bf0c923806619",
+      "annotation_status": "box_annotated",
+      "evaluation_eligible": true,
+      "source_group": "bridge_B",
+      "leakage_group": "bridge_B"
+    },
+    {
+      "id": 18,
+      "file_name": "data/pitch_norm/images/3271ba62-fig19.jpg",
+      "width": 648,
+      "height": 531,
+      "split": "val",
+      "classes": [
+        3
+      ],
+      "sha256": "d36ba80b6ecb414f796753a194e1298b41889c3380306d2520d0e037f970ed34",
+      "file_sha256": "2ee6846d05fbe85d81f9b754fe139d872b93d2a77d447f88c97716d1cbd15b05",
+      "annotation_status": "box_annotated",
+      "evaluation_eligible": true,
+      "source_group": "multi_D",
+      "leakage_group": "multi_D"
+    },
+    {
+      "id": 21,
+      "file_name": "data/pitch_norm/images/a0ac64f6-fig22.jpg",
+      "width": 650,
+      "height": 650,
+      "split": "val",
+      "classes": [
+        0
+      ],
+      "sha256": "d0d9c21b87d0a2e786a2b3ea62db50dd0ffd4036fad7df4490ba39240424035e",
+      "file_sha256": "879df76b8ae59961471a0626fcb62c3496ad530adf4e0bae305c601b46f6a5f0",
+      "annotation_status": "box_annotated",
+      "evaluation_eligible": true,
+      "source_group": "bridge_B",
+      "leakage_group": "bridge_B"
+    },
+    {
+      "id": 23,
+      "file_name": "data/pitch_norm/images/911571b2-fig24.jpg",
+      "width": 658,
+      "height": 658,
+      "split": "val",
+      "classes": [
+        3
+      ],
+      "sha256": "b6d98444ac93de9803dc7ef4282c3e535af6c7f6d9fb669b9fa96b129856e2e1",
+      "file_sha256": "c70b03357b83b425cf979f5c8a74d62a90e1b19fe2411bf038f765493755b682",
+      "annotation_status": "box_annotated",
+      "evaluation_eligible": true,
+      "source_group": "multi_D",
+      "leakage_group": "multi_D"
+    },
+    {
+      "id": 28,
+      "file_name": "data/pitch_norm/images/79c680ce-fig29.jpg",
+      "width": 1470,
+      "height": 1452,
+      "split": "val",
+      "classes": [
+        1
+      ],
+      "sha256": "7b2b3a87accb32c138a2a0fe77e2523a33467fb5841235940f24b1f285b5427c",
+      "file_sha256": "603589dd5b979a31c9aa8b8b7f0c7fa07343a3ff47e567a84d2cf1d80f6d1380",
+      "annotation_status": "box_annotated",
+      "evaluation_eligible": true,
+      "source_group": null,
+      "leakage_group": "79c680ce-fig29.jpg"
+    },
+    {
+      "id": 38,
+      "file_name": "data/pitch_norm/images/b726f4f4-fig39.jpg",
+      "width": 662,
+      "height": 530,
+      "split": "val",
+      "classes": [
+        0
+      ],
+      "sha256": "29bfb7da319dffc159b9166debfd33fe0691614847dbba76edfcd674e48f8a32",
+      "file_sha256": "c0be67032bfb9bbdd45b8b4ac81dd6a7c76f4c8591d2af380b1155fd273b6524",
+      "annotation_status": "box_annotated",
+      "evaluation_eligible": true,
+      "source_group": "bridge_B",
+      "leakage_group": "bridge_B"
+    },
+    {
+      "id": 40,
+      "file_name": "data/pitch_norm/images/e12c8cd2-fig41.jpg",
+      "width": 656,
+      "height": 520,
+      "split": "val",
+      "classes": [
+        3
+      ],
+      "sha256": "14948940f97185a74598cc312b2727b7451743e36647d40b075bea7c073b7365",
+      "file_sha256": "f0a3f1041b294564dddfb2d097e0d10b47b9c3b8f3fec2c8b626065d4e0af227",
+      "annotation_status": "box_annotated",
+      "evaluation_eligible": true,
+      "source_group": "multi_D",
+      "leakage_group": "multi_D"
+    },
+    {
+      "id": 43,
+      "file_name": "data/pitch_norm/images/59cf29dc-fig44.jpg",
+      "width": 240,
+      "height": 193,
+      "split": "val",
+      "classes": [
+        2
+      ],
+      "sha256": "e09bc425badb793fd14ac14813cf48dd62ad070358fd1bac9d7c693603e5557e",
+      "file_sha256": "6308c01bb9e9da2616cf59ae577962c942701938f4ff6d34624a7ef3740319f3",
+      "annotation_status": "box_annotated",
+      "evaluation_eligible": true,
+      "source_group": "collapse_J",
+      "leakage_group": "collapse_J"
+    },
+    {
+      "id": 46,
+      "file_name": "data/pitch_norm/images/4b225fb2-fig47.jpg",
+      "width": 646,
+      "height": 646,
+      "split": "val",
+      "classes": [],
+      "sha256": "e880f25148f98b9038da4301f6ebe1572ada86614112df23879be4527fa27149",
+      "file_sha256": "b4a672a1564f3ecdd2b9ea0a7539aa051d44320d8209e1a6efec604c5329c934",
+      "annotation_status": "assumed_clean_coco",
+      "evaluation_eligible": true,
+      "source_group": null,
+      "leakage_group": "4b225fb2-fig47.jpg"
+    },
+    {
+      "id": 48,
+      "file_name": "data/pitch_norm/images/5bf1c7b1-fig49.jpg",
+      "width": 744,
+      "height": 1018,
+      "split": "val",
+      "classes": [],
+      "sha256": "36e33d1c1ccf64c665224a02019e5695971b614c489b174b812bb4cbb24a68f0",
+      "file_sha256": "b0adf00cc99b722d0cab44c1e92ecc7a98a3f4a8dfb4eda8509589f0622e08f2",
+      "annotation_status": "assumed_clean_coco",
+      "evaluation_eligible": true,
+      "source_group": null,
+      "leakage_group": "5bf1c7b1-fig49.jpg"
+    },
+    {
+      "id": 54,
+      "file_name": "data/pitch_norm/images/616955db-fig55.png",
+      "width": 128,
+      "height": 128,
+      "split": "val",
+      "classes": [],
+      "sha256": "b0b18327578877290564c90b4c710352609a04e6252255d0d4319b1fdd31f0c8",
+      "file_sha256": "bfcaeee8c70d06ce5f2b8108151634625278e6ff34420bddadb1cdfa542e953b",
+      "annotation_status": "assumed_clean_coco",
+      "evaluation_eligible": true,
+      "source_group": "clean_55",
+      "leakage_group": "clean_55"
+    },
+    {
+      "id": 56,
+      "file_name": "data/pitch_norm/images/bc2db2b5-fig57.png",
+      "width": 128,
+      "height": 128,
+      "split": "val",
+      "classes": [],
+      "sha256": "5bad6af121ec2efea4b2733105a5d4a42927fcdceaa6accc3ba6ea4767c390e9",
+      "file_sha256": "2fa222132e9f95dcace0f4b640d7579ec5280fc35f650b39b3c4bf3f967b638c",
+      "annotation_status": "assumed_clean_coco",
+      "evaluation_eligible": true,
+      "source_group": "clean_55",
+      "leakage_group": "clean_55"
+    },
+    {
+      "id": 60,
+      "file_name": "data/pitch_norm/images/accee79d-fig61.png",
+      "width": 256,
+      "height": 256,
+      "split": "val",
+      "classes": [],
+      "sha256": "5703cfd09502f2d5aae628f41445880814fc346257401c8efd358a37c3ab071e",
+      "file_sha256": "41fc61305eb8da9bc8b16c00b08842c71c0130c971cad870128f3a9f3316c62f",
+      "annotation_status": "assumed_clean_coco",
+      "evaluation_eligible": true,
+      "source_group": null,
+      "leakage_group": "accee79d-fig61.png"
+    },
+    {
+      "id": 89,
+      "file_name": "data/pitch_norm/images/2f4867db-fig90.png",
+      "width": 666,
+      "height": 666,
+      "split": "val",
+      "classes": [
+        2
+      ],
+      "sha256": "cbc4e74198ea4fa96387fd3b4a2832a646eac6e97978d2ae47357e06449508d6",
+      "file_sha256": "66ffa33c00966005128a744633548c509f1ed5ac47cdaff3d37c64f4d5bb3832",
+      "annotation_status": "box_annotated",
+      "evaluation_eligible": true,
+      "source_group": null,
+      "leakage_group": "2f4867db-fig90.png"
+    }
+  ],
+  "annotations": [
+    {
+      "id": 1,
+      "image_id": 0,
+      "category_id": 0,
+      "bbox": [
+        161.19402985074632,
+        117.1641791044776,
+        69.40298507462694,
+        191.7910447761197
+      ],
+      "area": 13310.871018044141,
+      "iscrowd": 0,
+      "segmentation": [],
+      "source_annotation_id": 0
+    },
+    {
+      "id": 13,
+      "image_id": 12,
+      "category_id": 2,
+      "bbox": [
+        73.69301451924053,
+        16.563432835820894,
+        76.20936135648289,
+        164.9141791044776
+      ],
+      "area": 12568.004268180872,
+      "iscrowd": 0,
+      "segmentation": [],
+      "source_annotation_id": 12
+    },
+    {
+      "id": 18,
+      "image_id": 16,
+      "category_id": 0,
+      "bbox": [
+        295.3462560080951,
+        160.94029850746273,
+        69.66639261320523,
+        202.1567164179105
+      ],
+      "area": 14083.529175366546,
+      "iscrowd": 0,
+      "segmentation": [],
+      "source_annotation_id": 17
+    },
+    {
+      "id": 20,
+      "image_id": 18,
+      "category_id": 3,
+      "bbox": [
+        261.37258681969666,
+        200.92480923666986,
+        135.10431607291935,
+        129.46485599459308
+      ],
+      "area": 17491.26082462849,
+      "iscrowd": 0,
+      "segmentation": [],
+      "source_annotation_id": 19
+    },
+    {
+      "id": 23,
+      "image_id": 21,
+      "category_id": 0,
+      "bbox": [
+        303.04537300765577,
+        240.30978339496028,
+        67.71041031778708,
+        174.02309806462546
+      ],
+      "area": 11783.17537472829,
+      "iscrowd": 0,
+      "segmentation": [],
+      "source_annotation_id": 22
+    },
+    {
+      "id": 25,
+      "image_id": 23,
+      "category_id": 3,
+      "bbox": [
+        278.6679104477613,
+        266.3917910447761,
+        105.5746268656717,
+        114.1679104477613
+      ],
+      "area": 12053.23454555582,
+      "iscrowd": 0,
+      "segmentation": [],
+      "source_annotation_id": 24
+    },
+    {
+      "id": 32,
+      "image_id": 28,
+      "category_id": 1,
+      "bbox": [
+        1385.3738382133738,
+        63.35787578686363,
+        42.31308089331214,
+        96.12770150295528
+      ],
+      "area": 4067.4592097827094,
+      "iscrowd": 0,
+      "segmentation": [],
+      "source_annotation_id": 31
+    },
+    {
+      "id": 33,
+      "image_id": 28,
+      "category_id": 1,
+      "bbox": [
+        778.2584521448498,
+        632.0580803522021,
+        37.77953651188555,
+        103.96986633744645
+      ],
+      "area": 3927.9333614314187,
+      "iscrowd": 0,
+      "segmentation": [],
+      "source_annotation_id": 32
+    },
+    {
+      "id": 34,
+      "image_id": 28,
+      "category_id": 1,
+      "bbox": [
+        1160.5873616451363,
+        703.9537559846781,
+        42.31308089331224,
+        101.37703310662843
+      ],
+      "area": 4289.574602564762,
+      "iscrowd": 0,
+      "segmentation": [],
+      "source_annotation_id": 33
+    },
+    {
+      "id": 35,
+      "image_id": 28,
+      "category_id": 1,
+      "bbox": [
+        808.4820813543586,
+        1332.6494938057147,
+        40.8018994328368,
+        89.22775511999872
+      ],
+      "area": 3640.6618910239763,
+      "iscrowd": 0,
+      "segmentation": [],
+      "source_annotation_id": 34
+    },
+    {
+      "id": 48,
+      "image_id": 38,
+      "category_id": 0,
+      "bbox": [
+        302.6535311248632,
+        169.0858208955225,
+        69.23446790438041,
+        191.8283582089549
+      ],
+      "area": 13281.134309567877,
+      "iscrowd": 0,
+      "segmentation": [],
+      "source_annotation_id": 47
+    },
+    {
+      "id": 50,
+      "image_id": 40,
+      "category_id": 3,
+      "bbox": [
+        259.2603922536078,
+        197.91044776119395,
+        134.97076600468725,
+        139.70149253731353
+      ],
+      "area": 18855.617459759305,
+      "iscrowd": 0,
+      "segmentation": [],
+      "source_annotation_id": 49
+    },
+    {
+      "id": 53,
+      "image_id": 43,
+      "category_id": 2,
+      "bbox": [
+        77.24652403467293,
+        13.83806632758954,
+        73.7877244510309,
+        169.51631251297198
+      ],
+      "area": 12508.222957662018,
+      "iscrowd": 0,
+      "segmentation": [],
+      "source_annotation_id": 52
+    },
+    {
+      "id": 65,
+      "image_id": 89,
+      "category_id": 2,
+      "bbox": [
+        324.30223880597015,
+        54.67164179104478,
+        69.58208955223876,
+        497.0149253731343
+      ],
+      "area": 34583.33704611269,
+      "iscrowd": 0,
+      "segmentation": [],
+      "source_annotation_id": 64
+    }
+  ],
+  "categories": [
+    {
+      "id": 0,
+      "name": "bridge"
+    },
+    {
+      "id": 1,
+      "name": "gap"
+    },
+    {
+      "id": 2,
+      "name": "line_collapse"
+    },
+    {
+      "id": 3,
+      "name": "multi_bridge"
+    }
+  ]
+}

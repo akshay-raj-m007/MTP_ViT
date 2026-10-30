@@ -1,0 +1,9 @@
+<View>
+  <Image name="image" value="$image" zoom="true" zoomControl="true"/>
+  <RectangleLabels name="label" toName="image">
+    <Label value="bridge" background="#ff3b30"/>
+    <Label value="gap" background="#00c7ff"/>
+    <Label value="line_collapse" background="#ffcc00"/>
+    <Label value="multi_bridge" background="#d65cff"/>
+  </RectangleLabels>
+</View>

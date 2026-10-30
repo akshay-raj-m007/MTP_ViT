@@ -112,6 +112,29 @@ def test_boxes_follow_pixels_with_this_torchvision(config):
                 assert all(abs(g-w_)<=1.5 for g,w_ in zip(found,(bx,by,bx+bw,by+bh))),(info['file_name'],recipe['name'],found)
 
 
+def test_pitch32_views_and_tiled_validation():
+    config=read(EXPERIMENT/'configs/pitch32_natural.json')
+    assert config['resize_mode']=='pad' and config['size']==640 and config['native_pitch']
+    ds=SemDataset(ROOT,ROOT/config['prepared'],'train',config,training=True)
+    n=len(ds.images);assert ds.views_per_image==21 and len(ds)==n*21
+    for source,im in enumerate(ds.images):
+        for view in (1,12,20):
+            item=ds[(source+view*n,view)]
+            assert item['image'].shape==(3,640,640) and item['meta']['scale_x']<=1
+            assert len(item['labels'])>0 if ds.anns[im['id']] else len(item['labels'])==0
+    val=SemDataset(ROOT,ROOT/config['prepared'],'val',config,tiled=True)
+    assert len(val)>len(val.images) and val.tiled_images
+    assert len(SemDataset(ROOT,ROOT/config['prepared'],'val',config))==16
+    recovered={}
+    for index in range(len(val)):
+        item=val[index]
+        recovered.setdefault(item['image_id'],[]).extend(inverse(item['boxes'],item['meta'],clamp=False).tolist())
+    for im in val.images:
+        for ann in val.anns[im['id']]:
+            x,y,w,h=ann['bbox']
+            assert min(max(abs(a-b) for a,b in zip((x,y,x+w,y+h),got)) for got in recovered[im['id']])<1.5
+
+
 def metric_fixture():
     data=dict(images=[dict(id=i,width=100,height=100) for i in range(3)],
               categories=[dict(id=i,name=n) for i,n in enumerate(CLASSES)],

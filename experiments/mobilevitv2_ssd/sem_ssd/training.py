@@ -13,6 +13,7 @@ from .io import ROOT, REVISION, CHECKPOINT_SHA256, digest, output_path, write
 from .metrics import coco_ap, localization_recall
 from .model import create_model, configure_stage, set_training_mode, raw_forward, match_targets, decode
 from .preprocessing import inverse
+from .recipes import merge_predictions
 from .sampling import epoch_keys, weights_and_report
 
 
@@ -71,6 +72,8 @@ def validate(model, dataset, device, precision, workers=0):
                     continue  # decoded predictions outside the source content; never GT
                 predictions.append(dict(image_id=target['image_id'], category_id=int(label)-1,
                                         bbox=[x,y,x2-x,y2-y], score=float(score)))
+    if dataset.tiled_images:
+        predictions = merge_predictions(predictions, dataset.tiled_images)
     ground_truth=dataset.canonical_coco()
     metrics=coco_ap(ground_truth, predictions)
     metrics['class_agnostic_localization']=localization_recall(ground_truth,predictions)
@@ -121,7 +124,7 @@ def train(config, output, device_name='cuda', precision='fp32', resume=False,
         indices = chosen[:min(subset_size,len(full_train.images))]
     train_data = SemDataset(root, prepared, 'train', config, training=True, indices=indices)
     val_data = (SemDataset(root, prepared, 'train', config, training=False, indices=indices) if subset_size else
-                SemDataset(root, prepared, 'val', config))
+                SemDataset(root, prepared, 'val', config, tiled=True))
     _, sampling_report = weights_and_report(train_data, config)
     write(out/'sampling_report.json', sampling_report)
     write(out/'dataset_report.json', data_report)

@@ -1,6 +1,7 @@
 """Strict read-only prepared COCO adapter. SSD labels 1..4; external labels 0..3."""
 import copy
 import math
+import random
 from collections import Counter, defaultdict
 from pathlib import Path
 from PIL import Image
@@ -9,7 +10,7 @@ import torch
 from torch.utils.data import Dataset
 from .io import CLASSES, digest, file_hash, read
 from .preprocessing import transform
-from .recipes import appearance, geometry, validate_recipes
+from .recipes import appearance, crop_boxes, crop_window, geometry, tile_windows, validate_recipes
 
 
 def category_map(categories):
@@ -116,7 +117,7 @@ def inspect_dataset(root, prepared):
 
 
 class SemDataset(Dataset):
-    def __init__(self, root, prepared, split, config, training=False, indices=None, final_test=False):
+    def __init__(self, root, prepared, split, config, training=False, indices=None, final_test=False, tiled=False):
         # Test is opened only by the explicit `experiment.py test` command, never by training or selection.
         if split not in ('train', 'val') and not (split == 'test' and final_test and not training):
             raise ValueError('This experiment exposes train and validation only; final test is deferred')
@@ -137,9 +138,15 @@ class SemDataset(Dataset):
         if self.view_mode == 'original_plus_recipes':
             validate_recipes(self.recipes)
         self.views_per_image = 1 + len(self.recipes) if training and self.recipes else 1
+        # Evaluation only: each sample is (source image, window), merged per image after prediction.
+        overlap = config.get('tile_overlap') if tiled and not training else None
+        self.tiles = [(i, w) for i, im in enumerate(self.images)
+                      for w in tile_windows(im['width'], im['height'], config['size'], overlap)] if overlap is not None else None
+        self.tiled_images = {self.images[i]['id'] for i, w in self.tiles
+                             if (w[2], w[3]) != (self.images[i]['width'], self.images[i]['height'])} if self.tiles else set()
 
     def __len__(self):
-        return len(self.images) * self.views_per_image
+        return len(self.tiles) if self.tiles else len(self.images) * self.views_per_image
 
     def view_name(self, index):
         view = index // len(self.images)
@@ -153,15 +160,22 @@ class SemDataset(Dataset):
         index, seed = key if isinstance(key, tuple) else (key, 0)
         if not 0 <= index < len(self):
             raise IndexError(index)
-        source, view = index % len(self.images), index // len(self.images)
+        source, view = (self.tiles[index][0], 0) if self.tiles else (index % len(self.images), index // len(self.images))
         im = self.images[source]
         anns = self.anns[im['id']]
         external = [self.mapping[a['category_id']] for a in anns]
+        xywh = [a['bbox'] for a in anns]
         with Image.open(resolve_image(self.root, im['file_name'])) as image:
             image = image.convert('RGB')
         recipe = self.recipes[view - 1] if self.recipes and view > 0 else None
+        window = self.tiles[index][1] if self.tiles else None
+        if recipe is not None and self.config.get('native_pitch'):
+            window = crop_window(image.width, image.height, self.config['size'], xywh, random.Random(seed))
+        if window is not None:
+            xywh, external = crop_boxes(xywh, external, window)
+            image = image.crop((window[0], window[1], window[0] + window[2], window[1] + window[3]))
         if recipe is not None:
-            image, xywh, _ = geometry(image, [a['bbox'] for a in anns], external, recipe)
+            image, xywh, _ = geometry(image, xywh, external, recipe)
             tensor, boxes, meta, canvas = transform(image, xywh.tolist(), self.config['size'], self.config['resize_mode'])
             content = (meta['left'], meta['top'], round(meta['width'] * meta['scale_x']), round(meta['height'] * meta['scale_y']))
             with torch.random.fork_rng(devices=[]):
@@ -170,8 +184,10 @@ class SemDataset(Dataset):
             tensor = torch.from_numpy(np.array(canvas, copy=True)).permute(2, 0, 1).float().div(255)
         else:
             augmentation = self.config['augmentation'] if self.training and not self.recipes else None
-            tensor, boxes, meta, _ = transform(image, [a['bbox'] for a in anns],
+            tensor, boxes, meta, _ = transform(image, xywh,
                 self.config['size'], self.config['resize_mode'], augmentation, seed)
+        if window is not None:
+            meta.update(offset_x=window[0], offset_y=window[1])
         labels = torch.tensor([c + 1 for c in external], dtype=torch.long)
         return dict(image=tensor, boxes=boxes, labels=labels, meta=meta, image_id=im['id'], view=self.view_name(index))
 

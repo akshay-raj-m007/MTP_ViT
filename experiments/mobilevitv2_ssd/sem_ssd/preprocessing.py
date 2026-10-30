@@ -25,8 +25,10 @@ def transform(image, xywh, size, mode='resize', augmentation=None, seed=0):
         nw = nh = size
         left = top = 0
         canvas = image.resize((size, size), Image.Resampling.BICUBIC)
-    elif mode == 'letterbox':
+    elif mode in ('letterbox', 'pad'):
         scale = min(size / width, size / height)
+        if mode == 'pad':  # pitch-normalised images are never enlarged
+            scale = min(scale, 1.)
         nw, nh = max(1, round(width * scale)), max(1, round(height * scale))
         left, top = (size - nw) // 2, (size - nh) // 2
         canvas = Image.new('RGB', (size, size), (114, 114, 114))
@@ -49,4 +51,6 @@ def inverse(normalized_xyxy, meta, clamp=True):
     if clamp:  # predictions only; training GT is never clipped
         boxes[:, [0, 2]] = boxes[:, [0, 2]].clamp(0, meta['width'])
         boxes[:, [1, 3]] = boxes[:, [1, 3]].clamp(0, meta['height'])
+    boxes[:, [0, 2]] += meta.get('offset_x', 0)
+    boxes[:, [1, 3]] += meta.get('offset_y', 0)
     return boxes

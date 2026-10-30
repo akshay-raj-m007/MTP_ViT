@@ -78,7 +78,7 @@ def main():
         if saved['data_fingerprint']!=report['fingerprint']:raise ValueError('Checkpoint/data mismatch')
         model,_,_=create_model(config,pretrained=False);model.load_state_dict(saved['model'],strict=True)
         device,precision=device_precision(args.device,args.precision);model.to(device)
-        metrics,predictions=validate(model,SemDataset(ROOT,ROOT/config['prepared'],split,config,final_test=split=='test'),device,precision)
+        metrics,predictions=validate(model,SemDataset(ROOT,ROOT/config['prepared'],split,config,final_test=split=='test',tiled=True),device,precision)
         out.mkdir(parents=True,exist_ok=False);write(out/'metrics.json',metrics);write(out/'predictions.json',predictions)
         write(out/'provenance.json',dict(model=str(args.model),split=split,data_fingerprint=report['fingerprint'],config=config,precision=precision))
         print(json.dumps(metrics,indent=2));return

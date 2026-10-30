@@ -1,0 +1,360 @@
+{
+  "info": {
+    "source": "Label Studio"
+  },
+  "images": [
+    {
+      "id": 4,
+      "file_name": "data/pitch_norm/images/43e08f23-fig5.jpg",
+      "width": 370,
+      "height": 370,
+      "split": "test",
+      "classes": [
+        3
+      ],
+      "sha256": "8624d8f7551a3de0f593a57958a465d60f8a2d7c0a2c5b2fd1bc31e47db77330",
+      "file_sha256": "06e5ddbb0dc98f49fca896a2e2d9ac98bd82623e62a9e5bcd291b822a196e40d",
+      "annotation_status": "box_annotated",
+      "evaluation_eligible": true,
+      "source_group": null,
+      "leakage_group": "43e08f23-fig5.jpg"
+    },
+    {
+      "id": 6,
+      "file_name": "data/pitch_norm/images/c44668f5-fig7.jpg",
+      "width": 334,
+      "height": 334,
+      "split": "test",
+      "classes": [
+        0
+      ],
+      "sha256": "41ab8f1621fe2dfa635689eb677cac2a05cad9880864dee9a8bbfcc6e5724826",
+      "file_sha256": "aebb58d0661baaddc006f2646bd145a03b2d6a8e01ae0fd13d46373588940c77",
+      "annotation_status": "box_annotated",
+      "evaluation_eligible": true,
+      "source_group": null,
+      "leakage_group": "c44668f5-fig7.jpg"
+    },
+    {
+      "id": 11,
+      "file_name": "data/pitch_norm/images/e660164b-fig12.jpg",
+      "width": 276,
+      "height": 270,
+      "split": "test",
+      "classes": [
+        0
+      ],
+      "sha256": "91b69fd693d881a9b9691ee2f0ba6c50598affead98e6aa7f3b1e7682f301661",
+      "file_sha256": "9b2c8bf2874c0c6e460a4beb50b15b74c6fa53a20120c6a85c028565afae3c46",
+      "annotation_status": "box_annotated",
+      "evaluation_eligible": true,
+      "source_group": "bridge_I",
+      "leakage_group": "bridge_I"
+    },
+    {
+      "id": 19,
+      "file_name": "data/pitch_norm/images/3de709e3-fig20.jpg",
+      "width": 652,
+      "height": 541,
+      "split": "test",
+      "classes": [
+        2
+      ],
+      "sha256": "f4157581073dccf0ebf75078ef4b0870dadf79b71bf0df14ab96d68d4f195172",
+      "file_sha256": "eb04ee7352d7945ed347cabaed5ddadbd87c45b7ed3b200730fb1b72927fb612",
+      "annotation_status": "box_annotated",
+      "evaluation_eligible": true,
+      "source_group": "collapse_E",
+      "leakage_group": "collapse_E"
+    },
+    {
+      "id": 24,
+      "file_name": "data/pitch_norm/images/753e8e60-fig25.jpg",
+      "width": 658,
+      "height": 664,
+      "split": "test",
+      "classes": [
+        2
+      ],
+      "sha256": "14e15e05fb8e81a9a84a3bf38f0381b91090aedd6383713b76365480d001d797",
+      "file_sha256": "0acef939a2baabdc969ac97ec5db4255b8f4926349f577f33dff13612c03ad75",
+      "annotation_status": "box_annotated",
+      "evaluation_eligible": true,
+      "source_group": "collapse_E",
+      "leakage_group": "collapse_E"
+    },
+    {
+      "id": 41,
+      "file_name": "data/pitch_norm/images/4dec1c5f-fig42.jpg",
+      "width": 660,
+      "height": 537,
+      "split": "test",
+      "classes": [
+        2
+      ],
+      "sha256": "23a0f379b43b4f626bb9fc4ef0d5f8d65aa56dcf036d1207304c27b8b1aa58ad",
+      "file_sha256": "842c57f1437b461cd219f514f7d0570d11071dd5af0dddbd7082709d93e49b83",
+      "annotation_status": "box_annotated",
+      "evaluation_eligible": true,
+      "source_group": "collapse_E",
+      "leakage_group": "collapse_E"
+    },
+    {
+      "id": 42,
+      "file_name": "data/pitch_norm/images/d56b00d9-fig43.jpg",
+      "width": 330,
+      "height": 267,
+      "split": "test",
+      "classes": [
+        0
+      ],
+      "sha256": "03983d4bf6e154826d92ad675104d6ae5630ee40ad8c0d59f2553328ec5d53ce",
+      "file_sha256": "f1df1f0e3e486ab2f6074719454aad2a355d3406b1620d30144db739dd96117f",
+      "annotation_status": "box_annotated",
+      "evaluation_eligible": true,
+      "source_group": "bridge_I",
+      "leakage_group": "bridge_I"
+    },
+    {
+      "id": 49,
+      "file_name": "data/pitch_norm/images/4531a923-fig50.jpg",
+      "width": 242,
+      "height": 240,
+      "split": "test",
+      "classes": [],
+      "sha256": "f2157c6a8db336a71124ed4a8e3f1b532198920aed5dc70af794ec1916fba097",
+      "file_sha256": "09bf92190778c632ddd46928368b1338a5ac15d0b4cdbea1ebc828b31d7124f6",
+      "annotation_status": "assumed_clean_coco",
+      "evaluation_eligible": true,
+      "source_group": null,
+      "leakage_group": "4531a923-fig50.jpg"
+    },
+    {
+      "id": 51,
+      "file_name": "data/pitch_norm/images/38304605-fig52.jpg",
+      "width": 978,
+      "height": 988,
+      "split": "test",
+      "classes": [],
+      "sha256": "8e2d2465004eede97ce1102886d7c9039d95bc0d93133a6aa551a7f8e11a081e",
+      "file_sha256": "1a25f100b4b9eb90b66293a6c6716439095a2ac37dd962b345412df2de37cf72",
+      "annotation_status": "assumed_clean_coco",
+      "evaluation_eligible": true,
+      "source_group": null,
+      "leakage_group": "38304605-fig52.jpg"
+    },
+    {
+      "id": 52,
+      "file_name": "data/pitch_norm/images/4befb5e7-fig53.png",
+      "width": 128,
+      "height": 128,
+      "split": "test",
+      "classes": [],
+      "sha256": "1643c7ec6761ed5cf37778909a9d1cb6202e26112f62c663ab985009904be5a4",
+      "file_sha256": "6f34318d3bf4e09fddacf419be10f51ba13821b7ecfef101b0730d05c4db19f4",
+      "annotation_status": "assumed_clean_coco",
+      "evaluation_eligible": true,
+      "source_group": "clean_53",
+      "leakage_group": "clean_53"
+    },
+    {
+      "id": 53,
+      "file_name": "data/pitch_norm/images/17bb30c7-fig54.png",
+      "width": 128,
+      "height": 128,
+      "split": "test",
+      "classes": [],
+      "sha256": "7169cd8659fa63df766323f7a01119aadae53642480d4d4d396879cd76b0dc79",
+      "file_sha256": "64eebeffdb80c2a9e339f02b3e4f90cdd468911bd8f32c469bd2c0352bfda38a",
+      "annotation_status": "assumed_clean_coco",
+      "evaluation_eligible": true,
+      "source_group": "clean_53",
+      "leakage_group": "clean_53"
+    },
+    {
+      "id": 71,
+      "file_name": "data/pitch_norm/images/258f1f90-fig72.png",
+      "width": 258,
+      "height": 258,
+      "split": "test",
+      "classes": [],
+      "sha256": "a3ba4f641c9964e7ebc33895718d5f83119d421537d9af6eaf8d53ff496c2da6",
+      "file_sha256": "79df78b2583a9fba19ae66b8bc4e9badfe39b76c0f4e645d0678537c59337ff1",
+      "annotation_status": "assumed_clean_coco",
+      "evaluation_eligible": true,
+      "source_group": null,
+      "leakage_group": "258f1f90-fig72.png"
+    },
+    {
+      "id": 90,
+      "file_name": "data/pitch_norm/images/add3881f-fig91.jpg",
+      "width": 110,
+      "height": 111,
+      "split": "test",
+      "classes": [
+        1
+      ],
+      "sha256": "d92c360e7bac6040e702bb26f48dba3183cb52c82374ecb7925110372d81fdfc",
+      "file_sha256": "aecf646ab60fc4fa8ec69fcfe814570185ca99516551553dce35c061d425146f",
+      "annotation_status": "box_annotated",
+      "evaluation_eligible": true,
+      "source_group": null,
+      "leakage_group": "add3881f-fig91.jpg"
+    }
+  ],
+  "annotations": [
+    {
+      "id": 5,
+      "image_id": 4,
+      "category_id": 3,
+      "bbox": [
+        125.8670732667362,
+        138.69726461354054,
+        99.9034617408622,
+        128.1247786168121
+      ],
+      "area": 12800.108918601127,
+      "iscrowd": 0,
+      "segmentation": [],
+      "source_annotation_id": 4
+    },
+    {
+      "id": 7,
+      "image_id": 6,
+      "category_id": 0,
+      "bbox": [
+        118.3955223880596,
+        137.7126865671641,
+        71.03731343283575,
+        102.19402985074633
+      ],
+      "area": 7259.58932947204,
+      "iscrowd": 0,
+      "segmentation": [],
+      "source_annotation_id": 6
+    },
+    {
+      "id": 12,
+      "image_id": 11,
+      "category_id": 0,
+      "bbox": [
+        91.84208955223879,
+        70.01865671641791,
+        72.66626865671645,
+        126.94029850746271
+      ],
+      "area": 9224.277834707069,
+      "iscrowd": 0,
+      "segmentation": [],
+      "source_annotation_id": 11
+    },
+    {
+      "id": 21,
+      "image_id": 19,
+      "category_id": 2,
+      "bbox": [
+        299.03263344295465,
+        171.58582089552243,
+        67.68644067796599,
+        212.96828358208933
+      ],
+      "area": 14415.065092967328,
+      "iscrowd": 0,
+      "segmentation": [],
+      "source_annotation_id": 20
+    },
+    {
+      "id": 26,
+      "image_id": 24,
+      "category_id": 2,
+      "bbox": [
+        261.32857379767796,
+        262.6268656716418,
+        74.31144278606966,
+        153.61194029850725
+      ],
+      "area": 11415.12491274967,
+      "iscrowd": 0,
+      "segmentation": [],
+      "source_annotation_id": 25
+    },
+    {
+      "id": 27,
+      "image_id": 24,
+      "category_id": 2,
+      "bbox": [
+        325.73182421227193,
+        247.76119402985077,
+        74.31144278606966,
+        167.23880597014926
+      ],
+      "area": 12427.756961461351,
+      "iscrowd": 0,
+      "segmentation": [],
+      "source_annotation_id": 26
+    },
+    {
+      "id": 51,
+      "image_id": 41,
+      "category_id": 2,
+      "bbox": [
+        307.85688408841713,
+        180.33582089552218,
+        65.36365277721082,
+        163.4598525184872
+      ],
+      "area": 10684.333043032486,
+      "iscrowd": 0,
+      "segmentation": [],
+      "source_annotation_id": 50
+    },
+    {
+      "id": 52,
+      "image_id": 42,
+      "category_id": 0,
+      "bbox": [
+        141.57955163453983,
+        74.72014925373134,
+        75.27645174935041,
+        110.58582089552242
+      ],
+      "area": 8324.5082108041,
+      "iscrowd": 0,
+      "segmentation": [],
+      "source_annotation_id": 51
+    },
+    {
+      "id": 66,
+      "image_id": 90,
+      "category_id": 1,
+      "bbox": [
+        41.15778251599152,
+        34.16977611940298,
+        22.75053304904052,
+        41.62499999999996
+      ],
+      "area": 946.9909381663107,
+      "iscrowd": 0,
+      "segmentation": [],
+      "source_annotation_id": 65
+    }
+  ],
+  "categories": [
+    {
+      "id": 0,
+      "name": "bridge"
+    },
+    {
+      "id": 1,
+      "name": "gap"
+    },
+    {
+      "id": 2,
+      "name": "line_collapse"
+    },
+    {
+      "id": 3,
+      "name": "multi_bridge"
+    }
+  ]
+}
