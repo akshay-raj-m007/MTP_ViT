@@ -1,0 +1,50 @@
+{
+  "config": {
+    "prepared": "data/prepared/label_studio",
+    "size": 320,
+    "resize_mode": "resize",
+    "seed": 42,
+    "batch_size": 1,
+    "accumulation": 8,
+    "workers": 0,
+    "stage_a_epochs": 15,
+    "stage_b_epochs": 40,
+    "stage_a_lr": 0.0001,
+    "stage_b_head_lr": 5e-05,
+    "stage_b_encoder_lr": 5e-06,
+    "weight_decay": 0.0001,
+    "warmup_ratio": 0.05,
+    "gradient_clip": 1.0,
+    "early_stopping": false,
+    "patience": 8,
+    "sampling": "natural",
+    "sampling_power": 0.5,
+    "sampling_cap": 3.0,
+    "background_weight": 1.0,
+    "empty_negatives": 3,
+    "augmentation": {
+      "hflip": 0.5,
+      "vflip": 0.5,
+      "brightness": 0.1,
+      "contrast": 0.1
+    },
+    "score_floor": 0.001,
+    "nms_iou": 0.5,
+    "pre_nms_topk": 400,
+    "max_detections": 200
+  },
+  "precision": "fp32",
+  "device_type": "cuda",
+  "data_fingerprint": "54e0ef39bfabb1cf4e849733f7d9a056878c95825c1c2532f0c9039bb919f276",
+  "upstream_revision": "9b4d544e46011407dc12cde3735422b5eb8dc265",
+  "checkpoint_sha256": "5538a12e1350bf06f05f29917c48caa8c0a1dab3a458727db06764b0f77df055",
+  "subset_size": null,
+  "identity_hash": "4a8e9b8db84fce00380cade57576d16aa9615c30ae6e612be1889554c0353ea0",
+  "selection_split": "val",
+  "external_labels": {
+    "0": "bridge",
+    "1": "gap",
+    "2": "line_collapse",
+    "3": "multi_bridge"
+  }
+}

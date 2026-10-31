@@ -1,0 +1,15 @@
+file,gt_class,gt_bbox,verdict,best_score_iou50,best_same_class_iou,score_at_best_iou,wrong_class,wrong_class_score_iou50
+2f4867db-fig90.png,line_collapse,"[39.4, 6.6, 8.5, 60.4]",missed,0.0,0.049,0.0552,,
+308e765b-fig13.jpg,line_collapse,"[55.8, 12.5, 57.7, 124.8]",found,0.2131,0.593,0.2131,,
+3271ba62-fig19.jpg,multi_bridge,"[71.4, 54.9, 36.9, 35.4]",found,0.9977,0.819,0.9977,,
+3e4d737f-fig17.jpg,bridge,"[81.4, 44.4, 19.2, 55.7]",found,0.0517,0.713,0.0517,multi_bridge,0.8687
+40de6898-fig1.jpg,bridge,"[111.6, 81.1, 48.1, 132.8]",found,0.0049,0.623,0.0049,multi_bridge,0.0158
+59cf29dc-fig44.jpg,line_collapse,"[80.5, 14.4, 76.9, 176.5]",found,0.9999,0.863,0.9999,bridge,0.9748
+79c680ce-fig29.jpg,gap,"[226.2, 10.3, 6.9, 15.7]",missed,0.0,0.0,0.0,,
+79c680ce-fig29.jpg,gap,"[127.1, 103.2, 6.2, 17.0]",missed,0.0,0.0,0.0,,
+79c680ce-fig29.jpg,gap,"[189.5, 114.9, 6.9, 16.5]",missed,0.0,0.0,0.0,,
+79c680ce-fig29.jpg,gap,"[132.0, 217.5, 6.7, 14.6]",missed,0.0,0.0,0.0,,
+911571b2-fig24.jpg,multi_bridge,"[95.3, 91.1, 36.1, 39.0]",found,0.9999,0.601,0.9999,line_collapse,0.0518
+a0ac64f6-fig22.jpg,bridge,"[103.5, 82.1, 23.1, 59.4]",found,0.0096,0.611,0.0096,multi_bridge,0.9346
+b726f4f4-fig39.jpg,bridge,"[112.5, 62.8, 25.7, 71.3]",found,0.1467,0.652,0.1467,multi_bridge,0.816
+e12c8cd2-fig41.jpg,multi_bridge,"[95.6, 73.1, 49.8, 51.6]",found,0.9981,0.822,0.9981,line_collapse,0.0435

@@ -1,0 +1,185 @@
+{
+  "pretrained_load": {
+    "upstream_revision": "9b4d544e46011407dc12cde3735422b5eb8dc265",
+    "full_coco_parameters": 3584955,
+    "missing_keys": [],
+    "unexpected_keys": [],
+    "loaded_pretrained_parameters": 3584955,
+    "checkpoint_sha256": "5538a12e1350bf06f05f29917c48caa8c0a1dab3a458727db06764b0f77df055",
+    "replaced_layers": [
+      {
+        "module": "ssd_heads.0.loc_cls_layer.pw_conv.block.conv",
+        "anchors": 6,
+        "old_shape": [
+          510,
+          512,
+          1,
+          1
+        ],
+        "new_shape": [
+          54,
+          512,
+          1,
+          1
+        ],
+        "preserved": "regression offsets and background channel for each anchor",
+        "initialized_parameters": 12312
+      },
+      {
+        "module": "ssd_heads.1.loc_cls_layer.pw_conv.block.conv",
+        "anchors": 6,
+        "old_shape": [
+          510,
+          256,
+          1,
+          1
+        ],
+        "new_shape": [
+          54,
+          256,
+          1,
+          1
+        ],
+        "preserved": "regression offsets and background channel for each anchor",
+        "initialized_parameters": 6168
+      },
+      {
+        "module": "ssd_heads.2.loc_cls_layer.pw_conv.block.conv",
+        "anchors": 6,
+        "old_shape": [
+          510,
+          256,
+          1,
+          1
+        ],
+        "new_shape": [
+          54,
+          256,
+          1,
+          1
+        ],
+        "preserved": "regression offsets and background channel for each anchor",
+        "initialized_parameters": 6168
+      },
+      {
+        "module": "ssd_heads.3.loc_cls_layer.pw_conv.block.conv",
+        "anchors": 6,
+        "old_shape": [
+          510,
+          128,
+          1,
+          1
+        ],
+        "new_shape": [
+          54,
+          128,
+          1,
+          1
+        ],
+        "preserved": "regression offsets and background channel for each anchor",
+        "initialized_parameters": 3096
+      },
+      {
+        "module": "ssd_heads.4.loc_cls_layer.pw_conv.block.conv",
+        "anchors": 6,
+        "old_shape": [
+          510,
+          128,
+          1,
+          1
+        ],
+        "new_shape": [
+          54,
+          128,
+          1,
+          1
+        ],
+        "preserved": "regression offsets and background channel for each anchor",
+        "initialized_parameters": 3096
+      },
+      {
+        "module": "ssd_heads.5.loc_cls_layer.block.conv",
+        "anchors": 4,
+        "old_shape": [
+          340,
+          64,
+          1,
+          1
+        ],
+        "new_shape": [
+          36,
+          64,
+          1,
+          1
+        ],
+        "preserved": "regression offsets and background channel for each anchor",
+        "initialized_parameters": 1040
+      }
+    ],
+    "total_parameters": 2979235,
+    "initialized_parameters": 31880,
+    "retained_pretrained_parameters": 2947355,
+    "internal_labels": {
+      "background": 0,
+      "bridge": 1,
+      "gap": 2,
+      "line_collapse": 3,
+      "multi_bridge": 4
+    }
+  },
+  "steps": [
+    {
+      "stage": "A",
+      "image_id": 1,
+      "targets": 1,
+      "matched_positives": 1,
+      "anchors": 12808,
+      "losses": {
+        "total_loss": 14.568593978881836,
+        "reg_loss": 2.263294219970703,
+        "cls_loss": 12.305299758911133,
+        "empty_background_loss": 0.0
+      },
+      "gradient_l1": 9997.011787193944,
+      "frozen_bn_unchanged": true,
+      "trainable_parameters": 498226
+    },
+    {
+      "stage": "A",
+      "image_id": 33,
+      "targets": 0,
+      "matched_positives": 0,
+      "anchors": 12808,
+      "losses": {
+        "total_loss": 6.47431755065918,
+        "reg_loss": 0.0,
+        "cls_loss": 6.47431755065918,
+        "empty_background_loss": 6.47431755065918
+      },
+      "gradient_l1": 5231.414144235896,
+      "frozen_bn_unchanged": true,
+      "trainable_parameters": 498226
+    },
+    {
+      "stage": "B",
+      "image_id": 13,
+      "targets": 2,
+      "matched_positives": 2,
+      "anchors": 12808,
+      "losses": {
+        "total_loss": 17.39238166809082,
+        "reg_loss": 7.095178127288818,
+        "cls_loss": 10.297203063964844,
+        "empty_background_loss": 0.0
+      },
+      "gradient_l1": 19837.232902635722,
+      "frozen_bn_unchanged": true,
+      "trainable_parameters": 1826869
+    }
+  ],
+  "validation_decode_image_id": 0,
+  "decoded_boxes": 200,
+  "device": "cuda",
+  "precision": "fp32",
+  "note": "Three smoke optimizer steps only; weights discarded. No test inference or model selection."
+}

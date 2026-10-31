@@ -1,0 +1,154 @@
+{
+  "config": {
+    "prepared": "data/prepared/label_studio_v3_pitch32",
+    "size": 640,
+    "resize_mode": "pad",
+    "seed": 42,
+    "batch_size": 1,
+    "accumulation": 8,
+    "workers": 0,
+    "stage_a_epochs": 15,
+    "stage_b_epochs": 40,
+    "stage_a_lr": 0.0001,
+    "stage_b_head_lr": 5e-05,
+    "stage_b_encoder_lr": 5e-06,
+    "weight_decay": 0.0001,
+    "warmup_ratio": 0.05,
+    "gradient_clip": 1.0,
+    "early_stopping": false,
+    "patience": 8,
+    "sampling": "weighted",
+    "sampling_power": 0.5,
+    "sampling_cap": 3.0,
+    "background_weight": 1.0,
+    "empty_negatives": 3,
+    "augmentation": {
+      "hflip": 0.5,
+      "vflip": 0.5,
+      "brightness": 0.1,
+      "contrast": 0.1
+    },
+    "training_view_mode": "original_plus_recipes",
+    "augmentation_recipes": [
+      {
+        "name": "flip_h",
+        "hflip": true
+      },
+      {
+        "name": "flip_v",
+        "vflip": true
+      },
+      {
+        "name": "flip_hv",
+        "hflip": true,
+        "vflip": true
+      },
+      {
+        "name": "stretch_width_1p1",
+        "scale_x": 1.1
+      },
+      {
+        "name": "compress_width_0p9",
+        "scale_x": 0.9
+      },
+      {
+        "name": "stretch_height_1p2",
+        "scale_y": 1.2
+      },
+      {
+        "name": "compress_height_0p8",
+        "scale_y": 0.8
+      },
+      {
+        "name": "rotate_minus6",
+        "angle": -6.0
+      },
+      {
+        "name": "rotate_plus6",
+        "angle": 6.0
+      },
+      {
+        "name": "shear_horizontal_plus5",
+        "shear_x": 5.0
+      },
+      {
+        "name": "shear_vertical_minus5",
+        "shear_y": -5.0
+      },
+      {
+        "name": "zoom_out_0p9",
+        "zoom": 0.9
+      },
+      {
+        "name": "zoom_in_1p05",
+        "zoom": 1.05
+      },
+      {
+        "name": "zoom_in_1p1",
+        "zoom": 1.1
+      },
+      {
+        "name": "noise_0p02",
+        "noise_std": 0.02
+      },
+      {
+        "name": "noise_0p04",
+        "noise_std": 0.04
+      },
+      {
+        "name": "brightness_contrast_0p15",
+        "brightness": 0.15,
+        "contrast": 0.15
+      },
+      {
+        "name": "combo_h_zoom_in_rotate_noise",
+        "hflip": true,
+        "zoom": 1.1,
+        "angle": 4.0,
+        "noise_std": 0.02,
+        "brightness": 0.08,
+        "contrast": 0.08
+      },
+      {
+        "name": "combo_v_stretch_shear_noise",
+        "vflip": true,
+        "scale_x": 0.9,
+        "scale_y": 1.15,
+        "shear_y": -3.0,
+        "noise_std": 0.03,
+        "brightness": 0.08,
+        "contrast": 0.08
+      },
+      {
+        "name": "combo_hv_zoom_out_rotate_noise",
+        "hflip": true,
+        "vflip": true,
+        "zoom": 0.9,
+        "angle": -4.0,
+        "noise_std": 0.03,
+        "brightness": 0.08,
+        "contrast": 0.08
+      }
+    ],
+    "score_floor": 0.001,
+    "nms_iou": 0.5,
+    "pre_nms_topk": 400,
+    "max_detections": 200,
+    "native_pitch": true,
+    "tile_overlap": 320
+  },
+  "precision": "fp32",
+  "device_type": "cuda",
+  "data_fingerprint": "0bbd1ba412a057d84a523beb78c3f4a0a6e058db2c0fb5aa758f66a44621cadb",
+  "upstream_revision": "9b4d544e46011407dc12cde3735422b5eb8dc265",
+  "checkpoint_sha256": "5538a12e1350bf06f05f29917c48caa8c0a1dab3a458727db06764b0f77df055",
+  "subset_size": null,
+  "identity_hash": "7783c6dbfb47690135abdc1d875b17b9b3301ebe2b2173a30eb98ae0f6fe8459",
+  "selection_split": "val",
+  "external_labels": {
+    "0": "bridge",
+    "1": "gap",
+    "2": "line_collapse",
+    "3": "multi_bridge"
+  }
+}

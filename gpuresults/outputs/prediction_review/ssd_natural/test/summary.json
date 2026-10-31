@@ -1,0 +1,23 @@
+{
+  "predictions": "outputs/mobilevitv2_ssd/v2_natural_seed42/eval_test/predictions.json",
+  "split": "test",
+  "min_score": 0.05,
+  "threshold": null,
+  "images": 13,
+  "gt_verdicts": {
+    "line_collapse": {
+      "poorly_localised": 1,
+      "found": 2,
+      "wrong_class": 1
+    },
+    "multi_bridge": {
+      "found": 1
+    },
+    "gap": {
+      "poorly_localised": 1
+    },
+    "bridge": {
+      "found": 3
+    }
+  }
+}

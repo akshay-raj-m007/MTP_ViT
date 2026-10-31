@@ -1,0 +1,49 @@
+{
+  "stage": "B",
+  "epoch": 19,
+  "map": 0.15581321595588668,
+  "map50": 0.3391566870287726,
+  "per_class_ap": {
+    "bridge": {
+      "ap": 0.01815181518151815,
+      "ap50": 0.14933993399339932,
+      "support": 4
+    },
+    "gap": {
+      "ap": 0.006515490258703289,
+      "ap50": 0.03257745129351645,
+      "support": 4
+    },
+    "line_collapse": {
+      "ap": 0.054361135941081176,
+      "ap50": 0.17470936282817476,
+      "support": 3
+    },
+    "multi_bridge": {
+      "ap": 0.5442244224422442,
+      "ap50": 1.0,
+      "support": 3
+    }
+  },
+  "class_agnostic_localization": {
+    "recall": 0.6428571428571429,
+    "matched_boxes": 9,
+    "support": 14,
+    "confidence_threshold": 0.3,
+    "iou_threshold": 0.5,
+    "matching": "score_ordered_one_to_one_class_agnostic_after_class_aware_nms"
+  },
+  "losses": {
+    "total_loss": 0.8468653589196793,
+    "reg_loss": 0.21933594654236274,
+    "cls_loss": 0.627529413792779,
+    "empty_background_loss": 0.01751781307150103
+  },
+  "presentations": 1386,
+  "optimizer_updates": 174,
+  "optimizer_update_opportunities": 174,
+  "total_updates": 5916,
+  "total_presentations": 47124,
+  "epoch_seconds": 41.913757556001656,
+  "peak_memory_bytes": 139467264
+}

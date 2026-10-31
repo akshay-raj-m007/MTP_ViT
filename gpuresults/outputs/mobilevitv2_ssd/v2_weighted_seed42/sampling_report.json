@@ -1,0 +1,51 @@
+{
+  "sampling": "weighted",
+  "unique_images": 66,
+  "presentations_per_epoch": 1386,
+  "training_view_mode": "original_plus_recipes",
+  "views_per_image": 21,
+  "augmentation_recipes": [
+    "flip_h",
+    "flip_v",
+    "flip_hv",
+    "stretch_width_1p2",
+    "compress_width_0p8",
+    "stretch_height_1p2",
+    "compress_height_0p8",
+    "rotate_minus6",
+    "rotate_plus6",
+    "shear_horizontal_plus5",
+    "shear_vertical_minus5",
+    "zoom_out_0p75",
+    "zoom_in_1p3",
+    "zoom_in_1p5",
+    "noise_0p02",
+    "noise_0p04",
+    "brightness_contrast_0p15",
+    "combo_h_zoom_in_rotate_noise",
+    "combo_v_stretch_shear_noise",
+    "combo_hv_zoom_out_rotate_noise"
+  ],
+  "image_class_counts": {
+    "bridge": 15,
+    "gap": 5,
+    "line_collapse": 14,
+    "multi_bridge": 6
+  },
+  "box_class_counts": {
+    "line_collapse": 14,
+    "bridge": 18,
+    "multi_bridge": 6,
+    "gap": 9
+  },
+  "weight_min": 1.0,
+  "weight_max": 1.7320508075688772,
+  "strategy": "maximum capped inverse image-presence frequency raised to power",
+  "expected_clean_fraction": 0.3530763499240794,
+  "expected_class_presentations": {
+    "bridge": 282.32528134313884,
+    "gap": 163.00057718249803,
+    "line_collapse": 272.75213446115686,
+    "multi_bridge": 178.5581860184321
+  }
+}

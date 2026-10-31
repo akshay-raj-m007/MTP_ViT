@@ -1,0 +1,19 @@
+{
+  "stage": "A",
+  "names": [
+    "class_labels_classifier.layers.0.weight",
+    "class_labels_classifier.layers.0.bias",
+    "class_labels_classifier.layers.1.weight",
+    "class_labels_classifier.layers.1.bias",
+    "class_labels_classifier.layers.2.weight",
+    "class_labels_classifier.layers.2.bias",
+    "bbox_predictor.layers.0.weight",
+    "bbox_predictor.layers.0.bias",
+    "bbox_predictor.layers.1.weight",
+    "bbox_predictor.layers.1.bias",
+    "bbox_predictor.layers.2.weight",
+    "bbox_predictor.layers.2.bias"
+  ],
+  "trainable_parameters": 149961,
+  "total_parameters": 6471945
+}

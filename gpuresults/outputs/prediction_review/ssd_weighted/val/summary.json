@@ -1,0 +1,22 @@
+{
+  "predictions": "outputs/mobilevitv2_ssd/v2_weighted_seed42/best_validation_predictions.json",
+  "split": "val",
+  "min_score": 0.05,
+  "threshold": null,
+  "images": 16,
+  "gt_verdicts": {
+    "line_collapse": {
+      "missed": 1,
+      "found": 2
+    },
+    "multi_bridge": {
+      "found": 3
+    },
+    "bridge": {
+      "found": 4
+    },
+    "gap": {
+      "missed": 4
+    }
+  }
+}

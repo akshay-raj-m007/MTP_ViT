@@ -1,0 +1,176 @@
+{
+  "map": 0.042097584758475845,
+  "map50": 0.10457920792079207,
+  "per_class_ap": {
+    "bridge": {
+      "ap": 0.036723672367236726,
+      "ap50": 0.16831683168316833,
+      "support": 3
+    },
+    "gap": {
+      "ap": 0.0,
+      "ap50": 0.0,
+      "support": 1
+    },
+    "line_collapse": {
+      "ap": 0.0,
+      "ap50": 0.0,
+      "support": 4
+    },
+    "multi_bridge": {
+      "ap": 0.13166666666666665,
+      "ap50": 0.25,
+      "support": 1
+    }
+  },
+  "threshold": 0.6,
+  "detection": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "support": 9,
+    "tp": 0,
+    "fp": 2,
+    "fn": 9
+  },
+  "per_class_detection": {
+    "bridge": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "support": 3,
+      "tp": 0,
+      "fp": 0,
+      "fn": 3
+    },
+    "gap": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "support": 1,
+      "tp": 0,
+      "fp": 0,
+      "fn": 1
+    },
+    "line_collapse": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "support": 4,
+      "tp": 0,
+      "fp": 0,
+      "fn": 4
+    },
+    "multi_bridge": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "support": 1,
+      "tp": 0,
+      "fp": 2,
+      "fn": 1
+    }
+  },
+  "clean_images": 5,
+  "false_positive_boxes_per_clean_image": 0.0,
+  "fraction_clean_with_false_detection": 0.0,
+  "binary_defective_recall": 0.125,
+  "clean_specificity": 1.0,
+  "clean_false_alarm_rate": 0.0,
+  "image_classification": {
+    "mode": "single_label",
+    "labels": [
+      "bridge",
+      "gap",
+      "line_collapse",
+      "multi_bridge",
+      "no_defect"
+    ],
+    "confusion_matrix": [
+      [
+        0,
+        0,
+        0,
+        0,
+        3
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      [
+        0,
+        0,
+        0,
+        1,
+        2
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        5
+      ]
+    ],
+    "per_class": {
+      "bridge": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 3,
+        "tp": 0,
+        "fp": 0,
+        "fn": 3
+      },
+      "gap": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 1,
+        "tp": 0,
+        "fp": 0,
+        "fn": 1
+      },
+      "line_collapse": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 3,
+        "tp": 0,
+        "fp": 0,
+        "fn": 3
+      },
+      "multi_bridge": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 1,
+        "tp": 0,
+        "fp": 1,
+        "fn": 1
+      },
+      "no_defect": {
+        "precision": 0.4166666666666667,
+        "recall": 1.0,
+        "f1": 0.5882352941176471,
+        "support": 5,
+        "tp": 5,
+        "fp": 7,
+        "fn": 0
+      }
+    },
+    "macro_f1": 0.11764705882352941,
+    "balanced_accuracy": 0.2
+  }
+}

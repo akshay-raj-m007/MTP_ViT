@@ -1,0 +1,204 @@
+{
+  "device": "cpu",
+  "size": 512,
+  "training_view_mode": "original_plus_recipes",
+  "presentations_per_epoch": 1386,
+  "checks": [
+    {
+      "stage": "A",
+      "image_id": 11,
+      "loss": 2.4614152908325195,
+      "view": "rotate_minus6"
+    },
+    {
+      "stage": "B",
+      "image_id": 18,
+      "loss": 4.776129722595215,
+      "view": "combo_hv_zoom_out_rotate_noise"
+    }
+  ],
+  "validation_subset_ids": [
+    3,
+    6,
+    8,
+    37,
+    48
+  ],
+  "metrics": {
+    "map": 0.0,
+    "map50": 0.0,
+    "per_class_ap": {
+      "bridge": {
+        "ap": 0.0,
+        "ap50": 0.0,
+        "support": 1
+      },
+      "gap": {
+        "ap": 0.0,
+        "ap50": 0.0,
+        "support": 4
+      },
+      "line_collapse": {
+        "ap": 0.0,
+        "ap50": 0.0,
+        "support": 1
+      },
+      "multi_bridge": {
+        "ap": 0.0,
+        "ap50": 0.0,
+        "support": 1
+      }
+    },
+    "threshold": 0.5,
+    "detection": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "support": 7,
+      "tp": 0,
+      "fp": 0,
+      "fn": 7
+    },
+    "per_class_detection": {
+      "bridge": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 1,
+        "tp": 0,
+        "fp": 0,
+        "fn": 1
+      },
+      "gap": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 4,
+        "tp": 0,
+        "fp": 0,
+        "fn": 4
+      },
+      "line_collapse": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 1,
+        "tp": 0,
+        "fp": 0,
+        "fn": 1
+      },
+      "multi_bridge": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 1,
+        "tp": 0,
+        "fp": 0,
+        "fn": 1
+      }
+    },
+    "clean_images": 1,
+    "false_positive_boxes_per_clean_image": 0.0,
+    "fraction_clean_with_false_detection": 0.0,
+    "binary_defective_recall": 0.0,
+    "clean_specificity": 1.0,
+    "clean_false_alarm_rate": 0.0,
+    "image_classification": {
+      "mode": "single_label",
+      "labels": [
+        "bridge",
+        "gap",
+        "line_collapse",
+        "multi_bridge",
+        "no_defect"
+      ],
+      "confusion_matrix": [
+        [
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          1
+        ]
+      ],
+      "per_class": {
+        "bridge": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 1,
+          "tp": 0,
+          "fp": 0,
+          "fn": 1
+        },
+        "gap": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 1,
+          "tp": 0,
+          "fp": 0,
+          "fn": 1
+        },
+        "line_collapse": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 1,
+          "tp": 0,
+          "fp": 0,
+          "fn": 1
+        },
+        "multi_bridge": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 1,
+          "tp": 0,
+          "fp": 0,
+          "fn": 1
+        },
+        "no_defect": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "f1": 0.33333333333333337,
+          "support": 1,
+          "tp": 1,
+          "fp": 4,
+          "fn": 0
+        }
+      },
+      "macro_f1": 0.06666666666666668,
+      "balanced_accuracy": 0.2
+    }
+  },
+  "note": "Only two optimizer steps; metrics test execution, not trained-model quality. No test images used."
+}

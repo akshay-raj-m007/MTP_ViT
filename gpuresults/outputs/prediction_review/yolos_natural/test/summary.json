@@ -1,0 +1,22 @@
+{
+  "predictions": "outputs/runs/yolos_v2_natural/eval_test/predictions.json",
+  "split": "test",
+  "min_score": 0.05,
+  "threshold": 0.5,
+  "images": 13,
+  "gt_verdicts": {
+    "line_collapse": {
+      "wrong_class": 2,
+      "poorly_localised": 2
+    },
+    "multi_bridge": {
+      "found": 1
+    },
+    "gap": {
+      "poorly_localised": 1
+    },
+    "bridge": {
+      "found": 3
+    }
+  }
+}

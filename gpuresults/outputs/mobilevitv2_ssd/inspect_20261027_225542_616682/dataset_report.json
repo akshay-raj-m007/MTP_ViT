@@ -1,0 +1,89 @@
+{
+  "fingerprint": "54e0ef39bfabb1cf4e849733f7d9a056878c95825c1c2532f0c9039bb919f276",
+  "source_fingerprint": "b3aa0c38134c1bf18ed47502308a6740423d3544328ac59662f5572991e6b587",
+  "splits": {
+    "train": {
+      "images": 63,
+      "boxes": 44,
+      "empty_images": 26,
+      "image_classes": {
+        "multi_bridge": 6,
+        "line_collapse": 14,
+        "gap": 3,
+        "bridge": 14
+      },
+      "box_classes": {
+        "multi_bridge": 6,
+        "line_collapse": 15,
+        "gap": 6,
+        "bridge": 17
+      }
+    },
+    "val": {
+      "images": 16,
+      "boxes": 13,
+      "empty_images": 5,
+      "image_classes": {
+        "multi_bridge": 2,
+        "line_collapse": 3,
+        "gap": 2,
+        "bridge": 4
+      },
+      "box_classes": {
+        "multi_bridge": 2,
+        "line_collapse": 3,
+        "gap": 4,
+        "bridge": 4
+      }
+    },
+    "test": {
+      "images": 16,
+      "boxes": 12,
+      "empty_images": 5,
+      "image_classes": {
+        "multi_bridge": 2,
+        "line_collapse": 3,
+        "gap": 2,
+        "bridge": 4
+      },
+      "box_classes": {
+        "multi_bridge": 2,
+        "line_collapse": 3,
+        "gap": 3,
+        "bridge": 4
+      }
+    }
+  },
+  "warnings": [
+    "Empty annotations are used as background targets; reviewed-clean status remains the supplied metadata.",
+    "Source groups are checked when available; absent source metadata cannot establish source-independent evaluation."
+  ],
+  "validation": "structural only; no semantic labels inferred",
+  "sampling": {
+    "sampling": "natural",
+    "unique_images": 63,
+    "presentations_per_epoch": 63,
+    "image_class_counts": {
+      "bridge": 14,
+      "gap": 3,
+      "line_collapse": 14,
+      "multi_bridge": 6
+    },
+    "box_class_counts": {
+      "multi_bridge": 6,
+      "line_collapse": 15,
+      "gap": 6,
+      "bridge": 17
+    },
+    "weight_min": 1.0,
+    "weight_max": 1.0,
+    "strategy": "maximum capped inverse image-presence frequency raised to power",
+    "expected_clean_fraction": 0.4126984126984127,
+    "expected_class_presentations": {
+      "bridge": 14.0,
+      "gap": 3.0,
+      "line_collapse": 14.0,
+      "multi_bridge": 6.0
+    }
+  }
+}
