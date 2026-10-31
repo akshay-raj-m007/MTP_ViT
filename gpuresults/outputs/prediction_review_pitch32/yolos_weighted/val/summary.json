@@ -1,0 +1,23 @@
+{
+  "predictions": "outputs/runs/yolos_pitch32_weighted/eval_val/predictions.json",
+  "split": "val",
+  "min_score": 0.05,
+  "threshold": 0.6,
+  "images": 16,
+  "gt_verdicts": {
+    "line_collapse": {
+      "found": 3
+    },
+    "multi_bridge": {
+      "found": 3
+    },
+    "bridge": {
+      "found": 3,
+      "missed": 1
+    },
+    "gap": {
+      "found": 3,
+      "poorly_localised": 1
+    }
+  }
+}
