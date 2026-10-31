@@ -71,7 +71,8 @@ def main(default_sampling='natural'):
         if state and stage<state['stage']: continue
         resuming=state is not None and stage==state['stage']
         if stage=='B' and not resuming:
-            model,processor=load_model(out/'stage_A_best',device)
+            # A fixed schedule never lets the held-out fold pick the stage B starting point.
+            model,processor=load_model(out/('last' if cfg.get('fixed_schedule') else 'stage_A_best'),device)
         report=configure_stage(model,stage,cfg['last_blocks']);write(out/f'trainable_stage_{stage}.json',report)
         heads=[v for n,v in model.named_parameters() if v.requires_grad and not n.startswith('vit.')]
         encoder=[v for n,v in model.named_parameters() if v.requires_grad and n.startswith('vit.')]
@@ -107,6 +108,7 @@ def main(default_sampling='natural'):
             if score is None: raise ValueError('Validation AP undefined')
             row=dict(stage=stage,epoch=epoch+1,train_loss=total_loss/len(loader),training_presentations=len(train),optimizer_update_opportunities=math.ceil(len(loader)/cfg['accumulation']),**metrics)
             write(out/f'metrics_{stage}_{epoch+1:03d}.json',row);print(row)
+            if cfg.get('fixed_schedule'): write(out/'epoch_predictions'/f'{stage}_{epoch+1:03d}.json',predictions)
             if score>best:
                 best=score;bad=0;save_model(model,processor,out/f'stage_{stage}_best',cfg)
             else: bad+=1

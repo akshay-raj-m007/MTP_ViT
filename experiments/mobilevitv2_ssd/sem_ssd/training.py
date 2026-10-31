@@ -153,7 +153,8 @@ def train(config, output, device_name='cuda', precision='fp32', resume=False,
         if state and stage < state['stage']:
             continue
         continuing = state is not None and stage == state['stage']
-        if stage=='B' and not continuing:
+        # A fixed schedule never lets the held-out fold pick the stage B starting point.
+        if stage=='B' and not continuing and not config.get('fixed_schedule'):
             best_a = torch.load(out/'stage_A_best.pt', map_location='cpu', weights_only=False)
             model.load_state_dict(best_a['model'], strict=True)
         stage_report = configure_stage(model, stage)
@@ -218,6 +219,8 @@ def train(config, output, device_name='cuda', precision='fp32', resume=False,
                        peak_memory_bytes=torch.cuda.max_memory_allocated(device) if device.type=='cuda' else None)
             write(out/f'metrics_{stage}_{epoch+1:03d}.json', row)
             print(row, flush=True)
+            if config.get('fixed_schedule'):
+                write(out/'epoch_predictions'/f'{stage}_{epoch+1:03d}.json', predictions)
             selected = dict(model=model.state_dict(), config=config, data_fingerprint=data_report['fingerprint'],
                             identity_hash=identity_hash, stage=stage, epoch=epoch+1, map=score,
                             upstream_revision=REVISION, checkpoint_sha256=CHECKPOINT_SHA256)
