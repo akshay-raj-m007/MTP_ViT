@@ -42,7 +42,7 @@ Two isolated pipelines read the same prepared data in `data/prepared/label_studi
 
 ## Cross-validation (`scripts/cv5.py`, `scripts/run_cv5.sh`)
 - **Folds:** `scripts/make_cv_folds.py` splits train+val of `split_v2.json` into five grouped folds, written to `data/splits/cv5/fold{0..4}.json`. The 13 test images stay `test` in every fold and are never read during CV. Same-defect groups stay together, and the four gap defects in train+val sit in different folds.
-- **Setups:** natural sampling for SSD and YOLOS, each on pitch-normalised and v2 images. Each fold trains on about 66 images.
+- **Setups:** natural sampling for SSD and YOLOS, each on pitch-normalised and v2 images, plus weighted sampling for YOLOS on both. Each fold trains on about 66 images.
 - **Fixed schedule (`fixed_schedule` config key):** stage B starts from the last stage A epoch rather than the best one, and each epoch's held-out predictions go to `epoch_predictions/`. YOLOS runs 15+15 epochs with early stopping off; SSD runs its usual 15+40.
 - **Scoring:** one epoch count per setup is chosen on the pooled held-out predictions of all folds, because one fold has no gap and per-fold averaging would break. `outputs/cv5/summary/` holds `summary.json` and `<setup>_oof.json`.
 - **Outputs:** `outputs/cv5/` (prepared folds, configs, YOLOS runs, logs) and `outputs/mobilevitv2_ssd/cv5/` (SSD runs, which must live under that folder). Finished folds have a `DONE` file; `--quick` uses separate `cv5_quick` folders.

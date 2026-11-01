@@ -27,6 +27,8 @@ SETUPS = dict(
     ssd_v2=dict(model='ssd', data='v2', config=f'{SSD_CONFIGS}/natural.json'),
     yolos_pitch32=dict(model='yolos', data='pitch32', config='configs/pipeline_config_pitch32.json'),
     yolos_v2=dict(model='yolos', data='v2', config='configs/pipeline_config_20_views.json'),
+    yolos_pitch32_weighted=dict(model='yolos', data='pitch32', sampling='weighted', config='configs/pipeline_config_pitch32_weighted.json'),
+    yolos_v2_weighted=dict(model='yolos', data='v2', sampling='weighted', config='configs/pipeline_config_20_views_weighted_balanced.json'),
 )
 # YOLOS peaked by stage B epoch 13 in every earlier run, and no fold may stop early.
 YOLOS_SCHEDULE = dict(stage_b_epochs=15, patience=999)
@@ -82,7 +84,7 @@ def train_one(runs, setup, fold, device):
         shutil.rmtree(folder)  # stopped before its first checkpoint; nothing to keep
     config = runs.config(setup, fold)
     if model == 'yolos':
-        command = [sys.executable, 'scripts/train_yolos.py', '--config', config, '--sampling', 'natural', '--device', device, '--output', folder]
+        command = [sys.executable, 'scripts/train_yolos.py', '--config', config, '--sampling', SETUPS[setup].get('sampling', 'natural'), '--device', device, '--output', folder]
     else:
         command = [ssd_python(), 'experiments/mobilevitv2_ssd/scripts/experiment.py', 'train', '--config', config, '--seed', '42',
                    '--device', device, '--precision', 'fp32', '--output', folder]
@@ -149,8 +151,8 @@ def summary(runs, setups, folds):
             print(f'{setup}: skipped, finished folds {finished} of {list(folds)}', flush=True); continue
         result = score(runs, setup, folds); results.append(result)
         classes = '  '.join(f"{k[:6]} {number(v['ap'])}/{number(v['ap50'])}" for k, v in result['per_class_ap'].items())
-        print(f"{setup:14} epoch {result['epoch']}  mAP {number(result['map'])}  mAP50 {number(result['map50'])}  {classes}")
-        print(f"{'':14} correct boxes: {result['correct_at_05']} at score .05, {result['correct_at_30']} at score .3, of {result['boxes']}.  mAP per fold: {[number(v) for v in result['per_fold_map']]}", flush=True)
+        print(f"{setup:24} epoch {result['epoch']}  mAP {number(result['map'])}  mAP50 {number(result['map50'])}  {classes}")
+        print(f"{'':24} correct boxes: {result['correct_at_05']} at score .05, {result['correct_at_30']} at score .3, of {result['boxes']}.  mAP per fold: {[number(v) for v in result['per_fold_map']]}", flush=True)
     write(runs.base/'summary'/'summary.json', results)
 
 
