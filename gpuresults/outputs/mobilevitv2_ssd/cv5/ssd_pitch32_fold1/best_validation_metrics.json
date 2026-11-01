@@ -1,0 +1,34 @@
+{
+  "map": 0.09718530932377126,
+  "map50": 0.24004001423160218,
+  "per_class_ap": {
+    "bridge": {
+      "ap": 0.19999999999999998,
+      "ap50": 0.3333333333333334,
+      "support": 1
+    },
+    "gap": {
+      "ap": 0.0,
+      "ap50": 0.0,
+      "support": 4
+    },
+    "line_collapse": {
+      "ap": 0.09155592797131373,
+      "ap50": 0.38678670936147314,
+      "support": 7
+    },
+    "multi_bridge": {
+      "ap": null,
+      "ap50": null,
+      "support": 0
+    }
+  },
+  "class_agnostic_localization": {
+    "recall": 0.4166666666666667,
+    "matched_boxes": 5,
+    "support": 12,
+    "confidence_threshold": 0.3,
+    "iou_threshold": 0.5,
+    "matching": "score_ordered_one_to_one_class_agnostic_after_class_aware_nms"
+  }
+}

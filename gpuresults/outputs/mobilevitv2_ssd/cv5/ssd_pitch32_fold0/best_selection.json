@@ -1,0 +1,10 @@
+{
+  "stage": "B",
+  "epoch": 22,
+  "map": 0.21450883724736108,
+  "data_fingerprint": "4ce80fdb50eaca6ce89b0d1f71410c7a3cf32295e456841b0d00138d3a0e74b0",
+  "score_floor": 0.001,
+  "nms_iou": 0.5,
+  "pre_nms_topk": 400,
+  "max_detections": 200
+}

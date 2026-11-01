@@ -1,0 +1,62 @@
+{
+  "fingerprint": "a36e0ae01c47c79598cbf17d1ddf20729a508b8b678285dfab5e6513657a7b7c",
+  "source_fingerprint": "414f33830d5ad4c955f90d844fa377f71ae8d201b6bbc8f4797afa09c09e25cd",
+  "splits": {
+    "train": {
+      "images": 65,
+      "boxes": 48,
+      "empty_images": 24,
+      "image_classes": {
+        "line_collapse": 15,
+        "bridge": 15,
+        "multi_bridge": 6,
+        "gap": 5
+      },
+      "box_classes": {
+        "line_collapse": 15,
+        "bridge": 18,
+        "multi_bridge": 6,
+        "gap": 9
+      }
+    },
+    "val": {
+      "images": 17,
+      "boxes": 13,
+      "empty_images": 7,
+      "image_classes": {
+        "line_collapse": 2,
+        "bridge": 4,
+        "multi_bridge": 3,
+        "gap": 1
+      },
+      "box_classes": {
+        "line_collapse": 2,
+        "bridge": 4,
+        "multi_bridge": 3,
+        "gap": 4
+      }
+    },
+    "test": {
+      "images": 13,
+      "boxes": 9,
+      "empty_images": 5,
+      "image_classes": {
+        "line_collapse": 3,
+        "multi_bridge": 1,
+        "gap": 1,
+        "bridge": 3
+      },
+      "box_classes": {
+        "line_collapse": 4,
+        "multi_bridge": 1,
+        "gap": 1,
+        "bridge": 3
+      }
+    }
+  },
+  "warnings": [
+    "Empty annotations are used as background targets; reviewed-clean status remains the supplied metadata.",
+    "Source groups are checked when available; absent source metadata cannot establish source-independent evaluation."
+  ],
+  "validation": "structural only; no semantic labels inferred"
+}
