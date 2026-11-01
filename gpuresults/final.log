@@ -1,0 +1,61 @@
+prepared {'train': 82, 'val': 0, 'test': 13}
+=== final training: starting
+final stage A epoch  1
+final stage A epoch  2
+final stage A epoch  3
+final stage A epoch  4
+final stage A epoch  5
+final stage A epoch  6
+final stage A epoch  7
+final stage A epoch  8
+final stage A epoch  9
+final stage A epoch 10
+final stage A epoch 11
+final stage A epoch 12
+final stage A epoch 13
+final stage A epoch 14
+final stage A epoch 15
+final stage B epoch  1
+final stage B epoch  2
+final stage B epoch  3
+final stage B epoch  4
+final stage B epoch  5
+final stage B epoch  6
+final stage B epoch  7
+final stage B epoch  8
+final stage B epoch  9
+final stage B epoch 10
+final stage B epoch 11
+final stage B epoch 12
+final stage B epoch 13
+final stage B epoch 14
+final stage B epoch 15
+final stage B epoch 16
+final stage B epoch 17
+final stage B epoch 18
+final stage B epoch 19
+final stage B epoch 20
+final stage B epoch 21
+final stage B epoch 22
+final stage B epoch 23
+final stage B epoch 24
+final stage B epoch 25
+final stage B epoch 26
+final stage B epoch 27
+final stage B epoch 28
+final stage B epoch 29
+final stage B epoch 30
+final stage B epoch 31
+=== test images
+TEST  mAP 0.143  mAP50 0.274
+  bridge         AP 0.368  AP50 0.558
+  gap            AP 0.000  AP50 0.000
+  line_collapse  AP 0.006  AP50 0.038
+  multi_bridge   AP 0.200  AP50 0.500
+At score 0.5: 2 correct of 9 boxes, 14 false boxes. Clean images with a false box: 0.20
+  bridge         1 of 3
+  gap            0 of 1
+  line_collapse  0 of 4
+  multi_bridge   1 of 1
+Drawings: outputs/final/review
+FINAL RUN ENDED
