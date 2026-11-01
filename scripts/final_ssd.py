@@ -47,11 +47,10 @@ def write_config(base, quick):
     return base/'config.json'
 
 
-def train(run, config, device):
+def train(run, command, state):
     if (run/'DONE').exists():
         print('training already finished', flush=True); return
-    resume = (run/'last.pt').exists()
-    command = [ssd_python(), ENTRY, 'train', '--config', str(config), '--seed', '42', '--device', device, '--precision', 'fp32', '--output', str(run)]
+    resume = state.exists()
     print('=== final training:', 'resuming' if resume else 'starting', flush=True)
     process = subprocess.Popen(command+(['--resume'] if resume else []), cwd=ROOT, env=dict(os.environ, PYTHONUNBUFFERED='1'),
                                stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, errors='replace')
@@ -102,7 +101,8 @@ def main():
     name = 'final_quick' if args.quick else 'final'
     base, run = ROOT/'outputs'/name, ROOT/'outputs/mobilevitv2_ssd'/name/'pitch32_seed42'
     prepare(base)
-    train(run, write_config(base, args.quick), args.device)
+    config = write_config(base, args.quick)
+    train(run, [ssd_python(), ENTRY, 'train', '--config', str(config), '--seed', '42', '--device', args.device, '--precision', 'fp32', '--output', str(run)], run/'last.pt')
     report(*test(run, base, args.device), base)
     print('FINAL RUN ENDED', flush=True)
 

@@ -51,7 +51,8 @@ def main(default_sampling='natural'):
     source=out/'last' if state else cfg['model']
     model,processor=load_model(source,device,fresh=not bool(state),local=not args.allow_download)
     train=CocoDetectionDataset(root,prepared_dir(root,cfg['prepared'])/'train.json',processor,cfg['size'],True,cfg['augmentation'],view_mode=cfg.get('training_view_mode','random_augmented'),recipes=cfg.get('augmentation_recipes'),native=cfg.get('native_pitch',False))
-    val=CocoDetectionDataset(root,prepared_dir(root,cfg['prepared'])/'val.json',processor,cfg['size'],native=cfg.get('native_pitch',False),tile_overlap=cfg.get('tile_overlap'))
+    final_epoch=cfg.get('final_stage_b_epoch') # A final run trains on every image, so nothing is held out or selected.
+    val=None if final_epoch else CocoDetectionDataset(root,prepared_dir(root,cfg['prepared'])/'val.json',processor,cfg['size'],native=cfg.get('native_pitch',False),tile_overlap=cfg.get('tile_overlap'))
     weights,report=sample_weights(train,cfg['sampling_power'],cfg['sampling_cap'],cfg['background_weight'])
     report['sampling']=args.sampling
     report['expected_empty_fraction_natural']=sum(not im['classes'] for im in train.images)/len(train.images)
@@ -62,7 +63,7 @@ def main(default_sampling='natural'):
     generator=torch.Generator().manual_seed(cfg['seed'])
     sampler=WeightedRandomSampler(weights,len(weights),replacement=True,generator=generator) if args.sampling=='weighted' else None
     loader=DataLoader(train,batch_size=cfg['batch_size'],shuffle=sampler is None,sampler=sampler,num_workers=cfg['workers'],collate_fn=collate_fn,generator=generator)
-    validation=DataLoader(val,batch_size=cfg['batch_size'],shuffle=False,num_workers=cfg['workers'],collate_fn=collate_fn)
+    validation=DataLoader(val,batch_size=cfg['batch_size'],shuffle=False,num_workers=cfg['workers'],collate_fn=collate_fn) if val else None
     amp=device.type=='cuda';dtype=torch.bfloat16 if amp and torch.cuda.is_bf16_supported() else torch.float16
     write(out/'device.json',dict(device=str(device),amp=amp,dtype=str(dtype) if amp else 'float32'))
     scaler=torch.amp.GradScaler('cuda',enabled=amp and dtype==torch.float16)
@@ -87,7 +88,8 @@ def main(default_sampling='natural'):
             start=state['epoch']+1;best=state['stage_best'];bad=state['bad_epochs']
             random.setstate(state['python_rng']);np.random.set_state(state['numpy_rng']);torch.set_rng_state(state['torch_rng']);generator.set_state(state['loader_rng'])
             if amp and state['cuda_rng'] is not None: torch.cuda.set_rng_state_all(state['cuda_rng'])
-        for epoch in range(start,budget):
+        # The budget still sets the learning rate curve, so a final run follows the same curve as cross-validation.
+        for epoch in range(start,final_epoch if final_epoch and stage=='B' else budget):
             if bad>=cfg['patience']: break
             model.train();optimizer.zero_grad(set_to_none=True);total_loss=0.
             for step,batch in enumerate(loader):
@@ -103,12 +105,13 @@ def main(default_sampling='natural'):
                     previous_scale=scaler.get_scale();scaler.step(optimizer);scaler.update()
                     if scaler.get_scale()>=previous_scale: scheduler.step()
                     optimizer.zero_grad(set_to_none=True)
-            predictions=predict_loader(model,validation,device);metrics=coco_ap(val.coco,predictions)
+            predictions=predict_loader(model,validation,device) if val else []
+            metrics=coco_ap(val.coco,predictions) if val else dict(map=-1.)
             score=metrics['map']
             if score is None: raise ValueError('Validation AP undefined')
             row=dict(stage=stage,epoch=epoch+1,train_loss=total_loss/len(loader),training_presentations=len(train),optimizer_update_opportunities=math.ceil(len(loader)/cfg['accumulation']),**metrics)
             write(out/f'metrics_{stage}_{epoch+1:03d}.json',row);print(row)
-            if cfg.get('fixed_schedule'): write(out/'epoch_predictions'/f'{stage}_{epoch+1:03d}.json',predictions)
+            if cfg.get('fixed_schedule') and val: write(out/'epoch_predictions'/f'{stage}_{epoch+1:03d}.json',predictions)
             if score>best:
                 best=score;bad=0;save_model(model,processor,out/f'stage_{stage}_best',cfg)
             else: bad+=1
@@ -122,6 +125,6 @@ def main(default_sampling='natural'):
                             python_rng=random.getstate(),numpy_rng=np.random.get_state(),torch_rng=torch.get_rng_state(),
                             cuda_rng=torch.cuda.get_rng_state_all() if amp else None,loader_rng=generator.get_state()),out/'last'/'training_state.pt')
         state=None
-    print(f'Best model: {out / "best"}. Select confidence threshold on validation before test/inference.')
+    print(f'Final model: {out / "last"}' if final_epoch else f'Best model: {out / "best"}. Select confidence threshold on validation before test/inference.')
 
 if __name__=='__main__': main()

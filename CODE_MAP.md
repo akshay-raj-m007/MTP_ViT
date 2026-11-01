@@ -47,11 +47,11 @@ Two isolated pipelines read the same prepared data in `data/prepared/label_studi
 - **Scoring:** one epoch count per setup is chosen on the pooled held-out predictions of all folds, because one fold has no gap and per-fold averaging would break. `outputs/cv5/summary/` holds `summary.json` and `<setup>_oof.json`.
 - **Outputs:** `outputs/cv5/` (prepared folds, configs, YOLOS runs, logs) and `outputs/mobilevitv2_ssd/cv5/` (SSD runs, which must live under that folder). Finished folds have a `DONE` file; `--quick` uses separate `cv5_quick` folders.
 
-## Final model (`scripts/final_ssd.py`, `scripts/run_final_ssd.sh`)
-- **Choice:** `ssd_pitch32` from cross-validation, stage B epoch 31, score cutoff 0.5. All three are constants in the script and were fixed before the test run.
-- **Training (`final_stage_b_epoch` config key):** all 82 train+val images, no validation and no selection. It stops at stage B epoch 31 of the 40-epoch learning rate curve, so `last.pt` is the final model and no `best.pt` exists.
+## Final models (`scripts/final_ssd.py`, `scripts/final_yolos.py`, `scripts/run_final_ssd.sh`, `scripts/run_final_yolos.sh`)
+- **Choice:** SSD uses `ssd_pitch32`, stage B epoch 31. YOLOS uses `yolos_pitch32_weighted`, stage B epoch 13. Both use score cutoff 0.5. All are constants in the scripts and were fixed before their test runs.
+- **Training (`final_stage_b_epoch` config key):** all 82 train+val images, no validation and no selection. It stops at the chosen stage B epoch of the full learning rate curve, so the last checkpoint is the final model and no best checkpoint exists.
 - **Test:** runs once; an existing `eval_test` is never rerun. Rerunning the script resumes training if it stopped.
-- **Outputs:** `outputs/final/` (prepared data, config, `review/` drawings) and `outputs/mobilevitv2_ssd/final/pitch32_seed42/` (`last.pt`, `eval_test/`, `eval_test/cutoff.json`).
+- **Outputs:** `outputs/final/` (prepared data, config, `review/` drawings) and `outputs/mobilevitv2_ssd/final/pitch32_seed42/` (`last.pt`, `eval_test/`, `eval_test/cutoff.json`) for SSD; `outputs/final_yolos/` (`run/last/`, `run/eval_test/`, `review/`) for YOLOS.
 
 ## Diagnostics
 - Gallery: `diagnostics/prediction_gallery.py capture-ssd|build` (commands are in `diagnostics/PREDICTION_GALLERY.md`). Output goes to `outputs/prediction_gallery/`.
