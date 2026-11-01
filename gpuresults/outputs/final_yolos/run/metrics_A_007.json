@@ -1,0 +1,8 @@
+{
+  "stage": "A",
+  "epoch": 7,
+  "train_loss": 0.9090764011652831,
+  "training_presentations": 1722,
+  "optimizer_update_opportunities": 216,
+  "map": -1.0
+}

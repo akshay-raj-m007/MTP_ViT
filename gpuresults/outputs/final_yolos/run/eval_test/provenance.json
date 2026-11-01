@@ -1,0 +1,11 @@
+{
+  "split": "test",
+  "model": "/home/ssl30/Music/mtp/MTP_ViT/outputs/final_yolos/run/last",
+  "data_fingerprint": "0fc1a5d2212caef32cf1a647bd798882488513dda3950960ea23ad3aa730d64c",
+  "threshold": {
+    "threshold": 0.5,
+    "objective": "fixed from cross-validation",
+    "data_fingerprint": "0fc1a5d2212caef32cf1a647bd798882488513dda3950960ea23ad3aa730d64c"
+  },
+  "ap_cutoff": 0.0
+}

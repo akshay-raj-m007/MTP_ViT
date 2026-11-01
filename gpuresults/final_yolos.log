@@ -1,0 +1,44 @@
+prepared {'train': 82, 'val': 0, 'test': 13}
+=== final training: starting
+final stage A epoch  1
+final stage A epoch  2
+final stage A epoch  3
+final stage A epoch  4
+final stage A epoch  5
+final stage A epoch  6
+final stage A epoch  7
+final stage A epoch  8
+final stage A epoch  9
+final stage A epoch 10
+final stage A epoch 11
+final stage A epoch 12
+final stage A epoch 13
+final stage A epoch 14
+final stage A epoch 15
+final stage B epoch  1
+final stage B epoch  2
+final stage B epoch  3
+final stage B epoch  4
+final stage B epoch  5
+final stage B epoch  6
+final stage B epoch  7
+final stage B epoch  8
+final stage B epoch  9
+final stage B epoch 10
+final stage B epoch 11
+final stage B epoch 12
+final stage B epoch 13
+=== test images
+Loading weights:   0%|          | 0/211 [00:00<?, ?it/s]Loading weights: 100%|██████████| 211/211 [00:00<00:00, 15002.00it/s]
+TEST  mAP 0.075  mAP50 0.141
+  bridge         AP 0.265  AP50 0.355
+  gap            AP 0.000  AP50 0.000
+  line_collapse  AP 0.003  AP50 0.010
+  multi_bridge   AP 0.033  AP50 0.200
+At score 0.5: 0 correct of 9 boxes, 5 false boxes. Clean images with a false box: 0.00
+  bridge         0 of 3
+  gap            0 of 1
+  line_collapse  0 of 4
+  multi_bridge   0 of 1
+Drawings: outputs/final_yolos/review
+FINAL RUN ENDED
