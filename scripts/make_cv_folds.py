@@ -55,6 +55,12 @@ def assign(pool, folds, seed):
     return members, totals
 
 
+def final_plan(plan):
+    """Train on everything that is not test, for the final fit after cross-validation."""
+    assignments = {name: 'test' if split == 'test' else 'train' for name, split in plan['assignments'].items()}
+    return dict(description='Final fit: train+val of split_v2 all train; test unchanged.', groups=plan['groups'], assignments=assignments)
+
+
 def main():
     p = argparse.ArgumentParser()
     p.add_argument('--plan', default='data/splits/split_v2.json'); p.add_argument('--prepared', default='data/prepared/label_studio_v3_pitch32')

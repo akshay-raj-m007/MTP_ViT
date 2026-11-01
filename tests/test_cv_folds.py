@@ -1,6 +1,7 @@
 import json
 import unittest
 from collections import defaultdict
+from scripts.make_cv_folds import final_plan
 from sem_yolos.common import ROOT
 
 
@@ -37,6 +38,12 @@ class CvFoldTests(unittest.TestCase):
                 if split == 'val' and short in names:
                     names[short].append(k)
         self.assertEqual(len({v[0] for v in names.values()}), 4, names)
+
+    def test_final_plan_trains_on_everything_but_test(self):
+        plan = final_plan(self.base)
+        self.assertEqual(sorted(plan['assignments'].values()), ['test']*13+['train']*82)
+        for name, split in self.base['assignments'].items():
+            self.assertEqual(plan['assignments'][name] == 'test', split == 'test', name)
 
 
 if __name__ == '__main__':

@@ -123,13 +123,15 @@ def train(config, output, device_name='cuda', precision='fp32', resume=False,
         chosen += [i for i in range(len(full_train.images)) if i not in chosen]
         indices = chosen[:min(subset_size,len(full_train.images))]
     train_data = SemDataset(root, prepared, 'train', config, training=True, indices=indices)
-    val_data = (SemDataset(root, prepared, 'train', config, training=False, indices=indices) if subset_size else
+    final_epoch = config.get('final_stage_b_epoch')  # A final run trains on every image, so nothing is held out or selected.
+    val_data = (None if final_epoch else
+                SemDataset(root, prepared, 'train', config, training=False, indices=indices) if subset_size else
                 SemDataset(root, prepared, 'val', config, tiled=True))
     _, sampling_report = weights_and_report(train_data, config)
     write(out/'sampling_report.json', sampling_report)
     write(out/'dataset_report.json', data_report)
     write(out/'run_config.json', dict(**identity, identity_hash=identity_hash,
-          selection_split='training_subset_debug_only' if subset_size else 'val',
+          selection_split='none' if final_epoch else 'training_subset_debug_only' if subset_size else 'val',
           external_labels={i:c for i,c in enumerate(['bridge','gap','line_collapse','multi_bridge'])}))
     import torchvision
     runtime = dict(python=platform.python_version(), platform=platform.platform(), torch=torch.__version__,
@@ -177,7 +179,8 @@ def train(config, output, device_name='cuda', precision='fp32', resume=False,
             optimizer.load_state_dict(state['optimizer']); scheduler.load_state_dict(state['scheduler'])
             scaler.load_state_dict(state['scaler'])
             start, stage_best, bad = state['epoch'], state['stage_best'], state['bad_epochs']
-        for epoch in range(start, budget):
+        # The budget still sets the learning rate curve, so a final run follows the same curve as cross-validation.
+        for epoch in range(start, final_epoch if final_epoch and stage=='B' else budget):
             if config['early_stopping'] and bad >= config['patience']:
                 break
             started = time.perf_counter()
@@ -207,7 +210,7 @@ def train(config, output, device_name='cuda', precision='fp32', resume=False,
                     if scaler.get_scale() >= before_scale:
                         scheduler.step(); updates += 1; total_updates += 1
                     optimizer.zero_grad(set_to_none=True)
-            metrics, predictions = validate(model, val_data, device, precision, config['workers'])
+            metrics, predictions = validate(model, val_data, device, precision, config['workers']) if val_data else (dict(map=-1.), [])
             score = metrics['map']
             if score is None: raise ValueError('Selection AP undefined')
             row = dict(stage=stage, epoch=epoch+1, **metrics,
@@ -219,7 +222,7 @@ def train(config, output, device_name='cuda', precision='fp32', resume=False,
                        peak_memory_bytes=torch.cuda.max_memory_allocated(device) if device.type=='cuda' else None)
             write(out/f'metrics_{stage}_{epoch+1:03d}.json', row)
             print(row, flush=True)
-            if config.get('fixed_schedule'):
+            if config.get('fixed_schedule') and val_data:
                 write(out/'epoch_predictions'/f'{stage}_{epoch+1:03d}.json', predictions)
             selected = dict(model=model.state_dict(), config=config, data_fingerprint=data_report['fingerprint'],
                             identity_hash=identity_hash, stage=stage, epoch=epoch+1, map=score,
@@ -243,4 +246,4 @@ def train(config, output, device_name='cuda', precision='fp32', resume=False,
                          cuda=torch.cuda.get_rng_state_all() if device.type=='cuda' else None,
                          sampling=sampling_rng.get_state(),augmentation=augmentation_rng.get_state(),loader=loader_rng.get_state())))
         state = None
-    print(f'Finished. Validation-selected checkpoint: {out / "best.pt"}', flush=True)
+    print(f'Finished. Final checkpoint: {out / "last.pt"}' if final_epoch else f'Finished. Validation-selected checkpoint: {out / "best.pt"}', flush=True)
