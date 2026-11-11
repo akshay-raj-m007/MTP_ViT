@@ -29,6 +29,9 @@ SETUPS = dict(
     yolos_v2=dict(model='yolos', data='v2', config='configs/pipeline_config_20_views.json'),
     yolos_pitch32_weighted=dict(model='yolos', data='pitch32', sampling='weighted', config='configs/pipeline_config_pitch32_weighted.json'),
     yolos_v2_weighted=dict(model='yolos', data='v2', sampling='weighted', config='configs/pipeline_config_20_views_weighted_balanced.json'),
+    # CNN baseline: same data, folds, schedule and weighting as SSD weighted; only the detector differs.
+    retinanet_pitch32_weighted=dict(model='retinanet', data='pitch32', sampling='weighted', config='configs/retinanet_pitch32_weighted.json'),
+    retinanet_v2_weighted=dict(model='retinanet', data='v2', sampling='weighted', config='configs/retinanet_v2_weighted.json'),
 )
 # YOLOS peaked by stage B epoch 13 in every earlier run, and no fold may stop early.
 YOLOS_SCHEDULE = dict(stage_b_epochs=15, patience=999)
@@ -78,13 +81,15 @@ def train_one(runs, setup, fold, device):
     folder, model = runs.folder(setup, fold), SETUPS[setup]['model']
     if (folder/'DONE').exists():
         print(setup, 'fold', fold, 'already finished', flush=True); return True
-    state = folder/('last/training_state.pt' if model == 'yolos' else 'last.pt')
+    state = folder/('last.pt' if model == 'ssd' else 'last/training_state.pt')
     resume = state.exists()
     if folder.exists() and not resume:
         shutil.rmtree(folder)  # stopped before its first checkpoint; nothing to keep
     config = runs.config(setup, fold)
     if model == 'yolos':
         command = [sys.executable, 'scripts/train_yolos.py', '--config', config, '--sampling', SETUPS[setup].get('sampling', 'natural'), '--device', device, '--output', folder]
+    elif model == 'retinanet':
+        command = [sys.executable, 'scripts/train_retinanet.py', '--config', config, '--sampling', SETUPS[setup]['sampling'], '--device', device, '--output', folder]
     else:
         command = [ssd_python(), 'experiments/mobilevitv2_ssd/scripts/experiment.py', 'train', '--config', config, '--seed', '42',
                    '--device', device, '--precision', 'fp32', '--output', folder]
