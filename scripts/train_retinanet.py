@@ -155,7 +155,7 @@ def main():
             if device.type == 'cuda' and state['cuda_rng'] is not None: torch.cuda.set_rng_state_all(state['cuda_rng'])
         # The budget still sets the learning-rate curve, so a final run follows the same curve as cross-validation.
         for epoch in range(start, final_epoch if final_epoch and stage == 'B' else budget):
-            if bad >= cfg['patience']: break
+            if cfg['early_stopping'] and bad >= cfg['patience']: break  # off for CV: every fold runs the full schedule
             model.train(); optimizer.zero_grad(set_to_none=True); total_loss = 0.
             for step, batch in enumerate(loader):
                 targets = [{k: v.to(device) for k, v in t.items()} for t in batch['labels']]
