@@ -25,6 +25,9 @@ SSD_CONFIGS = 'experiments/mobilevitv2_ssd/configs'
 SETUPS = dict(
     ssd_pitch32=dict(model='ssd', data='pitch32', config=f'{SSD_CONFIGS}/pitch32_natural.json'),
     ssd_v2=dict(model='ssd', data='v2', config=f'{SSD_CONFIGS}/natural.json'),
+    # SSD reads its sampling from the config; these differ from the natural configs only in "sampling".
+    ssd_pitch32_weighted=dict(model='ssd', data='pitch32', sampling='weighted', config=f'{SSD_CONFIGS}/pitch32_weighted.json'),
+    ssd_v2_weighted=dict(model='ssd', data='v2', sampling='weighted', config=f'{SSD_CONFIGS}/weighted.json'),
     yolos_pitch32=dict(model='yolos', data='pitch32', config='configs/pipeline_config_pitch32.json'),
     yolos_v2=dict(model='yolos', data='v2', config='configs/pipeline_config_20_views.json'),
     yolos_pitch32_weighted=dict(model='yolos', data='pitch32', sampling='weighted', config='configs/pipeline_config_pitch32_weighted.json'),
