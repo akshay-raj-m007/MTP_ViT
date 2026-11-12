@@ -161,7 +161,11 @@ def summary(runs, setups, folds):
         classes = '  '.join(f"{k[:6]} {number(v['ap'])}/{number(v['ap50'])}" for k, v in result['per_class_ap'].items())
         print(f"{setup:24} epoch {result['epoch']}  mAP {number(result['map'])}  mAP50 {number(result['map50'])}  {classes}")
         print(f"{'':24} correct boxes: {result['correct_at_05']} at score .05, {result['correct_at_30']} at score .3, of {result['boxes']}.  mAP per fold: {[number(v) for v in result['per_fold_map']]}", flush=True)
-    write(runs.base/'summary'/'summary.json', results)
+    # Keep the setups that were not scored this time, so a run with --setups does not drop the others.
+    path = runs.base/'summary'/'summary.json'
+    merged = {row['setup']: row for row in read(path)} if path.exists() else {}
+    merged.update({row['setup']: row for row in results})
+    write(path, [merged[name] for name in SETUPS if name in merged])
 
 
 def main():
